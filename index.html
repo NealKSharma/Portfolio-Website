@@ -11,136 +11,126 @@
 <body>
     <header>
         <nav class="nav">
+            <div class="logo">NKS</div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
+                <li><a href="#about-details">Details</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#resume">Resume</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="logo"><a href="#about">Neal Kaushik Sharma</a></div>
         </nav>
     </header>
 
     <section id="about">
-        <div class="about-content">
-            <div class="hero-content fade-in">
-                <h1>Neal Kaushik Sharma</h1>
-                <p>Computer Science Student | Software Engineer | AI Researcher</p>
-                <p class="subtitle">Iowa State University, Class of 2028</p>
-                <div class="hero-links">
-                    <a href="mailto:nea1@iastate.edu">nea1@iastate.edu</a>
-                    <a href="mailto:sharneal11@gmail.com">sharneal11@gmail.com</a>
-                </div>
-                <a href="#contact" class="cta-button">Let's Connect</a>
+        <div class="hero-container">
+            <h1>Neal Kaushik Sharma</h1>
+            <p class="subtitle">Computer Science Student | Software Engineer | AI Researcher</p>
+            <p class="subsubtitle">Iowa State University, Class of 2028</p>
+            <div class="hero-links">
+                <a href="mailto:nea1@iastate.edu">nea1@iastate.edu</a>
+                <a href="mailto:sharneal11@gmail.com">sharneal11@gmail.com</a>
+            </div>
+            <button class="cta-button" onclick="smoothScrollToSection('#about-details')">Learn More</button>
+        </div>
+    </section>
+
+    <section id="about-details">
+        <div class="section-title">About Me</div>
+        <div class="about-grid">
+            <div class="education-card">
+                <h3>🎓 Iowa State University</h3>
+                <p><strong>Bachelor of Science in Computer Science (Honors)</strong></p>
+                <p>Minor in Artificial Intelligence</p>
+                <p>Sophomore, Class of 2028</p>
+                <p style="margin-top: 1rem; color: #667eea; font-size: 1.1rem;"><strong>GPA: 3.8</strong></p>
+                <p>Dean's List for Academic Excellence</p>
             </div>
 
-            <div class="about-text fade-in">
-                <div class="education-card">
-                    <h3>Iowa State University</h3>
-                    <p><strong>Bachelor of Science in Computer Science (Honors Program)</strong></p>
-                    <p>Minor in Artificial Intelligence | Sophomore, Class of 2028</p>
-                    <p><strong>GPA: 3.8</strong> | Dean's List for Academic Excellence</p>
-                </div>
+            <div class="about-text">
+                <p>I'm a passionate computer science student with hands-on experience in full-stack development, cloud technologies, and AI research. Currently exploring the intersection of machine learning safety and software engineering at Iowa State University.</p>
 
-                <p>I'm a passionate computer science student with hands-on experience in full-stack development, cloud
-                    technologies, and AI research. Currently exploring the intersection of machine learning safety and
-                    software engineering at Iowa State University.</p>
+                <p>My interests span from building robust web applications to investigating vulnerabilities in AI systems. I'm actively involved in the ISU AI and ML Club, Web Development Club, Hackathon Club, and CSE Club.</p>
 
-                <p>My interests span from building robust web applications to investigating vulnerabilities in AI
-                    systems. I'm actively involved in the ISU AI and ML Club, Web Development Club, Hackathon Club, and
-                    CSE Club.</p>
-
-                <h3 style="color: #667eea; margin-top: 1.8rem; margin-bottom: 1rem;">Technical Skills</h3>
-                <div class="skills">
-                    <span class="skill-tag">Java</span>
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">C#</span>
-                    <span class="skill-tag">SQL</span>
-                    <span class="skill-tag">.NET</span>
-                    <span class="skill-tag">Git</span>
-                    <span class="skill-tag">HTML/CSS</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">Spring Boot</span>
-                    <span class="skill-tag">ASP.NET Core</span>
-                    <span class="skill-tag">Azure</span>
-                    <span class="skill-tag">Linux</span>
-                    <span class="skill-tag">LaTeX</span>
+                <div>
+                    <h3>Technical Skills</h3>
+                    <div class="skills">
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C#</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">.NET</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Spring Boot</span>
+                        <span class="skill-tag">ASP.NET Core</span>
+                        <span class="skill-tag">Azure</span>
+                        <span class="skill-tag">Linux</span>
+                        <span class="skill-tag">LaTeX</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="experience">
-        <h2 class="fade-in">Experience</h2>
+        <div class="section-title">Experience</div>
         <div class="experience-list">
-            <div class="experience-item fade-in">
-                <h3>Software Engineer Intern</h3>
+            <div class="experience-item">
+                <h3>💼 Software Engineer Intern</h3>
                 <div class="experience-meta">
                     <span>Tata Consultancy Services</span>
                     <span>June 2025 – August 2025</span>
                 </div>
                 <ul>
-                    <li>Developed and maintained full-stack web applications and databases as a Web Application
-                        Developer</li>
-                    <li>Built a comprehensive Online Retail Management System using C#, ASP.NET Core MVC, SQL Server,
-                        and AJAX with secure authentication, role-based access control, dynamic product listings,
-                        shopping cart, and checkout functionality</li>
-                    <li>Gained hands-on experience with Azure cloud services including Function Apps, Data Factory,
-                        Pipelines, and Key Vaults</li>
-                    <li>Contributed to user stories for team projects, enhancing development and cloud deployment skills
-                    </li>
+                    <li>Developed and maintained full-stack web applications and databases as a Web Application Developer</li>
+                    <li>Built a comprehensive Online Retail Management System using C#, ASP.NET Core MVC, SQL Server, and AJAX with secure authentication, role-based access control, dynamic product listings, shopping cart, and checkout functionality</li>
+                    <li>Gained hands-on experience with Azure cloud services including Function Apps, Data Factory, Pipelines, and Key Vaults</li>
+                    <li>Contributed to user stories for team projects, enhancing development and cloud deployment skills</li>
                 </ul>
             </div>
 
-            <div class="experience-item fade-in">
-                <h3>Undergraduate Researcher</h3>
+            <div class="experience-item">
+                <h3>🔬 Undergraduate Researcher</h3>
                 <div class="experience-meta">
                     <span>Iowa State University - Computer Science</span>
                     <span>August 2025 - Present</span>
                 </div>
                 <ul>
-                    <li>Conducting research on malicious unlearning attacks against predictive uncertainty in AI models
-                    </li>
+                    <li>Conducting research on malicious unlearning attacks against predictive uncertainty in AI models</li>
                     <li>Focusing on safety-critical applications such as healthcare and autonomous driving systems</li>
-                    <li>Contributing to model training, implementation of unlearning techniques, and exploration of
-                        uncertainty quantification methods</li>
-                    <li>Reviewing and analyzing existing methods in machine unlearning and uncertainty quantification to
-                        identify potential attack surfaces</li>
+                    <li>Contributing to model training, implementation of unlearning techniques, and exploration of uncertainty quantification methods</li>
+                    <li>Reviewing and analyzing existing methods in machine unlearning and uncertainty quantification to identify potential attack surfaces</li>
                 </ul>
             </div>
 
-            <div class="experience-item fade-in">
-                <h3>Research Assistant</h3>
+            <div class="experience-item">
+                <h3>🔭 Research Assistant</h3>
                 <div class="experience-meta">
                     <span>Iowa State University - Physics & Astronomy</span>
                     <span>March 2025 - April 2025</span>
                 </div>
                 <ul>
-                    <li>Volunteered in a study focused on identifying outbursting white dwarf stars using NASA's TESS
-                        mission data</li>
-                    <li>Interpreted data visualizations including HR diagrams and brightness plots to classify star
-                        behavior</li>
-                    <li>Documented findings and collaborated with peers in maintaining a catalog of analyzed targets
-                    </li>
+                    <li>Volunteered in a study focused on identifying outbursting white dwarf stars using NASA's TESS mission data</li>
+                    <li>Interpreted data visualizations including HR diagrams and brightness plots to classify star behavior</li>
+                    <li>Documented findings and collaborated with peers in maintaining a catalog of analyzed targets</li>
                 </ul>
             </div>
         </div>
     </section>
 
     <section id="projects">
-        <h2 class="fade-in">Featured Projects</h2>
+        <div class="section-title">Featured Projects</div>
         <div class="projects-grid">
-            <div class="project-card fade-in">
+            <div class="project-card">
                 <div class="project-image">☕</div>
                 <div class="project-content">
                     <h3>Online Retail Management System</h3>
                     <p class="project-subtitle">BrewMaster - Full-Stack E-Commerce Platform</p>
-                    <p>A domain-independent e-commerce solution demonstrated as a coffee retail store. Manages products,
-                        users, and orders with enterprise-grade features adaptable to any retail sector.</p>
-                    <p><strong>Key Features:</strong> Secure authentication, role-based access, dynamic product
-                        listings, shopping cart, checkout flows, admin dashboards with searchable tables, image uploads,
-                        audit trails, and real-time SQL Server integration.</p>
+                    <p>A domain-independent e-commerce solution demonstrated as a coffee retail store. Manages products, users, and orders with enterprise-grade features adaptable to any retail sector.</p>
+                    <p><strong>Key Features:</strong> Secure authentication, role-based access, dynamic product listings, shopping cart, checkout flows, admin dashboards with searchable tables, image uploads, audit trails, and real-time SQL Server integration.</p>
                     <div class="project-tech">
                         <span class="tech-badge">C#</span>
                         <span class="tech-badge">ASP.NET Core MVC</span>
@@ -152,16 +142,13 @@
                 </div>
             </div>
 
-            <div class="project-card fade-in">
+            <div class="project-card">
                 <div class="project-image">🖥️</div>
                 <div class="project-content">
                     <h3>Network Attached Storage (NAS)</h3>
                     <p class="project-subtitle">Personal Server Infrastructure</p>
-                    <p>Custom NAS and server built on Raspberry Pi 5 with automated backups, SSH-based remote access,
-                        and secure networking capabilities.</p>
-                    <p><strong>Key Features:</strong> OpenMediaVault on Debian Linux, automated daily PC and remote
-                        server backups with Wake-on-LAN triggers, backup rotation, OpenVPN setup, and Docker-based
-                        services for secure remote administration.</p>
+                    <p>Custom NAS and server built on Raspberry Pi 5 with automated backups, SSH-based remote access, and secure networking capabilities.</p>
+                    <p><strong>Key Features:</strong> OpenMediaVault on Debian Linux, automated daily PC and remote server backups with Wake-on-LAN triggers, backup rotation, OpenVPN setup, and Docker-based services for secure remote administration.</p>
                     <div class="project-tech">
                         <span class="tech-badge">Raspberry Pi</span>
                         <span class="tech-badge">Linux</span>
@@ -172,16 +159,13 @@
                 </div>
             </div>
 
-            <div class="project-card fade-in">
+            <div class="project-card">
                 <div class="project-image">🤖</div>
                 <div class="project-content">
                     <h3>AI Research: Malicious Unlearning</h3>
                     <p class="project-subtitle">Machine Learning Safety Research</p>
-                    <p>Ongoing research investigating vulnerabilities in predictive uncertainty during machine
-                        unlearning processes, with focus on safety-critical AI applications.</p>
-                    <p><strong>Research Areas:</strong> Uncertainty quantification, machine unlearning techniques,
-                        adversarial attacks on AI models, model confidence manipulation, and applications in healthcare
-                        and autonomous systems.</p>
+                    <p>Ongoing research investigating vulnerabilities in predictive uncertainty during machine unlearning processes, with focus on safety-critical AI applications.</p>
+                    <p><strong>Research Areas:</strong> Uncertainty quantification, machine unlearning techniques, adversarial attacks on AI models, model confidence manipulation, and applications in healthcare and autonomous systems.</p>
                     <div class="project-tech">
                         <span class="tech-badge">Python</span>
                         <span class="tech-badge">Machine Learning</span>
@@ -194,9 +178,9 @@
     </section>
 
     <section id="resume">
-        <h2 class="fade-in">Resume</h2>
-        <div class="resume-container fade-in">
-            <p>Download my resume to learn more about my experience and qualifications</p>
+        <div class="section-title">Resume</div>
+        <div class="resume-container">
+            <p class="resume-intro">Download my resume to learn more about my experience and qualifications</p>
             <div class="resume-preview">
                 <div class="resume-visual">
                     <h3>📄 Neal Kaushik Sharma</h3>
@@ -212,33 +196,32 @@
                     </ul>
                 </div>
                 <div class="resume-actions">
-                    <a href="#" class="resume-btn" download>
-                        <span style="font-size: 1.5rem;">📥</span>
+                    <button class="resume-btn" onclick="alert('Resume download would go here')">
+                        <span>📥</span>
                         Download Resume PDF
-                    </a>
-                    <a href="#" class="resume-btn secondary" target="_blank">
-                        <span style="font-size: 1.5rem;">🔗</span>
+                    </button>
+                    <button class="resume-btn secondary" onclick="alert('Full resume would open here')">
+                        <span>🔗</span>
                         View Full Resume
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="contact">
-        <h2 class="fade-in">Let's Connect</h2>
-        <div class="contact-content fade-in">
-            <p>I'm always interested in new opportunities, collaborations, and interesting projects. Whether you want to
-                discuss software development, AI research, or just say hello, feel free to reach out!</p>
+    <section id="contact">
+        <div class="section-title">Let's Connect</div>
+        <div class="contact-content">
+            <p>I'm always interested in new opportunities, collaborations, and interesting projects. Whether you want to discuss software development, AI research, or just say hello, feel free to reach out!</p>
             <div class="contact-links">
-                <a href="mailto:nea1@iastate.edu">Email Me</a>
-                <a href="https://linkedin.com/in/nealks" target="_blank">LinkedIn</a>
-                <a href="https://github.com/NealKSharma" target="_blank">GitHub</a>
+                <a href="mailto:nea1@iastate.edu">📧 Email Me</a>
+                <a href="https://linkedin.com/in/nealks" target="_blank">💼 LinkedIn</a>
+                <a href="https://github.com/NealKSharma" target="_blank">🐙 GitHub</a>
             </div>
         </div>
     </section>
 
-    <footer class="fade-in">
+    <footer>
         <p>&copy; 2025 Neal Kaushik Sharma. All rights reserved.</p>
     </footer>
 
