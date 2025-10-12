@@ -311,13 +311,8 @@ section > * {
 /* Experience Section */
 #experience {
     background: #0a0e27;
-    padding: 0 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding: 80px 2rem 2rem;
 }
-
 
 .experience-list {
     max-width: 1200px;
@@ -328,23 +323,23 @@ section > * {
 }
 
 .experience-item {
-    background: rgba(102, 126, 234, 0.08);
-    border: 1px solid rgba(102, 126, 234, 0.25);
-    padding: 2rem;
-    border-radius: 18px;
-    border-left: 5px solid #667eea;
+    background: rgba(102, 126, 234, 0.05);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
     transition: all 0.3s ease;
-    backdrop-filter: blur(12px);
+    animation: fadeInUp 0.8s ease-out;
+    backdrop-filter: blur(10px);
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    font-size: 0.95rem;
 }
 
 .experience-item:hover {
-    transform: translateY(-6px);
-    background: rgba(102, 126, 234, 0.15);
-    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.25);
+    border-color: #764ba2;
+    background: rgba(102, 126, 234, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
 }
 
 .experience-item h3 {
