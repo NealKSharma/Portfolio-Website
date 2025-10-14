@@ -115,7 +115,7 @@ section::before {
     z-index: 0;
 }
 
-section > * {
+section>* {
     position: relative;
     z-index: 1;
 }
@@ -146,6 +146,7 @@ section.carousel-section {
     align-items: center;
     justify-content: space-between;
     gap: 8rem;
+    padding: 0 2rem;
 }
 
 .home-content {
@@ -158,6 +159,7 @@ section.carousel-section {
         opacity: 0;
         transform: translateX(-50px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -169,6 +171,7 @@ section.carousel-section {
         opacity: 0;
         transform: translateX(50px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -176,7 +179,7 @@ section.carousel-section {
 }
 
 .home-content h1 {
-    font-size: 6rem;
+    font-size: clamp(3.5rem, 5vw, 5rem);
     font-weight: 700;
     line-height: 1.3;
     margin-bottom: 1rem;
@@ -187,13 +190,13 @@ section.carousel-section {
 }
 
 .home-content h3 {
-    font-size: 4rem;
+    font-size: clamp(2.5rem, 3.5vw, 4rem);
     margin-bottom: 2rem;
     font-weight: 700;
 }
 
 .typing-text {
-    font-size: 3.4rem;
+    font-size: clamp(2.2rem, 3vw, 3.4rem);
     font-weight: 600;
     min-width: 280px;
 }
@@ -220,7 +223,7 @@ section.carousel-section {
 }
 
 .home-content p {
-    font-size: 1.6rem;
+    font-size: clamp(1.4rem, 1.6vw, 1.6rem);
     color: #b0b8d4;
     margin-bottom: 3rem;
     line-height: 1.8;
@@ -252,28 +255,6 @@ section.carousel-section {
     box-shadow: 0 0 25px #b74b4b;
 }
 
-.btn {
-    display: inline-block;
-    padding: 1.2rem 3.5rem;
-    background-color: transparent;
-    border-radius: 4rem;
-    font-size: 1.8rem;
-    color: #b74b4b;
-    letter-spacing: 0.2rem;
-    font-weight: 600;
-    border: 2px solid #b74b4b;
-    transition: 0.3s ease;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.btn:hover {
-    transform: scale(1.05);
-    background-color: #b74b4b;
-    color: #0a0e27;
-    box-shadow: 0 0 25px #b74b4b;
-}
-
 .home-img {
     flex: 0 0 auto;
     animation: fadeInRight 1s ease-out;
@@ -282,6 +263,7 @@ section.carousel-section {
 .home-img img {
     width: 35vw;
     max-width: 450px;
+    min-width: 250px;
     border-radius: 50%;
     box-shadow: 0 0 35px rgba(183, 75, 75, 0.5);
     cursor: pointer;
@@ -296,9 +278,9 @@ section.carousel-section {
 
 /* Section Title */
 .section-title {
-    font-size: 4.5rem;
+    font-size: clamp(3rem, 4vw, 4.5rem);
     font-weight: 700;
-    padding: 2rem 0 1rem;
+    padding: 2rem 0 0;
     text-align: center;
     color: #b74b4b;
     animation: fadeInUp 0.8s ease-out;
@@ -313,6 +295,7 @@ section.carousel-section {
         opacity: 0;
         transform: translateY(40px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -334,7 +317,7 @@ section.carousel-section {
     max-width: 1400px;
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 3fr 5fr;
     gap: 5rem;
     margin-top: 2rem;
 }
@@ -356,16 +339,22 @@ section.carousel-section {
     box-shadow: 0 10px 40px rgba(183, 75, 75, 0.3);
 }
 
+.edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .education-card h3 {
     color: #b74b4b;
     margin-bottom: 2rem;
-    font-size: 2.8rem;
+    font-size: clamp(2rem, 2.5vw, 2.8rem);
 }
 
 .education-card p {
     color: #b0b8d4;
     margin-bottom: 1.2rem;
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 1.6vw, 1.8rem);
 }
 
 .about-text {
@@ -377,13 +366,13 @@ section.carousel-section {
 
 .about-text p {
     color: #b0b8d4;
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 1.6vw, 1.8rem);
     line-height: 1.8;
 }
 
 .about-text h3 {
     color: #b74b4b;
-    font-size: 2.6rem;
+    font-size: clamp(2rem, 2.4vw, 2.6rem);
     margin-top: 1rem;
 }
 
@@ -401,7 +390,7 @@ section.carousel-section {
     border-radius: 3rem;
     color: #b74b4b;
     font-weight: 500;
-    font-size: 1.6rem;
+    font-size: clamp(1.3rem, 1.5vw, 1.6rem);
     transition: all 0.3s ease;
     cursor: pointer;
 }
@@ -417,6 +406,7 @@ section.carousel-section {
 .carousel-container {
     position: relative;
     width: 100%;
+    max-width: 100vw;
     height: 100%;
     display: flex;
     align-items: center;
@@ -425,30 +415,24 @@ section.carousel-section {
     overflow: hidden;
 }
 
-.carousel-wrapper {
+.carousel-slide {
+    min-width: 100%;
+    max-width: 100%;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    position: relative;
+    flex-shrink: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .carousel-track {
     display: flex;
     height: 100%;
+    width: 100%;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.carousel-slide {
-    min-width: 100%;
-    height: 100%;
-    flex-shrink: 0;
-    opacity: 0;
-    transition: opacity 0.6s ease-in-out;
-    padding: 0;
-}
-
-.carousel-slide.active {
-    opacity: 1;
+    position: relative;
 }
 
 .carousel-indicators {
@@ -482,28 +466,27 @@ section.carousel-section {
     box-shadow: 0 0 15px rgba(183, 75, 75, 0.6);
 }
 
-/* Grid Card Layout - Full Screen Display */
+/* Grid Card Layout - Fully Responsive */
 .grid-card {
     display: grid;
-    grid-template-columns: 800px 1fr;  /* Fixed 400px for image, rest for content */
+    grid-template-columns: 45% 55%;
     gap: 0;
-    max-width: 1880px;
-    height: 100%;
-    max-height: calc(100vh - 160px);
+    width: 95%;
+    max-width: 1600px;
+    height: auto;
+    max-height: 700px;
     align-items: stretch;
     position: relative;
-    margin: 0 2rem;
+    margin: 0 auto;
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 40px rgb(0, 0, 0);
 }
 
 .grid-image {
     height: 100%;
-    max-height: auto;
     overflow: hidden;
     position: relative;
-    background: rgba(16, 22, 68, 0.95);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -518,7 +501,7 @@ section.carousel-section {
     object-fit: contain;
     transition: transform 0.3s ease;
     filter: brightness(0.9);
-}   
+}
 
 .grid-image:hover img {
     transform: scale(1.03);
@@ -526,38 +509,16 @@ section.carousel-section {
 }
 
 .grid-content {
-    padding: 6rem 2rem;
-    overflow-y: auto;
-    overflow-x: hidden;  /* ADD THIS */
+    padding: 4rem 2rem;
     height: 100%;
-    max-width: 100%;  /* ADD THIS */
+    max-width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    background: rgba(16, 22, 68, 0.95);
-}
-
-/* Custom scrollbar for grid content */
-.grid-content::-webkit-scrollbar {
-    width: 10px;
-}
-
-.grid-content::-webkit-scrollbar-track {
-    background: rgba(183, 75, 75, 0.1);
-    border-radius: 10px;
-}
-
-.grid-content::-webkit-scrollbar-thumb {
-    background: #b74b4b;
-    border-radius: 10px;
-}
-
-.grid-content::-webkit-scrollbar-thumb:hover {
-    background: #e76f6f;
+    justify-content: flex-start;
 }
 
 .grid-content h2 {
-    font-size: 3.5rem;
+    font-size: clamp(2rem, 2.8vw, 3.5rem);
     color: #e0e0e0;
     margin-bottom: 1.5rem;
     line-height: 1.2;
@@ -573,7 +534,7 @@ section.carousel-section {
 }
 
 .item-header h3 {
-    font-size: 2.4rem;
+    font-size: clamp(1.6rem, 2vw, 2.4rem);
     color: #b74b4b;
     line-height: 1.3;
 }
@@ -581,25 +542,25 @@ section.carousel-section {
 .date-badge {
     background: rgba(183, 75, 75, 0.25);
     border: 2px solid #b74b4b;
-    padding: 1rem 2.5rem;
+    padding: 0.8rem 2rem;
     border-radius: 3rem;
     color: #e76f6f;
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 1.3vw, 1.5rem);
     white-space: nowrap;
     box-shadow: 0 4px 15px rgba(183, 75, 75, 0.2);
 }
 
 .item-description {
     color: #b0b8d4;
-    font-size: 1.7rem;
+    font-size: clamp(1.4rem, 1.5vw, 1.7rem);
     line-height: 1.8;
     margin-bottom: 2rem;
 }
 
 .project-subtitle {
     color: #b74b4b;
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 1.6vw, 1.8rem);
     margin-bottom: 1.5rem;
     font-style: italic;
     font-weight: 500;
@@ -607,7 +568,7 @@ section.carousel-section {
 
 .item-details h4 {
     color: #b74b4b;
-    font-size: 2rem;
+    font-size: clamp(1.6rem, 1.8vw, 2rem);
     margin-bottom: 1.5rem;
     margin-top: 2rem;
 }
@@ -619,7 +580,7 @@ section.carousel-section {
 
 .item-details li {
     color: #b0b8d4;
-    font-size: 1.6rem;
+    font-size: clamp(1.3rem, 1.5vw, 1.6rem);
     line-height: 1.8;
     margin-bottom: 1.2rem;
     padding-left: 2.5rem;
@@ -650,7 +611,7 @@ section.carousel-section {
     border: 2px solid rgba(183, 75, 75, 0.5);
     padding: 0.8rem 1.8rem;
     border-radius: 2rem;
-    font-size: 1.4rem;
+    font-size: clamp(1.2rem, 1.3vw, 1.4rem);
     color: #e76f6f;
     font-weight: 600;
     transition: all 0.3s ease;
@@ -677,7 +638,7 @@ section.carousel-section {
     padding: 1.4rem 3rem;
     border-radius: 50px;
     font-weight: 600;
-    font-size: 1.6rem;
+    font-size: clamp(1.3rem, 1.5vw, 1.6rem);
     text-decoration: none;
     transition: all 0.3s ease;
     cursor: pointer;
@@ -729,7 +690,7 @@ section.carousel-section {
     text-align: center;
     margin-bottom: 5rem;
     color: #b0b8d4;
-    font-size: 2.2rem;
+    font-size: clamp(1.6rem, 2vw, 2.2rem);
     animation: fadeInUp 0.8s ease-out;
 }
 
@@ -750,14 +711,14 @@ section.carousel-section {
 }
 
 .resume-visual h3 {
-    font-size: 3.2rem;
+    font-size: clamp(2.2rem, 2.8vw, 3.2rem);
     margin-bottom: 1.5rem;
 }
 
 .resume-visual p {
     margin-bottom: 1.2rem;
     line-height: 1.7;
-    font-size: 1.9rem;
+    font-size: clamp(1.5rem, 1.8vw, 1.9rem);
 }
 
 .resume-highlights {
@@ -769,7 +730,7 @@ section.carousel-section {
 .resume-highlights li {
     padding: 1.2rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 1.7vw, 1.8rem);
 }
 
 .resume-highlights li:last-child {
@@ -794,7 +755,7 @@ section.carousel-section {
     text-decoration: none;
     border-radius: 50px;
     font-weight: 600;
-    font-size: 1.9rem;
+    font-size: clamp(1.5rem, 1.8vw, 1.9rem);
     transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(183, 75, 75, 0.3);
     border: none;
@@ -844,7 +805,7 @@ section.carousel-section {
 .contact-content p {
     margin-bottom: 3rem;
     color: #b0b8d4;
-    font-size: 2rem;
+    font-size: clamp(1.6rem, 1.9vw, 2rem);
     line-height: 1.8;
 }
 
@@ -865,7 +826,7 @@ section.carousel-section {
     text-decoration: none;
     border-radius: 50px;
     font-weight: 600;
-    font-size: 1.8rem;
+    font-size: clamp(1.5rem, 1.7vw, 1.8rem);
     transition: all 0.3s ease;
     box-shadow: 0 10px 25px rgba(183, 75, 75, 0.3);
 }
@@ -885,23 +846,34 @@ footer {
     font-size: 1.5rem;
 }
 
-/* Responsive */
+/* Responsive Media Queries */
+@media (max-width: 1400px) {
+    .grid-card {
+        width: 94%;
+        height: calc(100vh - 220px);
+    }
+}
+
 @media (max-width: 1200px) {
     html {
-        font-size: 55%;
+        font-size: 58%;
     }
-    
-    .grid-content {
-        padding: 4rem 5rem;
-    }
-    
+
     .grid-card {
-        width: calc(100% - 3rem);
-        margin: 0 1.5rem;
+        width: 92%;
+        grid-template-columns: 40% 60%;
+    }
+
+    .grid-content {
+        padding: 3%;
     }
 }
 
 @media (max-width: 995px) {
+    html {
+        font-size: 56%;
+    }
+
     header {
         padding: 2rem 5%;
     }
@@ -909,7 +881,7 @@ footer {
     section {
         padding: 10rem 5% 5rem;
     }
-    
+
     section.carousel-section {
         padding: 0;
     }
@@ -921,6 +893,7 @@ footer {
 
     .home-img img {
         width: 60vw;
+        max-width: 350px;
     }
 
     .about-grid {
@@ -934,56 +907,95 @@ footer {
     .nav-links {
         gap: 2.5rem;
     }
-    
+
     .grid-card {
         grid-template-columns: 1fr;
-        width: calc(100% - 2rem);
-        margin: 0 1rem;
+        width: 96%;
+        height: auto;
+        min-height: calc(100vh - 220px);
     }
-    
+
     .grid-image {
-        height: 40vh;
-        min-height: 300px;
+        height: 35vh;
+        min-height: 280px;
     }
-    
+
     .grid-content {
-        padding: 3rem;
-        height: 60vh;
+        padding: 3rem 2rem;
+        min-height: 40vh;
     }
 }
 
 @media (max-width: 768px) {
+    html {
+        font-size: 54%;
+    }
+
     .nav-links {
         display: none;
     }
 
-    .home-content h1 {
-        font-size: 4.5rem;
+    .hero-container {
+        gap: 3rem;
     }
 
-    .home-content h3 {
-        font-size: 3rem;
-    }
-
-    .section-title {
-        font-size: 3.5rem;
-    }
-
-    .grid-content h2 {
-        font-size: 2.8rem;
+    .home-img img {
+        width: 70vw;
     }
 
     .item-header {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .grid-content {
-        padding: 2rem;
+        padding: 2.5rem 2rem;
     }
-    
+
     .grid-card {
-        width: calc(100% - 1rem);
-        margin: 0 0.5rem;
+        width: 98%;
+        margin: 0 1%;
+    }
+
+    .grid-image {
+        height: 30vh;
+        min-height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 50%;
+    }
+
+    header {
+        padding: 1.5rem 3%;
+        height: 70px;
+    }
+
+    section {
+        margin-top: 70px;
+    }
+
+    section.carousel-section {
+        min-height: calc(100vh - 70px);
+        max-height: calc(100vh - 70px);
+    }
+
+    .grid-image {
+        height: 28vh;
+        min-height: 220px;
+    }
+
+    .about-content-wrapper,
+    .resume-content-wrapper,
+    .contact-content-wrapper {
+        padding: 0 2rem 2rem;
+    }
+
+    .social-icons a {
+        width: 4rem;
+        height: 4rem;
+        font-size: 1.8rem;
     }
 }
