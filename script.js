@@ -7,9 +7,9 @@ let isDeleting = false;
 function type() {
     const typingElement = document.querySelector('.typing-text span');
     if (!typingElement) return;
-    
+
     const currentWord = words[wordIndex];
-    
+
     if (isDeleting) {
         typingElement.textContent = currentWord.substring(0, charIndex - 1);
         charIndex--;
@@ -17,7 +17,7 @@ function type() {
         typingElement.textContent = currentWord.substring(0, charIndex + 1);
         charIndex++;
     }
-    
+
     if (!isDeleting && charIndex === currentWord.length) {
         isDeleting = true;
         setTimeout(type, 2000);
@@ -40,14 +40,14 @@ class Carousel {
         this.currentIndex = 0;
         this.isScrolling = false;
         this.scrollTimeout = null;
-        
+
         this.initializeIndicators();
         this.initializeScrollListener();
     }
-    
+
     initializeIndicators() {
         this.indicatorsContainer.innerHTML = '';
-        
+
         this.slides.forEach((slide, index) => {
             const indicator = document.createElement('div');
             indicator.className = 'indicator';
@@ -56,20 +56,20 @@ class Carousel {
             this.indicatorsContainer.appendChild(indicator);
         });
     }
-    
+
     update() {
         this.slides.forEach((slide, index) => {
             slide.classList.toggle('active', index === this.currentIndex);
         });
-        
+
         this.track.style.transform = `translateX(-${this.currentIndex * 100}%)`;
-        
+
         const indicators = this.indicatorsContainer.querySelectorAll('.indicator');
         indicators.forEach((indicator, index) => {
             indicator.classList.toggle('active', index === this.currentIndex);
         });
     }
-    
+
     next() {
         if (this.currentIndex < this.slides.length - 1) {
             this.currentIndex++;
@@ -78,7 +78,7 @@ class Carousel {
         }
         return false;
     }
-    
+
     prev() {
         if (this.currentIndex > 0) {
             this.currentIndex--;
@@ -87,33 +87,34 @@ class Carousel {
         }
         return false;
     }
-    
+
     goTo(index) {
         this.currentIndex = index;
         this.update();
     }
-    
+
     isAtStart() {
         return this.currentIndex === 0;
     }
-    
+
     isAtEnd() {
         return this.currentIndex === this.slides.length - 1;
     }
-    
+
     initializeScrollListener() {
         this.section.addEventListener('wheel', (e) => {
             if (!this.isInViewport()) return;
-            
+
             e.preventDefault();
-            
+            e.stopPropagation();
+
             if (this.isScrolling) return;
-            
+
             this.isScrolling = true;
             clearTimeout(this.scrollTimeout);
-            
+
             const direction = e.deltaY > 0 ? 'down' : 'up';
-            
+
             if (direction === 'down') {
                 const canAdvance = this.next();
                 if (!canAdvance) {
@@ -133,13 +134,13 @@ class Carousel {
                     return;
                 }
             }
-            
+
             this.scrollTimeout = setTimeout(() => {
                 this.isScrolling = false;
             }, 600);
-        }, { passive: false });
+        }, { passive: false, capture: true });
     }
-    
+
     isInViewport() {
         const rect = this.section.getBoundingClientRect();
         return rect.top <= 100 && rect.bottom >= 100;
@@ -153,107 +154,139 @@ class SectionScrollManager {
         this.currentSectionIndex = 0;
         this.isScrolling = false;
         this.headerOffset = 80;
-        
+        this.scrollQueue = [];
+        this.isProcessingQueue = false;
+
         this.initializeScrollListener();
         this.initializeNavigation();
     }
-    
+
+    isCarouselInView() {
+        const currentSection = this.sections[this.currentSectionIndex];
+        if (!currentSection || !currentSection.classList.contains('carousel-section')) {
+            return false;
+        }
+        const rect = currentSection.getBoundingClientRect();
+        const headerOffset = 80;
+        return Math.abs(rect.top - headerOffset) < 5; // Within 5px tolerance
+    }
+
     initializeScrollListener() {
+        let scrollEndTimeout;
+        
         window.addEventListener('wheel', (e) => {
             const currentSection = this.sections[this.currentSectionIndex];
-            
+
+            if (!currentSection || !currentSection.classList.contains('carousel-section')) {
+                e.preventDefault();
+            }
             if (currentSection && currentSection.classList.contains('carousel-section')) {
                 return;
             }
-            
-            if (this.isScrolling) return;
-            
+
+            if (this.isScrolling || this.isProcessingQueue) {
+                e.preventDefault();
+                return;
+            }
+
             e.preventDefault();
-            
+
             if (e.deltaY > 0) {
                 this.scrollToNextSection();
             } else {
                 this.scrollToPrevSection();
             }
         }, { passive: false });
+
+        // Safety net - force snap on any scroll end
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollEndTimeout);
+            scrollEndTimeout = setTimeout(() => {
+                if (!this.isScrolling) {
+                    this.snapToNearestSection();
+                }
+            }, 150);
+        });
     }
-    
+
     scrollToNextSection() {
         if (this.currentSectionIndex < this.sections.length - 1 && !this.isScrolling) {
             this.currentSectionIndex++;
             this.scrollToSection(this.currentSectionIndex);
         }
     }
-    
+
     scrollToPrevSection() {
         if (this.currentSectionIndex > 0 && !this.isScrolling) {
             this.currentSectionIndex--;
             this.scrollToSection(this.currentSectionIndex);
         }
     }
-    
+
     scrollToSection(index) {
         if (index < 0 || index >= this.sections.length || this.isScrolling) return;
-        
+
         this.currentSectionIndex = index;
         const targetPosition = this.sections[index].offsetTop - this.headerOffset;
-        
+
         this.isScrolling = true;
         this.smoothScrollTo(targetPosition);
     }
-    
+
     smoothScrollTo(targetPosition) {
         const startPosition = window.pageYOffset;
         const distance = targetPosition - startPosition;
         const duration = 800;
         let startTime = null;
-        
+
         const animation = (currentTime) => {
             if (startTime === null) startTime = currentTime;
             const timeElapsed = currentTime - startTime;
             const progress = Math.min(timeElapsed / duration, 1);
-            
+
             const ease = progress < 0.5
                 ? 4 * progress * progress * progress
                 : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-            
+
             window.scrollTo(0, startPosition + (distance * ease));
-            
+
             if (timeElapsed < duration) {
                 requestAnimationFrame(animation);
             } else {
+                // Force exact position snap
+                window.scrollTo(0, targetPosition);
                 this.isScrolling = false;
                 this.updateCurrentSection();
             }
         };
-        
+
         requestAnimationFrame(animation);
     }
-    
+
     smoothScrollToSelector(selector) {
         const element = document.querySelector(selector);
         if (element) {
             this.isScrolling = true;
             const targetPosition = element.offsetTop - this.headerOffset;
             this.smoothScrollTo(targetPosition);
-            
+
             setTimeout(() => {
                 this.updateCurrentSection();
             }, 900);
         }
     }
-    
+
     updateCurrentSection() {
         const scrollPosition = window.pageYOffset + (window.innerHeight / 3);
-        
+
         for (let i = 0; i < this.sections.length; i++) {
             const section = this.sections[i];
             const sectionTop = section.offsetTop;
             const sectionBottom = sectionTop + section.offsetHeight;
-            
+
             if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
                 this.currentSectionIndex = i;
-                
+
                 const sectionId = section.getAttribute('id');
                 document.querySelectorAll('.nav a').forEach(link => {
                     link.classList.remove('active');
@@ -265,14 +298,41 @@ class SectionScrollManager {
             }
         }
     }
-    
+
+    snapToNearestSection() {
+        const scrollPos = window.pageYOffset + this.headerOffset;
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+
+        this.sections.forEach((section, index) => {
+            const sectionTop = section.offsetTop;
+            const distance = Math.abs(scrollPos - sectionTop);
+            
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+            }
+        });
+
+        // If we're more than 10px away from a section, snap to it
+        if (closestDistance > 10) {
+            this.currentSectionIndex = closestIndex;
+            const targetPosition = this.sections[closestIndex].offsetTop - this.headerOffset;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+            this.updateCurrentSection();
+        }
+    }
+
     initializeNavigation() {
         document.querySelectorAll('.nav a').forEach(anchor => {
             anchor.addEventListener('click', (e) => {
                 e.preventDefault();
                 const targetId = anchor.getAttribute('href');
                 this.smoothScrollToSelector(targetId);
-                
+
                 document.querySelectorAll('.nav a').forEach(link => link.classList.remove('active'));
                 anchor.classList.add('active');
             });
@@ -285,13 +345,13 @@ let experienceCarousel;
 let projectCarousel;
 let sectionScrollManager;
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     type();
-    
+
     experienceCarousel = new Carousel('experienceTrack', 'experienceIndicators', 'experience');
     projectCarousel = new Carousel('projectTrack', 'projectIndicators', 'projects');
-    
+
     sectionScrollManager = new SectionScrollManager();
-    
+
     sectionScrollManager.updateCurrentSection();
 });

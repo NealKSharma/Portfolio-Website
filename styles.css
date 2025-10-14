@@ -7,6 +7,9 @@
 html {
     font-size: 62.5%;
     scroll-behavior: smooth;
+    scrollbar-width: none;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
 }
 
 body {
@@ -16,6 +19,7 @@ body {
     width: 100%;
     overflow-x: hidden;
     background-color: #0a0e27;
+    overscroll-behavior-y: contain;
 }
 
 /* Header */
@@ -88,6 +92,8 @@ section {
     position: relative;
     overflow: hidden;
     margin-top: 80px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
 
 section:first-of-type {
@@ -314,9 +320,6 @@ section.carousel-section {
 }
 
 /* About Details Section */
-#about-details {
-}
-
 .about-content-wrapper {
     max-width: 1600px;
     width: 100%;
@@ -482,11 +485,11 @@ section.carousel-section {
 /* Grid Card Layout - Full Screen Display */
 .grid-card {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 800px 1fr;  /* Fixed 400px for image, rest for content */
     gap: 0;
-    background: rgba(10, 14, 39, 0.95);
-    width: calc(100% - 4rem);
+    max-width: 1880px;
     height: 100%;
+    max-height: calc(100vh - 160px);
     align-items: stretch;
     position: relative;
     margin: 0 2rem;
@@ -496,34 +499,42 @@ section.carousel-section {
 }
 
 .grid-image {
-    width: 100%;
     height: 100%;
+    max-height: auto;
     overflow: hidden;
     position: relative;
-    background: #000;
+    background: rgba(16, 22, 68, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
 }
 
 .grid-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
     transition: transform 0.3s ease;
     filter: brightness(0.9);
-}
+}   
 
-.grid-card:hover .grid-image img {
+.grid-image:hover img {
     transform: scale(1.03);
     filter: brightness(1);
 }
 
 .grid-content {
-    padding: 6rem 8rem;
+    padding: 6rem 2rem;
     overflow-y: auto;
+    overflow-x: hidden;  /* ADD THIS */
     height: 100%;
+    max-width: 100%;  /* ADD THIS */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(10, 14, 39, 0.98) 0%, rgba(20, 25, 50, 0.95) 100%);
+    background: rgba(16, 22, 68, 0.95);
 }
 
 /* Custom scrollbar for grid content */
@@ -698,9 +709,6 @@ section.carousel-section {
 }
 
 /* Resume Section */
-#resume {
-}
-
 .resume-content-wrapper {
     max-width: 1600px;
     width: 100%;
