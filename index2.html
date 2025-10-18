@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neal Kaushik Sharma - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles2.css">
+</head>
+
+<body>
+    <!-- Cursor Glow Effect -->
+    <div class="cursor-glow"></div>
+
+    <!-- Floating Navigation -->
+    <nav class="floating-nav">
+        <a href="#about" class="nav-item active" data-section="0">
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="#about-details" class="nav-item" data-section="1">
+            <span class="nav-label">About</span>
+        </a>
+        <a href="#experience" class="nav-item" data-section="2">
+            <span class="nav-label">Experience</span>
+        </a>
+        <a href="#projects" class="nav-item" data-section="3">
+            <span class="nav-label">Projects</span>
+        </a>
+        <a href="#resume" class="nav-item" data-section="4">
+            <span class="nav-label">Resume</span>
+        </a>
+        <a href="#contact" class="nav-item" data-section="5">
+            <span class="nav-label">Contact</span>
+        </a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="about">
+        <div class="noise-overlay"></div>
+        <div class="hero-grid">
+            <div class="grid-line"></div>
+            <div class="grid-line"></div>
+            <div class="grid-line"></div>
+        </div>
+        
+        <div class="hero-container">
+            <div class="home-content">
+                <div class="hero-tag">
+                    <span class="status-dot"></span>
+                    Available for opportunities
+                </div>
+                
+                <h1 class="hero-title">
+                    <span class="title-line">NEAL</span>
+                    <span class="title-line">KAUSHIK</span>
+                    <span class="title-line gradient-text">SHARMA</span>
+                </h1>
+                
+                <div class="hero-subtitle">
+                    <span class="typing-container">
+                        <span class="typing-text"></span>
+                        <span class="typing-cursor">|</span>
+                    </span>
+                </div>
+                
+                <p class="hero-desc">
+                    CS Student @ Iowa State • AI Researcher • Full-Stack Developer
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">3.8</div>
+                        <div class="stat-label">GPA</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">2+</div>
+                        <div class="stat-label">Years Coding</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Projects</div>
+                    </div>
+                </div>
+                
+                <div class="social-icons">
+                    <a href="https://github.com/NealKSharma" target="_blank"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://linkedin.com/in/nealks" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="mailto:nea1@iastate.edu"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about-details">
+        <div class="noise-overlay"></div>
+        <div class="about-content-wrapper">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title">About Me</h2>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-left">
+                    <div class="about-image-container">
+                        <div class="image-border"></div>
+                        <img src="images/Profile Picture.jpg" alt="Neal Sharma" class="about-image">
+                        <div class="image-overlay">
+                            <div class="overlay-text">Developer</div>
+                            <div class="overlay-text">Researcher</div>
+                            <div class="overlay-text">Problem Solver</div>
+                        </div>
+                    </div>
+                    
+                    <div class="education-card">
+                        <div class="info-header">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h3>Education</h3>
+                        </div>
+                        <div class="info-content">
+                            <strong>Iowa State University</strong>
+                            <p>B.S. Computer Science - Sophomore</p>
+                            <p>Minor in Artificial Intelligence</p>
+                            <p>Honors Student</p>
+                            <div class="info-badge">GPA: 3.8 - Dean's List</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-right">
+                    <div class="about-text">
+                        <p class="lead-text">
+                            I build things that matter. From full-stack applications to AI safety research, 
+                            I'm driven by the challenge of turning complex problems into elegant solutions.
+                        </p>
+                        
+                        <p>
+                            Currently diving deep into machine learning safety at Iowa State's AI/ML Lab, 
+                            investigating vulnerabilities in unlearning processes. I've also worked on 
+                            enterprise-grade systems at TCS and contributed to astronomy research with NASA's 
+                            TESS mission data.
+                        </p>
+                        
+                        <p>
+                            When I'm not coding or researching, you'll find me building custom servers, 
+                            experimenting with new technologies, or contributing to open-source projects.
+                        </p>
+                    </div>
+                    
+                    <div class="skills-section">
+                        <h3>Technical Skills</h3>
+                        <div class="skills">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">C#</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">ASP.NET Core</span>
+                            <span class="skill-tag">Spring Boot</span>
+                            <span class="skill-tag">PyTorch</span>
+                            <span class="skill-tag">TensorFlow</span>
+                            <span class="skill-tag">Azure</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Linux</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">LaTeX</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="carousel-section">
+        <div class="noise-overlay"></div>
+        <div class="section-header">
+            <span class="section-number">02</span>
+            <h2 class="section-title">Experience</h2>
+        </div>
+        <div class="carousel-container">
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="experienceTrack">
+                    <!-- Experience 1 -->
+                    <div class="carousel-slide active">
+                        <div class="grid-card">
+                            <div class="grid-image">
+                                <img src="images/TCS Certificate.jpg" alt="TCS Experience">
+                            </div>
+                            <div class="grid-content">
+                                <h2>💼 Software Engineer Intern</h2>
+                                <div class="item-header">
+                                    <h3>Tata Consultancy Services</h3>
+                                    <span class="date-badge">June 2025 – Aug 2025</span>
+                                </div>
+                                <p class="item-description">
+                                    Contributed to full-stack web development projects, designing and implementing an
+                                    Online Retail Management System using modern technologies and cloud services.
+                                </p>
+                                <div class="item-details">
+                                    <h4>Key Responsibilities:</h4>
+                                    <ul>
+                                        <li>Developed e-commerce platform using C# and ASP.NET Core MVC</li>
+                                        <li>Designed database schemas in SQL Server for data management</li>
+                                        <li>Created responsive user interfaces with modern web technologies</li>
+                                        <li>Collaborated with cross-functional teams in Agile environment</li>
+                                    </ul>
+                                </div>
+                                <div class="tech-stack">
+                                    <div class="tech-tags">
+                                        <span class="tech-badge">C#</span>
+                                        <span class="tech-badge">ASP.NET Core</span>
+                                        <span class="tech-badge">SQL Server</span>
+                                        <span class="tech-badge">Azure</span>
+                                        <span class="tech-badge">JavaScript</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Experience 2 -->
+                    <div class="carousel-slide">
+                        <div class="grid-card">
+                            <div class="grid-image">
+                                <img src="images/ai-research.jpg" alt="AI Research">
+                            </div>
+                            <div class="grid-content">
+                                <h2>🔬 Undergraduate Researcher</h2>
+                                <div class="item-header">
+                                    <h3>Iowa State University - AI/ML Safety Lab</h3>
+                                    <span class="date-badge">August 2025 - Present</span>
+                                </div>
+                                <p class="item-description">
+                                    Conducting cutting-edge research on machine learning safety, focusing on malicious
+                                    unlearning attacks and predictive uncertainty in AI systems.
+                                </p>
+                                <div class="item-details">
+                                    <h4>Research Focus:</h4>
+                                    <ul>
+                                        <li>Investigating vulnerabilities in machine unlearning processes</li>
+                                        <li>Analyzing predictive uncertainty in neural networks</li>
+                                        <li>Developing methods to detect malicious unlearning attacks</li>
+                                        <li>Implementing experiments using PyTorch and TensorFlow</li>
+                                    </ul>
+                                </div>
+                                <div class="tech-stack">
+                                    <div class="tech-tags">
+                                        <span class="tech-badge">Python</span>
+                                        <span class="tech-badge">PyTorch</span>
+                                        <span class="tech-badge">TensorFlow</span>
+                                        <span class="tech-badge">ML</span>
+                                        <span class="tech-badge">AI Safety</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Experience 3 -->
+                    <div class="carousel-slide">
+                        <div class="grid-card">
+                            <div class="grid-image">
+                                <img src="images/TIC100625998_fast.png" alt="Astronomy Research">
+                            </div>
+                            <div class="grid-content">
+                                <h2>🔭 Research Assistant</h2>
+                                <div class="item-header">
+                                    <h3>Iowa State University - Astronomy Department</h3>
+                                    <span class="date-badge">March 2025 - April 2025</span>
+                                </div>
+                                <p class="item-description">
+                                    Assisted in analyzing white dwarf star data from NASA's TESS mission, contributing
+                                    to stellar classification and data visualization efforts.
+                                </p>
+                                <div class="item-details">
+                                    <h4>Project Contributions:</h4>
+                                    <ul>
+                                        <li>Processed and analyzed light curve data from NASA TESS mission</li>
+                                        <li>Developed Python scripts for automated data cleaning</li>
+                                        <li>Created data visualizations to identify stellar patterns</li>
+                                        <li>Assisted in classifying white dwarf stars</li>
+                                    </ul>
+                                </div>
+                                <div class="tech-stack">
+                                    <div class="tech-tags">
+                                        <span class="tech-badge">Python</span>
+                                        <span class="tech-badge">NumPy</span>
+                                        <span class="tech-badge">Matplotlib</span>
+                                        <span class="tech-badge">Data Analysis</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-indicators" id="experienceIndicators"></div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="carousel-section">
+        <div class="noise-overlay"></div>
+        <div class="section-header">
+            <span class="section-number">03</span>
+            <h2 class="section-title">Featured Projects</h2>
+        </div>
+        <div class="carousel-container">
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="projectTrack">
+                    <!-- Project 1 -->
+                    <div class="carousel-slide active">
+                        <div class="grid-card">
+                            <div class="grid-image">
+                                <img src="images/brewmaster-project.jpg" alt="BrewMaster Project">
+                            </div>
+                            <div class="grid-content">
+                                <h2>☕ Online Retail Management System</h2>
+                                <p class="project-subtitle">BrewMaster - Full-Stack E-Commerce Platform</p>
+                                <p class="item-description">
+                                    A comprehensive, domain-independent e-commerce solution demonstrated through a
+                                    coffee retail store. Enterprise-grade platform showcasing modern web development
+                                    practices.
+                                </p>
+                                <div class="item-details">
+                                    <h4>Key Features:</h4>
+                                    <ul>
+                                        <li>Secure user authentication & role-based access control</li>
+                                        <li>Dynamic shopping cart & checkout system</li>
+                                        <li>Admin dashboard with analytics</li>
+                                        <li>Advanced product search & filtering</li>
+                                    </ul>
+                                </div>
+                                <div class="tech-stack">
+                                    <div class="tech-tags">
+                                        <span class="tech-badge">C#</span>
+                                        <span class="tech-badge">ASP.NET Core</span>
+                                        <span class="tech-badge">SQL Server</span>
+                                        <span class="tech-badge">Entity Framework</span>
+                                        <span class="tech-badge">Bootstrap</span>
+                                    </div>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/NealKSharma" class="project-btn primary" target="_blank">
+                                        <i class="fab fa-github"></i> GitHub
+                                    </a>
+                                    <a href="#" class="project-btn secondary">
+                                        <i class="fas fa-external-link-alt"></i> Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="carousel-slide">
+                        <div class="grid-card">
+                            <div class="grid-image">
+                                <img src="images/nas-project.jpg" alt="NAS Project">
+                            </div>
+                            <div class="grid-content">
+                                <h2>🖥️ Network Attached Storage (NAS)</h2>
+                                <p class="project-subtitle">Personal Server Infrastructure</p>
+                                <p class="item-description">
+                                    Built a custom NAS and server solution using Raspberry Pi 5, featuring automated
+                                    backups, remote access capabilities, and secure networking.
+                                </p>
+                                <div class="item-details">
+                                    <h4>Key Features:</h4>
+                                    <ul>
+                                        <li>OpenMediaVault on Debian Linux</li>
+                                        <li>Automated daily backups with rotation</li>
+                                        <li>Wake-on-LAN triggers for power management</li>
+                                        <li>OpenVPN secure remote access</li>
+                                    </ul>
+                                </div>
+                                <div class="tech-stack">
+                                    <div class="tech-tags">
+                                        <span class="tech-badge">Raspberry Pi 5</span>
+                                        <span class="tech-badge">Debian Linux</span>
+                                        <span class="tech-badge">OpenMediaVault</span>
+                                        <span class="tech-badge">Docker</span>
+                                        <span class="tech-badge">OpenVPN</span>
+                                    </div>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/NealKSharma" class="project-btn primary" target="_blank">
+                                        <i class="fab fa-github"></i> Documentation
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="carousel-slide">
+                        <div class="grid-card">
+                            <div class="grid-image">
+                                <img src="images/ai-research-project.jpg" alt="AI Research">
+                            </div>
+                            <div class="grid-content">
+                                <h2>🤖 AI Research: Malicious Unlearning</h2>
+                                <p class="project-subtitle">Machine Learning Safety Research</p>
+                                <p class="item-description">
+                                    Ongoing research investigating vulnerabilities in predictive uncertainty during
+                                    machine unlearning processes in safety-critical AI systems.
+                                </p>
+                                <div class="item-details">
+                                    <h4>Research Areas:</h4>
+                                    <ul>
+                                        <li>Uncertainty quantification in machine learning</li>
+                                        <li>Machine unlearning techniques and vulnerabilities</li>
+                                        <li>Adversarial attack analysis on AI models</li>
+                                        <li>Healthcare and autonomous systems safety</li>
+                                    </ul>
+                                </div>
+                                <div class="tech-stack">
+                                    <div class="tech-tags">
+                                        <span class="tech-badge">Python</span>
+                                        <span class="tech-badge">PyTorch</span>
+                                        <span class="tech-badge">TensorFlow</span>
+                                        <span class="tech-badge">ML</span>
+                                        <span class="tech-badge">AI Safety</span>
+                                    </div>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" class="project-btn primary">
+                                        <i class="fas fa-file-pdf"></i> Paper (Coming Soon)
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-indicators" id="projectIndicators"></div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume">
+        <div class="noise-overlay"></div>
+        <div class="resume-content-wrapper">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2 class="section-title">Resume</h2>
+            </div>
+            <div class="resume-container">
+                <p class="resume-intro">Download my resume to learn more about my experience and qualifications</p>
+                <div class="resume-preview">
+                    <div class="resume-visual">
+                        <h3>📄 Neal Kaushik Sharma</h3>
+                        <p><strong>Computer Science Student</strong></p>
+                        <p>Iowa State University | Class of 2028</p>
+                        <ul class="resume-highlights">
+                            <li>✨ GPA: 3.8 - Dean's List</li>
+                            <li>💼 Software Engineering Intern at TCS</li>
+                            <li>🔬 AI Research - Machine Learning Safety</li>
+                            <li>🛠️ Full-Stack Development Experience</li>
+                            <li>☁️ Azure Cloud Platform</li>
+                            <li>🤖 AI & ML Club Member</li>
+                        </ul>
+                    </div>
+                    <div class="resume-actions">
+                        <button class="resume-btn" onclick="alert('Resume download would go here')">
+                            <span>📥</span>
+                            Download Resume PDF
+                        </button>
+                        <button class="resume-btn secondary" onclick="alert('Full resume would open here')">
+                            <span>🔗</span>
+                            View Full Resume
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="noise-overlay"></div>
+        <div class="contact-container">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2 class="contact-title">Let's Build Something</h2>
+            </div>
+            <p class="contact-subtitle">
+                Got an interesting project or opportunity? I'm always open to discussing 
+                software development, AI research, or just connecting with fellow tech enthusiasts.
+            </p>
+            
+            <div class="contact-grid">
+                <a href="mailto:nea1@iastate.edu" class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>nea1@iastate.edu</p>
+                    <span class="contact-arrow">→</span>
+                </a>
+                
+                <a href="https://linkedin.com/in/nealks" target="_blank" class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <h3>LinkedIn</h3>
+                    <p>Connect with me</p>
+                    <span class="contact-arrow">→</span>
+                </a>
+                
+                <a href="https://github.com/NealKSharma" target="_blank" class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <h3>GitHub</h3>
+                    <p>Check out my code</p>
+                    <span class="contact-arrow">→</span>
+                </a>
+            </div>
+            
+            <div class="footer-text">
+                <p>© 2025 Neal Kaushik Sharma</p>
+                <p>Designed & Built with passion</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

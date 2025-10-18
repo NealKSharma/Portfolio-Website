@@ -1,3 +1,11 @@
+// Cursor glow effect
+const cursorGlow = document.querySelector('.cursor-glow');
+
+document.addEventListener('mousemove', (e) => {
+    cursorGlow.style.left = e.clientX + 'px';
+    cursorGlow.style.top = e.clientY + 'px';
+});
+
 // Typing animation
 const words = ["Software Developer", "AI Researcher", "Full-Stack Engineer", "Problem Solver", "Tech Enthusiast"];
 let wordIndex = 0;
@@ -5,7 +13,7 @@ let charIndex = 0;
 let isDeleting = false;
 
 function type() {
-    const typingElement = document.querySelector('.typing-text span');
+    const typingElement = document.querySelector('.typing-text');
     if (!typingElement) return;
 
     const currentWord = words[wordIndex];
@@ -153,7 +161,7 @@ class SectionScrollManager {
         this.sections = Array.from(document.querySelectorAll('section'));
         this.currentSectionIndex = 0;
         this.isScrolling = false;
-        this.headerOffset = 80;
+        this.headerOffset = 0;
         this.scrollQueue = [];
         this.isProcessingQueue = false;
 
@@ -167,8 +175,7 @@ class SectionScrollManager {
             return false;
         }
         const rect = currentSection.getBoundingClientRect();
-        const headerOffset = 80;
-        return Math.abs(rect.top - headerOffset) < 5; // Within 5px tolerance
+        return Math.abs(rect.top - this.headerOffset) < 5;
     }
 
     initializeScrollListener() {
@@ -180,6 +187,7 @@ class SectionScrollManager {
             if (!currentSection || !currentSection.classList.contains('carousel-section')) {
                 e.preventDefault();
             }
+            
             if (currentSection && currentSection.classList.contains('carousel-section')) {
                 return;
             }
@@ -198,7 +206,6 @@ class SectionScrollManager {
             }
         }, { passive: false });
 
-        // Safety net - force snap on any scroll end
         window.addEventListener('scroll', () => {
             clearTimeout(scrollEndTimeout);
             scrollEndTimeout = setTimeout(() => {
@@ -253,7 +260,6 @@ class SectionScrollManager {
             if (timeElapsed < duration) {
                 requestAnimationFrame(animation);
             } else {
-                // Force exact position snap
                 window.scrollTo(0, targetPosition);
                 this.isScrolling = false;
                 this.updateCurrentSection();
@@ -288,7 +294,7 @@ class SectionScrollManager {
                 this.currentSectionIndex = i;
 
                 const sectionId = section.getAttribute('id');
-                document.querySelectorAll('.nav a').forEach(link => {
+                document.querySelectorAll('.nav-item').forEach(link => {
                     link.classList.remove('active');
                     if (link.getAttribute('href') === `#${sectionId}`) {
                         link.classList.add('active');
@@ -314,7 +320,6 @@ class SectionScrollManager {
             }
         });
 
-        // If we're more than 10px away from a section, snap to it
         if (closestDistance > 10) {
             this.currentSectionIndex = closestIndex;
             const targetPosition = this.sections[closestIndex].offsetTop - this.headerOffset;
@@ -327,13 +332,13 @@ class SectionScrollManager {
     }
 
     initializeNavigation() {
-        document.querySelectorAll('.nav a').forEach(anchor => {
+        document.querySelectorAll('.nav-item').forEach(anchor => {
             anchor.addEventListener('click', (e) => {
                 e.preventDefault();
                 const targetId = anchor.getAttribute('href');
                 this.smoothScrollToSelector(targetId);
 
-                document.querySelectorAll('.nav a').forEach(link => link.classList.remove('active'));
+                document.querySelectorAll('.nav-item').forEach(link => link.classList.remove('active'));
                 anchor.classList.add('active');
             });
         });
