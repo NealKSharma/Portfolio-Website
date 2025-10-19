@@ -246,14 +246,6 @@ class UnifiedSectionManager {
     moveToNextSection() {
         if (this.currentSectionIndex < this.sections.length - 1) {
             this.currentSectionIndex++;
-            const nextSection = this.sections[this.currentSectionIndex];
-            
-            // Reset carousel to first slide when entering
-            if (nextSection.isCarousel) {
-                nextSection.currentSlide = 0;
-                this.updateCarouselSlide(nextSection);
-            }
-            
             this.scrollToCurrentSection();
         }
     }
@@ -261,14 +253,6 @@ class UnifiedSectionManager {
     moveToPreviousSection() {
         if (this.currentSectionIndex > 0) {
             this.currentSectionIndex--;
-            const prevSection = this.sections[this.currentSectionIndex];
-            
-            // Reset carousel to last slide when entering from below
-            if (prevSection.isCarousel) {
-                prevSection.currentSlide = prevSection.slides.length - 1;
-                this.updateCarouselSlide(prevSection);
-            }
-            
             this.scrollToCurrentSection();
         }
     }
