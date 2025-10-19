@@ -6,173 +6,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neal Kaushik Sharma - Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <!-- Cursor Glow Effect -->
-    <div class="cursor-glow"></div>
+    <header>
+        <nav class="nav">
+            <div class="logo">NKS</div>
+            <ul class="nav-links">
+                <li><a href="#about" class="active">Home</a></li>
+                <li><a href="#about-details">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- Floating Navigation -->
-    <nav class="floating-nav">
-        <a href="#about" class="nav-item active" data-section="0">
-            <span class="nav-label">Home</span>
-        </a>
-        <a href="#about-details" class="nav-item" data-section="1">
-            <span class="nav-label">About</span>
-        </a>
-        <a href="#experience" class="nav-item" data-section="2">
-            <span class="nav-label">Experience</span>
-        </a>
-        <a href="#projects" class="nav-item" data-section="3">
-            <span class="nav-label">Projects</span>
-        </a>
-        <a href="#resume" class="nav-item" data-section="4">
-            <span class="nav-label">Resume</span>
-        </a>
-        <a href="#contact" class="nav-item" data-section="5">
-            <span class="nav-label">Contact</span>
-        </a>
-    </nav>
-
-    <!-- Hero Section -->
     <section id="about">
-        <div class="noise-overlay"></div>
-        <div class="hero-grid">
-            <div class="grid-line"></div>
-            <div class="grid-line"></div>
-            <div class="grid-line"></div>
-        </div>
-        
         <div class="hero-container">
             <div class="home-content">
-                <div class="hero-tag">
-                    <span class="status-dot"></span>
-                    Available for opportunities
-                </div>
-                
-                <h1 class="hero-title">
-                    <span class="title-line">NEAL</span>
-                    <span class="title-line">KAUSHIK</span>
-                    <span class="title-line gradient-text">SHARMA</span>
-                </h1>
-                
-                <div class="hero-subtitle">
-                    <span class="typing-container">
-                        <span class="typing-text"></span>
-                        <span class="typing-cursor">|</span>
-                    </span>
-                </div>
-                
-                <p class="hero-desc">
-                    CS Student @ Iowa State • AI Researcher • Full-Stack Developer
-                </p>
-                
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">3.8</div>
-                        <div class="stat-label">GPA</div>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <div class="stat-number">2+</div>
-                        <div class="stat-label">Years Coding</div>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <div class="stat-number">10+</div>
-                        <div class="stat-label">Projects</div>
-                    </div>
-                </div>
-                
+                <h1>Hi, I'm <span>Neal Kaushik Sharma</span></h1>
+                <h3 class="typing-text">I'm a <span></span></h3>
+                <p>Passionate Computer Science student at Iowa State University with hands-on experience in full-stack
+                    development, cloud technologies, and AI research. Currently exploring the intersection of machine
+                    learning safety and software engineering.</p>
                 <div class="social-icons">
-                    <a href="https://github.com/NealKSharma" target="_blank"><i class="fa-brands fa-github"></i></a>
                     <a href="https://linkedin.com/in/nealks" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://github.com/NealKSharma" target="_blank"><i class="fa-brands fa-github"></i></a>
                     <a href="mailto:nea1@iastate.edu"><i class="fa-solid fa-envelope"></i></a>
                 </div>
             </div>
-        </div>
-        
-        <div class="scroll-indicator">
-            <div class="scroll-line"></div>
-            <span>Scroll</span>
+            <div class="home-img">
+                <img src="images/Profile Picture.jpg" alt="Neal Kaushik Sharma">
+            </div>
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about-details">
-        <div class="noise-overlay"></div>
         <div class="about-content-wrapper">
-            <div class="section-header">
-                <span class="section-number">01</span>
-                <h2 class="section-title">About Me</h2>
-            </div>
-            
+            <div class="section-title">About Me</div>
             <div class="about-grid">
-                <div class="about-left">
-                    <div class="about-image-container">
-                        <div class="image-border"></div>
-                        <img src="images/Profile Picture.jpg" alt="Neal Sharma" class="about-image">
-                        <div class="image-overlay">
-                            <div class="overlay-text">Developer</div>
-                            <div class="overlay-text">Researcher</div>
-                            <div class="overlay-text">Problem Solver</div>
-                        </div>
-                    </div>
-                    
-                    <div class="education-card">
-                        <div class="info-header">
-                            <i class="fas fa-graduation-cap"></i>
-                            <h3>Education</h3>
-                        </div>
-                        <div class="info-content">
-                            <strong>Iowa State University</strong>
-                            <p>B.S. Computer Science - Sophomore</p>
-                            <p>Minor in Artificial Intelligence</p>
-                            <p>Honors Student</p>
-                            <div class="info-badge">GPA: 3.8 - Dean's List</div>
-                        </div>
-                    </div>
+                <div class="education-card">
+                    <h3>🎓 Iowa State University</h3>
+                    <p><strong>B.S. in Computer Science</strong> - Sophomore</p>
+                    <p><strong>Minor in Artificial Intelligence</strong></p>
+                    <p><strong>Honors Student</strong></p>
+                    <p>
+                        <strong style="margin-top: 1.5rem; font-size: 1.8rem; color: #b74b4b;">GPA: 3.8</strong> - Dean's List for Academic Excellence
+                    </p>
+                    <p><strong>Relevant Coursework:</strong>
+                        <br> - Data Structures and Algorithms
+                        <br> - Software Development Practices
+                        <br> - Discrete Computational Structures
+                        <br> - Web Development and Design
+                        </p>
+                    <p><strong>Clubs:</strong>
+                        <br> - AI and ML Club
+                        <br> - Web Development Club
+                        <br> - Hackathon Club
+                    </p>
                 </div>
-                
-                <div class="about-right">
-                    <div class="about-text">
-                        <p class="lead-text">
-                            I build things that matter. From full-stack applications to AI safety research, 
-                            I'm driven by the challenge of turning complex problems into elegant solutions.
-                        </p>
-                        
-                        <p>
-                            Currently diving deep into machine learning safety at Iowa State's AI/ML Lab, 
-                            investigating vulnerabilities in unlearning processes. I've also worked on 
-                            enterprise-grade systems at TCS and contributed to astronomy research with NASA's 
-                            TESS mission data.
-                        </p>
-                        
-                        <p>
-                            When I'm not coding or researching, you'll find me building custom servers, 
-                            experimenting with new technologies, or contributing to open-source projects.
-                        </p>
-                    </div>
-                    
-                    <div class="skills-section">
+
+                <div class="about-text">
+                    <p>I’m a driven computer science student with experience in full-stack development, cloud computing, 
+                        and applied AI. My work focuses on creating reliable, efficient systems that balance performance, 
+                        scalability, and security while maintaining clean, maintainable code.</p>
+
+
+                    <p>I enjoy tackling complex technical problems—whether that means building dynamic web applications, 
+                        optimizing backend systems, or experimenting with ways to make machine learning models safer and more 
+                        interpretable. I’m especially interested in how thoughtful design and engineering can turn challenging 
+                        ideas into real, impactful solutions.</p>
+
+                    <div>
                         <h3>Technical Skills</h3>
                         <div class="skills">
-                            <span class="skill-tag">Python</span>
                             <span class="skill-tag">Java</span>
+                            <span class="skill-tag">Python</span>
                             <span class="skill-tag">C#</span>
-                            <span class="skill-tag">JavaScript</span>
                             <span class="skill-tag">SQL</span>
-                            <span class="skill-tag">ASP.NET Core</span>
-                            <span class="skill-tag">Spring Boot</span>
-                            <span class="skill-tag">PyTorch</span>
-                            <span class="skill-tag">TensorFlow</span>
-                            <span class="skill-tag">Azure</span>
+                            <span class="skill-tag">.NET</span>
                             <span class="skill-tag">Git</span>
-                            <span class="skill-tag">Docker</span>
-                            <span class="skill-tag">Linux</span>
                             <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Spring Boot</span>
+                            <span class="skill-tag">ASP.NET Core</span>
+                            <span class="skill-tag">Azure</span>
+                            <span class="skill-tag">Linux</span>
                             <span class="skill-tag">LaTeX</span>
                         </div>
                     </div>
@@ -181,13 +105,8 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
     <section id="experience" class="carousel-section">
-        <div class="noise-overlay"></div>
-        <div class="section-header">
-            <span class="section-number">02</span>
-            <h2 class="section-title">Experience</h2>
-        </div>
+        <div class="section-title">Experience</div>
         <div class="carousel-container">
             <div class="carousel-wrapper">
                 <div class="carousel-track" id="experienceTrack">
@@ -271,7 +190,8 @@
                     <div class="carousel-slide">
                         <div class="grid-card">
                             <div class="grid-image">
-                                <img src="images/TIC100625998_fast.png" alt="Astronomy Research">
+                                <img src="images/TIC100625998_fast.png" alt="Astronomy Research"
+                                    onerror="this.src='https://via.placeholder.com/600x500/b74b4b/ffffff?text=Astronomy+Research'">
                             </div>
                             <div class="grid-content">
                                 <h2>🔭 Research Assistant</h2>
@@ -309,13 +229,8 @@
         <div class="carousel-indicators" id="experienceIndicators"></div>
     </section>
 
-    <!-- Projects Section -->
     <section id="projects" class="carousel-section">
-        <div class="noise-overlay"></div>
-        <div class="section-header">
-            <span class="section-number">03</span>
-            <h2 class="section-title">Featured Projects</h2>
-        </div>
+        <div class="section-title">Featured Projects</div>
         <div class="carousel-container">
             <div class="carousel-wrapper">
                 <div class="carousel-track" id="projectTrack">
@@ -323,7 +238,8 @@
                     <div class="carousel-slide active">
                         <div class="grid-card">
                             <div class="grid-image">
-                                <img src="images/brewmaster-project.jpg" alt="BrewMaster Project">
+                                <img src="images/brewmaster-project.jpg" alt="BrewMaster Project"
+                                    onerror="this.src='https://via.placeholder.com/600x500/b74b4b/ffffff?text=BrewMaster'">
                             </div>
                             <div class="grid-content">
                                 <h2>☕ Online Retail Management System</h2>
@@ -352,7 +268,8 @@
                                     </div>
                                 </div>
                                 <div class="project-links">
-                                    <a href="https://github.com/NealKSharma" class="project-btn primary" target="_blank">
+                                    <a href="https://github.com/NealKSharma" class="project-btn primary"
+                                        target="_blank">
                                         <i class="fab fa-github"></i> GitHub
                                     </a>
                                     <a href="#" class="project-btn secondary">
@@ -367,7 +284,8 @@
                     <div class="carousel-slide">
                         <div class="grid-card">
                             <div class="grid-image">
-                                <img src="images/nas-project.jpg" alt="NAS Project">
+                                <img src="images/nas-project.jpg" alt="NAS Project"
+                                    onerror="this.src='https://via.placeholder.com/600x500/b74b4b/ffffff?text=NAS+Server'">
                             </div>
                             <div class="grid-content">
                                 <h2>🖥️ Network Attached Storage (NAS)</h2>
@@ -395,7 +313,8 @@
                                     </div>
                                 </div>
                                 <div class="project-links">
-                                    <a href="https://github.com/NealKSharma" class="project-btn primary" target="_blank">
+                                    <a href="https://github.com/NealKSharma" class="project-btn primary"
+                                        target="_blank">
                                         <i class="fab fa-github"></i> Documentation
                                     </a>
                                 </div>
@@ -407,7 +326,8 @@
                     <div class="carousel-slide">
                         <div class="grid-card">
                             <div class="grid-image">
-                                <img src="images/ai-research-project.jpg" alt="AI Research">
+                                <img src="images/ai-research-project.jpg" alt="AI Research"
+                                    onerror="this.src='https://via.placeholder.com/600x500/b74b4b/ffffff?text=AI+Safety'">
                             </div>
                             <div class="grid-content">
                                 <h2>🤖 AI Research: Malicious Unlearning</h2>
@@ -448,14 +368,9 @@
         <div class="carousel-indicators" id="projectIndicators"></div>
     </section>
 
-    <!-- Resume Section -->
     <section id="resume">
-        <div class="noise-overlay"></div>
         <div class="resume-content-wrapper">
-            <div class="section-header">
-                <span class="section-number">04</span>
-                <h2 class="section-title">Resume</h2>
-            </div>
+            <div class="section-title">Resume</div>
             <div class="resume-container">
                 <p class="resume-intro">Download my resume to learn more about my experience and qualifications</p>
                 <div class="resume-preview">
@@ -487,54 +402,24 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact">
-        <div class="noise-overlay"></div>
-        <div class="contact-container">
-            <div class="section-header">
-                <span class="section-number">05</span>
-                <h2 class="contact-title">Let's Build Something</h2>
-            </div>
-            <p class="contact-subtitle">
-                Got an interesting project or opportunity? I'm always open to discussing 
-                software development, AI research, or just connecting with fellow tech enthusiasts.
-            </p>
-            
-            <div class="contact-grid">
-                <a href="mailto:nea1@iastate.edu" class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <h3>Email</h3>
-                    <p>nea1@iastate.edu</p>
-                    <span class="contact-arrow">→</span>
-                </a>
-                
-                <a href="https://linkedin.com/in/nealks" target="_blank" class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fab fa-linkedin"></i>
-                    </div>
-                    <h3>LinkedIn</h3>
-                    <p>Connect with me</p>
-                    <span class="contact-arrow">→</span>
-                </a>
-                
-                <a href="https://github.com/NealKSharma" target="_blank" class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fab fa-github"></i>
-                    </div>
-                    <h3>GitHub</h3>
-                    <p>Check out my code</p>
-                    <span class="contact-arrow">→</span>
-                </a>
-            </div>
-            
-            <div class="footer-text">
-                <p>© 2025 Neal Kaushik Sharma</p>
-                <p>Designed & Built with passion</p>
+        <div class="contact-content-wrapper">
+            <div class="section-title">Let's Connect</div>
+            <div class="contact-content">
+                <p>I'm always interested in new opportunities, collaborations, and interesting projects. Whether you
+                    want to discuss software development, AI research, or just say hello, feel free to reach out!</p>
+                <div class="contact-links">
+                    <a href="mailto:nea1@iastate.edu">📧 Email Me</a>
+                    <a href="https://linkedin.com/in/nealks" target="_blank">💼 LinkedIn</a>
+                    <a href="https://github.com/NealKSharma" target="_blank">🐙 GitHub</a>
+                </div>
             </div>
         </div>
     </section>
+
+    <footer>
+        <p>&copy; 2025 Neal Kaushik Sharma. All rights reserved.</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>

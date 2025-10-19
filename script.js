@@ -6,8 +6,33 @@ document.addEventListener('mousemove', (e) => {
     cursorGlow.style.top = e.clientY + 'px';
 });
 
+// Hamburger menu toggle
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('navMenu');
+
+hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    navMenu.classList.toggle('active');
+});
+
+// Close menu when nav item is clicked
+document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navMenu.classList.remove('active');
+    });
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    const floatingNav = document.querySelector('.floating-nav');
+    if (!floatingNav.contains(e.target)) {
+        navMenu.classList.remove('active');
+    }
+});
+
 // Typing animation
-const words = ["Software Developer", "AI Researcher", "Full-Stack Engineer", "Problem Solver", "Tech Enthusiast"];
+const words = ["Software Developer", "AI Researcher", "Full-Stack Engineer", "Tech Enthusiast"];
 let wordIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
@@ -145,7 +170,7 @@ class Carousel {
 
             this.scrollTimeout = setTimeout(() => {
                 this.isScrolling = false;
-            }, 600);
+            }, 400);
         }, { passive: false, capture: true });
     }
 
@@ -243,7 +268,7 @@ class SectionScrollManager {
     smoothScrollTo(targetPosition) {
         const startPosition = window.pageYOffset;
         const distance = targetPosition - startPosition;
-        const duration = 800;
+        const duration = 500;
         let startTime = null;
 
         const animation = (currentTime) => {
