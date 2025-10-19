@@ -63,175 +63,116 @@ function type() {
     }
 }
 
-// Carousel class for Experience and Projects
-class Carousel {
-    constructor(trackId, indicatorsId, sectionId) {
-        this.track = document.getElementById(trackId);
-        this.slides = this.track.querySelectorAll('.carousel-slide');
-        this.indicatorsContainer = document.getElementById(indicatorsId);
-        this.section = document.getElementById(sectionId);
-        this.currentIndex = 0;
-        this.isScrolling = false;
-        this.scrollTimeout = null;
-
-        this.initializeIndicators();
-        this.initializeScrollListener();
-    }
-
-    initializeIndicators() {
-        this.indicatorsContainer.innerHTML = '';
-
-        this.slides.forEach((slide, index) => {
-            const indicator = document.createElement('div');
-            indicator.className = 'indicator';
-            if (index === 0) indicator.classList.add('active');
-            indicator.addEventListener('click', () => this.goTo(index));
-            this.indicatorsContainer.appendChild(indicator);
-        });
-    }
-
-    update() {
-        this.slides.forEach((slide, index) => {
-            slide.classList.toggle('active', index === this.currentIndex);
-        });
-
-        this.track.style.transform = `translateX(-${this.currentIndex * 100}%)`;
-
-        const indicators = this.indicatorsContainer.querySelectorAll('.indicator');
-        indicators.forEach((indicator, index) => {
-            indicator.classList.toggle('active', index === this.currentIndex);
-        });
-    }
-
-    next() {
-        if (this.currentIndex < this.slides.length - 1) {
-            this.currentIndex++;
-            this.update();
-            return true;
-        }
-        return false;
-    }
-
-    prev() {
-        if (this.currentIndex > 0) {
-            this.currentIndex--;
-            this.update();
-            return true;
-        }
-        return false;
-    }
-
-    goTo(index) {
-        this.currentIndex = index;
-        this.update();
-    }
-
-    isAtStart() {
-        return this.currentIndex === 0;
-    }
-
-    isAtEnd() {
-        return this.currentIndex === this.slides.length - 1;
-    }
-
-    initializeScrollListener() {
-        this.section.addEventListener('wheel', (e) => {
-            if (!this.isInViewport()) return;
-
-            e.preventDefault();
-            e.stopPropagation();
-
-            if (this.isScrolling) return;
-
-            this.isScrolling = true;
-            clearTimeout(this.scrollTimeout);
-
-            const direction = e.deltaY > 0 ? 'down' : 'up';
-
-            if (direction === 'down') {
-                const canAdvance = this.next();
-                if (!canAdvance) {
-                    this.scrollTimeout = setTimeout(() => {
-                        this.isScrolling = false;
-                        sectionScrollManager.scrollToNextSection();
-                    }, 300);
-                    return;
-                }
-            } else {
-                const canGoBack = this.prev();
-                if (!canGoBack) {
-                    this.scrollTimeout = setTimeout(() => {
-                        this.isScrolling = false;
-                        sectionScrollManager.scrollToPrevSection();
-                    }, 300);
-                    return;
-                }
-            }
-
-            this.scrollTimeout = setTimeout(() => {
-                this.isScrolling = false;
-            }, 400);
-        }, { passive: false, capture: true });
-    }
-
-    isInViewport() {
-        const rect = this.section.getBoundingClientRect();
-        return rect.top <= 100 && rect.bottom >= 100;
-    }
-}
-
-// Section scroll manager for non-carousel sections
-class SectionScrollManager {
+// Unified Section Manager - treats everything as sections with optional slides
+class UnifiedSectionManager {
     constructor() {
-        this.sections = Array.from(document.querySelectorAll('section'));
+        this.sections = [];
         this.currentSectionIndex = 0;
+        this.currentSlideIndex = 0;
         this.isScrolling = false;
+        this.lastScrollTime = 0;
+        this.SCROLL_COOLDOWN = 600;
+        this.DELTA_THRESHOLD = 35;
         this.headerOffset = 0;
-        this.scrollQueue = [];
-        this.isProcessingQueue = false;
 
+        this.initializeSections();
         this.initializeScrollListener();
         this.initializeNavigation();
     }
 
-    isCarouselInView() {
-        const currentSection = this.sections[this.currentSectionIndex];
-        if (!currentSection || !currentSection.classList.contains('carousel-section')) {
-            return false;
-        }
-        const rect = currentSection.getBoundingClientRect();
-        return Math.abs(rect.top - this.headerOffset) < 5;
+    initializeSections() {
+        const sectionElements = document.querySelectorAll('section');
+        
+        sectionElements.forEach((sectionEl, index) => {
+            const section = {
+                element: sectionEl,
+                id: sectionEl.id,
+                index: index,
+                isCarousel: sectionEl.classList.contains('carousel-section'),
+                slides: [],
+                currentSlide: 0,
+                track: null,
+                indicatorsContainer: null
+            };
+
+            if (section.isCarousel) {
+                // Find carousel components
+                section.track = sectionEl.querySelector('[id$="Track"]');
+                section.indicatorsContainer = sectionEl.querySelector('[id$="Indicators"]');
+                section.slides = Array.from(section.track.querySelectorAll('.carousel-slide'));
+                
+                // Initialize indicators
+                this.initializeIndicators(section);
+            }
+
+            this.sections.push(section);
+        });
+    }
+
+    initializeIndicators(section) {
+        if (!section.indicatorsContainer) return;
+        
+        section.indicatorsContainer.innerHTML = '';
+        
+        section.slides.forEach((slide, index) => {
+            const indicator = document.createElement('div');
+            indicator.className = 'indicator';
+            if (index === 0) indicator.classList.add('active');
+            indicator.addEventListener('click', () => this.goToSlide(section.index, index));
+            section.indicatorsContainer.appendChild(indicator);
+        });
     }
 
     initializeScrollListener() {
-        let scrollEndTimeout;
+        let canProcess = true;
         
         window.addEventListener('wheel', (e) => {
-            const currentSection = this.sections[this.currentSectionIndex];
-
-            if (!currentSection || !currentSection.classList.contains('carousel-section')) {
-                e.preventDefault();
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Immediate gate - only process if we're ready
+            if (!canProcess) {
+                return;
             }
             
-            if (currentSection && currentSection.classList.contains('carousel-section')) {
+            const now = Date.now();
+            
+            // Enforce cooldown
+            if (this.isScrolling || (now - this.lastScrollTime) < this.SCROLL_COOLDOWN) {
                 return;
             }
 
-            if (this.isScrolling || this.isProcessingQueue) {
-                e.preventDefault();
+            // Ignore tiny movements
+            if (Math.abs(e.deltaY) < this.DELTA_THRESHOLD) {
                 return;
             }
-
-            e.preventDefault();
-
-            if (e.deltaY > 0) {
-                this.scrollToNextSection();
-            } else {
-                this.scrollToPrevSection();
+            
+            const direction = e.deltaY > 0 ? 'forward' : 'backward';
+            
+            // Check if we can actually move before locking
+            if (!this.canMove(direction)) {
+                return;
             }
+            
+            // Block all events immediately for 150ms
+            canProcess = false;
+            setTimeout(() => {
+                canProcess = true;
+            }, 150);
+            
+            // Lock BOTH flags immediately before any processing
+            this.isScrolling = true;
+            this.lastScrollTime = now;
+            
+            this.handleScroll(direction);
+            
         }, { passive: false });
 
+        // Snap to nearest section on manual scroll end
+        let scrollEndTimeout;
         window.addEventListener('scroll', () => {
+            if (this.isScrolling) return;
+            
             clearTimeout(scrollEndTimeout);
             scrollEndTimeout = setTimeout(() => {
                 if (!this.isScrolling) {
@@ -241,28 +182,128 @@ class SectionScrollManager {
         });
     }
 
-    scrollToNextSection() {
-        if (this.currentSectionIndex < this.sections.length - 1 && !this.isScrolling) {
+    canMove(direction) {
+        const currentSection = this.sections[this.currentSectionIndex];
+        
+        if (direction === 'forward') {
+            if (currentSection.isCarousel) {
+                // Can move if not at last slide, or not at last section
+                return currentSection.currentSlide < currentSection.slides.length - 1 || 
+                       this.currentSectionIndex < this.sections.length - 1;
+            } else {
+                // Can move if not at last section
+                return this.currentSectionIndex < this.sections.length - 1;
+            }
+        } else {
+            if (currentSection.isCarousel) {
+                // Can move if not at first slide, or not at first section
+                return currentSection.currentSlide > 0 || this.currentSectionIndex > 0;
+            } else {
+                // Can move if not at first section
+                return this.currentSectionIndex > 0;
+            }
+        }
+    }
+
+    handleScroll(direction) {
+        const currentSection = this.sections[this.currentSectionIndex];
+        
+        if (currentSection.isCarousel) {
+            // In a carousel section
+            if (direction === 'forward') {
+                // Try to advance slide
+                if (currentSection.currentSlide < currentSection.slides.length - 1) {
+                    currentSection.currentSlide++;
+                    this.updateCarouselSlide(currentSection);
+                    // Release lock for carousel transitions (no animation)
+                    this.isScrolling = false;
+                } else {
+                    // At last slide, move to next section
+                    this.moveToNextSection();
+                }
+            } else {
+                // Try to go back slide
+                if (currentSection.currentSlide > 0) {
+                    currentSection.currentSlide--;
+                    this.updateCarouselSlide(currentSection);
+                    // Release lock for carousel transitions (no animation)
+                    this.isScrolling = false;
+                } else {
+                    // At first slide, move to previous section
+                    this.moveToPreviousSection();
+                }
+            }
+        } else {
+            // Regular section - just move to next/previous section
+            if (direction === 'forward') {
+                this.moveToNextSection();
+            } else {
+                this.moveToPreviousSection();
+            }
+        }
+    }
+
+    moveToNextSection() {
+        if (this.currentSectionIndex < this.sections.length - 1) {
             this.currentSectionIndex++;
-            this.scrollToSection(this.currentSectionIndex);
+            const nextSection = this.sections[this.currentSectionIndex];
+            
+            // Reset carousel to first slide when entering
+            if (nextSection.isCarousel) {
+                nextSection.currentSlide = 0;
+                this.updateCarouselSlide(nextSection);
+            }
+            
+            this.scrollToCurrentSection();
         }
     }
 
-    scrollToPrevSection() {
-        if (this.currentSectionIndex > 0 && !this.isScrolling) {
+    moveToPreviousSection() {
+        if (this.currentSectionIndex > 0) {
             this.currentSectionIndex--;
-            this.scrollToSection(this.currentSectionIndex);
+            const prevSection = this.sections[this.currentSectionIndex];
+            
+            // Reset carousel to last slide when entering from below
+            if (prevSection.isCarousel) {
+                prevSection.currentSlide = prevSection.slides.length - 1;
+                this.updateCarouselSlide(prevSection);
+            }
+            
+            this.scrollToCurrentSection();
         }
     }
 
-    scrollToSection(index) {
-        if (index < 0 || index >= this.sections.length || this.isScrolling) return;
-
-        this.currentSectionIndex = index;
-        const targetPosition = this.sections[index].offsetTop - this.headerOffset;
-
+    scrollToCurrentSection() {
+        const section = this.sections[this.currentSectionIndex];
+        const targetPosition = section.element.offsetTop - this.headerOffset;
+        
         this.isScrolling = true;
         this.smoothScrollTo(targetPosition);
+    }
+
+    updateCarouselSlide(section) {
+        // Update slide positions
+        section.slides.forEach((slide, index) => {
+            slide.classList.toggle('active', index === section.currentSlide);
+        });
+
+        section.track.style.transform = `translateX(-${section.currentSlide * 100}%)`;
+
+        // Update indicators
+        if (section.indicatorsContainer) {
+            const indicators = section.indicatorsContainer.querySelectorAll('.indicator');
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === section.currentSlide);
+            });
+        }
+    }
+
+    goToSlide(sectionIndex, slideIndex) {
+        const section = this.sections[sectionIndex];
+        if (!section.isCarousel) return;
+        
+        section.currentSlide = slideIndex;
+        this.updateCarouselSlide(section);
     }
 
     smoothScrollTo(targetPosition) {
@@ -287,7 +328,7 @@ class SectionScrollManager {
             } else {
                 window.scrollTo(0, targetPosition);
                 this.isScrolling = false;
-                this.updateCurrentSection();
+                this.updateActiveNav();
             }
         };
 
@@ -296,38 +337,36 @@ class SectionScrollManager {
 
     smoothScrollToSelector(selector) {
         const element = document.querySelector(selector);
-        if (element) {
-            this.isScrolling = true;
-            const targetPosition = element.offsetTop - this.headerOffset;
-            this.smoothScrollTo(targetPosition);
+        if (!element) return;
 
-            setTimeout(() => {
-                this.updateCurrentSection();
-            }, 900);
-        }
-    }
-
-    updateCurrentSection() {
-        const scrollPosition = window.pageYOffset + (window.innerHeight / 3);
-
-        for (let i = 0; i < this.sections.length; i++) {
-            const section = this.sections[i];
-            const sectionTop = section.offsetTop;
-            const sectionBottom = sectionTop + section.offsetHeight;
-
-            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                this.currentSectionIndex = i;
-
-                const sectionId = section.getAttribute('id');
-                document.querySelectorAll('.nav-item').forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
-                break;
+        // Find which section this is
+        const sectionIndex = this.sections.findIndex(s => s.element === element);
+        if (sectionIndex !== -1) {
+            this.currentSectionIndex = sectionIndex;
+            
+            // Reset carousel if clicking on one
+            const section = this.sections[sectionIndex];
+            if (section.isCarousel) {
+                section.currentSlide = 0;
+                this.updateCarouselSlide(section);
             }
         }
+
+        this.isScrolling = true;
+        const targetPosition = element.offsetTop - this.headerOffset;
+        this.smoothScrollTo(targetPosition);
+    }
+
+    updateActiveNav() {
+        const currentSection = this.sections[this.currentSectionIndex];
+        const sectionId = currentSection.id;
+        
+        document.querySelectorAll('.nav-item').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('active');
+            }
+        });
     }
 
     snapToNearestSection() {
@@ -336,9 +375,9 @@ class SectionScrollManager {
         let closestDistance = Infinity;
 
         this.sections.forEach((section, index) => {
-            const sectionTop = section.offsetTop;
+            const sectionTop = section.element.offsetTop;
             const distance = Math.abs(scrollPos - sectionTop);
-            
+
             if (distance < closestDistance) {
                 closestDistance = distance;
                 closestIndex = index;
@@ -347,12 +386,12 @@ class SectionScrollManager {
 
         if (closestDistance > 10) {
             this.currentSectionIndex = closestIndex;
-            const targetPosition = this.sections[closestIndex].offsetTop - this.headerOffset;
+            const targetPosition = this.sections[closestIndex].element.offsetTop - this.headerOffset;
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth'
             });
-            this.updateCurrentSection();
+            this.updateActiveNav();
         }
     }
 
@@ -370,18 +409,11 @@ class SectionScrollManager {
     }
 }
 
-// Initialize everything when DOM is ready
-let experienceCarousel;
-let projectCarousel;
-let sectionScrollManager;
+// Initialize when DOM is ready
+let sectionManager;
 
 document.addEventListener('DOMContentLoaded', function () {
     type();
-
-    experienceCarousel = new Carousel('experienceTrack', 'experienceIndicators', 'experience');
-    projectCarousel = new Carousel('projectTrack', 'projectIndicators', 'projects');
-
-    sectionScrollManager = new SectionScrollManager();
-
-    sectionScrollManager.updateCurrentSection();
+    sectionManager = new UnifiedSectionManager();
+    sectionManager.updateActiveNav();
 });
