@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neal Kaushik Sharma - Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -22,22 +24,22 @@
             <span></span>
         </button>
         <div class="nav-menu" id="navMenu">
-            <a href="#about" class="nav-item" data-section="0">
+            <a href="#about" class="nav-item">
                 <span class="nav-label">Home</span>
             </a>
-            <a href="#about-details" class="nav-item" data-section="1">
+            <a href="#about-details" class="nav-item">
                 <span class="nav-label">About</span>
             </a>
-            <a href="#experience" class="nav-item" data-section="2">
+            <a href="#experience" class="nav-item">
                 <span class="nav-label">Experience</span>
             </a>
-            <a href="#projects" class="nav-item" data-section="3">
+            <a href="#projects" class="nav-item">
                 <span class="nav-label">Projects</span>
             </a>
-            <a href="#resume" class="nav-item" data-section="4">
+            <a href="#resume" class="nav-item">
                 <span class="nav-label">Resume</span>
             </a>
-            <a href="#contact" class="nav-item" data-section="5">
+            <a href="#contact" class="nav-item">
                 <span class="nav-label">Contact</span>
             </a>
         </div>
@@ -51,48 +53,68 @@
             <div class="grid-line"></div>
             <div class="grid-line"></div>
         </div>
-        
+
         <div class="hero-container">
             <div class="home-content">
-                <div class="hero-tag">
-                    <span class="status-dot"></span>
-                    Available for opportunities
-                </div>
-                
                 <h1 class="hero-title">
                     <span class="title-line">NEAL</span>
                     <span class="title-line">KAUSHIK</span>
                     <span class="title-line gradient-text">SHARMA</span>
                 </h1>
-                
+
                 <div class="hero-subtitle">
                     <span class="typing-container">
                         <span class="typing-text"></span>
                         <span class="typing-cursor">|</span>
                     </span>
                 </div>
-                
+
                 <p class="hero-desc">
                     CS Student @ Iowa State • AI Researcher • Full-Stack Developer
                 </p>
-                
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">3.8</div>
-                        <div class="stat-label">GPA</div>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <div class="stat-number">2+</div>
-                        <div class="stat-label">Years Coding</div>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <div class="stat-number">10+</div>
-                        <div class="stat-label">Projects</div>
+
+                <div class="hero-skills-section">
+                    <div class="hero-skills">
+                        <div class="skill-category">
+                            <div class="category-header">
+                                <i class="fas fa-tools"></i>
+                                <span>Frameworks</span>
+                            </div>
+                            <div class="category-tags">
+                                <span class="hero-skill-tag">ASP.NET Core</span>
+                                <span class="hero-skill-tag">Spring Boot</span>
+                                <span class="hero-skill-tag">PyTorch</span>
+                                <span class="hero-skill-tag">TensorFlow</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <div class="category-header">
+                                <i class="fas fa-code"></i>
+                                <span>Languages</span>
+                            </div>
+                            <div class="category-tags">
+                                <span class="hero-skill-tag">Python</span>
+                                <span class="hero-skill-tag">Java</span>
+                                <span class="hero-skill-tag">C#</span>
+                                <span class="hero-skill-tag">JavaScript</span>
+                                <span class="hero-skill-tag">SQL</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <div class="category-header">
+                                <i class="fas fa-server"></i>
+                                <span>Tools & Cloud</span>
+                            </div>
+                            <div class="category-tags">
+                                <span class="hero-skill-tag">Azure</span>
+                                <span class="hero-skill-tag">Docker</span>
+                                <span class="hero-skill-tag">Git</span>
+                                <span class="hero-skill-tag">Linux</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
+
                 <div class="social-icons">
                     <a href="https://github.com/NealKSharma" target="_blank"><i class="fa-brands fa-github"></i></a>
                     <a href="https://linkedin.com/in/nealks" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
@@ -100,9 +122,8 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="scroll-indicator">
-            <div class="scroll-line"></div>
             <span>Scroll</span>
         </div>
     </section>
@@ -115,7 +136,7 @@
                 <span class="section-number">01</span>
                 <h2 class="section-title">About Me</h2>
             </div>
-            
+
             <div class="about-grid">
                 <div class="about-left">
                     <div class="about-image-container">
@@ -127,7 +148,7 @@
                             <div class="overlay-text">Problem Solver</div>
                         </div>
                     </div>
-                    
+
                     <div class="education-card">
                         <div class="info-header">
                             <i class="fas fa-graduation-cap"></i>
@@ -135,53 +156,39 @@
                         </div>
                         <div class="info-content">
                             <strong>Iowa State University</strong>
+                            <strong>
                             <p>B.S. Computer Science - Sophomore</p>
                             <p>Minor in Artificial Intelligence</p>
                             <p>Honors Student</p>
                             <div class="info-badge">GPA: 3.8 - Dean's List</div>
+                            </strong>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="about-right">
                     <div class="about-text">
-                        <p class="lead-text">
-                            I build things that matter. From full-stack applications to AI safety research, 
-                            I'm driven by the challenge of turning complex problems into elegant solutions.
+                        <p> My computer science journey started back in eighth grade with a simple question:
+                            “How can I mod Minecraft?” That curiosity led me to learn Java, and before long,
+                            I wasn’t just playing games — I was creating inside them. Ever since then, computers
+                            have felt like home. From playing Road Rash on a chunky old monitor with a ball mouse
+                            to accidentally breaking my grandfather’s PC while trying to upgrade its RAM, every
+                            experience just pulled me deeper into this world. I even taught myself web development
+                            long before it showed up in any class, not because I had to, but because I genuinely loved
+                            figuring things out.
                         </p>
-                        
-                        <p>
-                            Currently diving deep into machine learning safety at Iowa State's AI/ML Lab, 
-                            investigating vulnerabilities in unlearning processes. I've also worked on 
-                            enterprise-grade systems at TCS and contributed to astronomy research with NASA's 
-                            TESS mission data.
+                        <p> That excitement hasn’t faded — if anything, it’s grown. Coding has always been a passion for
+                            me,
+                            and it’s something I want to stick with for the long run. I’m not completely sure which
+                            direction
+                            I’ll go yet, but I know my interests lie somewhere between web development, software
+                            engineering,
+                            and artificial intelligence. Whether it’s building systems that people actually use,
+                            researching
+                            AI safety, or just exploring new technologies, what drives me is the challenge of turning
+                            ideas
+                            into real, working solutions that make a difference.
                         </p>
-                        
-                        <p>
-                            When I'm not coding or researching, you'll find me building custom servers, 
-                            experimenting with new technologies, or contributing to open-source projects.
-                        </p>
-                    </div>
-                    
-                    <div class="skills-section">
-                        <h3>Technical Skills</h3>
-                        <div class="skills">
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">Java</span>
-                            <span class="skill-tag">C#</span>
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">SQL</span>
-                            <span class="skill-tag">ASP.NET Core</span>
-                            <span class="skill-tag">Spring Boot</span>
-                            <span class="skill-tag">PyTorch</span>
-                            <span class="skill-tag">TensorFlow</span>
-                            <span class="skill-tag">Azure</span>
-                            <span class="skill-tag">Git</span>
-                            <span class="skill-tag">Docker</span>
-                            <span class="skill-tag">Linux</span>
-                            <span class="skill-tag">HTML/CSS</span>
-                            <span class="skill-tag">LaTeX</span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -363,7 +370,8 @@
                                     </div>
                                 </div>
                                 <div class="project-links">
-                                    <a href="https://github.com/NealKSharma" class="project-btn primary" target="_blank">
+                                    <a href="https://github.com/NealKSharma" class="project-btn primary"
+                                        target="_blank">
                                         <i class="fab fa-github"></i> GitHub
                                     </a>
                                     <a href="#" class="project-btn secondary">
@@ -406,7 +414,8 @@
                                     </div>
                                 </div>
                                 <div class="project-links">
-                                    <a href="https://github.com/NealKSharma" class="project-btn primary" target="_blank">
+                                    <a href="https://github.com/NealKSharma" class="project-btn primary"
+                                        target="_blank">
                                         <i class="fab fa-github"></i> Documentation
                                     </a>
                                 </div>
@@ -468,29 +477,29 @@
                 <h2 class="section-title">Resume</h2>
             </div>
             <div class="resume-container">
-                <p class="resume-intro">Download my resume to learn more about my experience and qualifications</p>
-                <div class="resume-preview">
-                    <div class="resume-visual">
-                        <h3>📄 Neal Kaushik Sharma</h3>
-                        <p><strong>Computer Science Student</strong></p>
-                        <p>Iowa State University | Class of 2028</p>
-                        <ul class="resume-highlights">
-                            <li>✨ GPA: 3.8 - Dean's List</li>
-                            <li>💼 Software Engineering Intern at TCS</li>
-                            <li>🔬 AI Research - Machine Learning Safety</li>
-                            <li>🛠️ Full-Stack Development Experience</li>
-                            <li>☁️ Azure Cloud Platform</li>
-                            <li>🤖 AI & ML Club Member</li>
-                        </ul>
-                    </div>
-                    <div class="resume-actions">
+                <p class="resume-intro">
+                    A comprehensive overview of my academic achievements, technical expertise, and professional
+                    experience
+                </p>
+
+                <div class="resume-actions">
+                    <div class="action-card">
+                        <h4>📥 Download Resume</h4>
+                        <p>Get the full PDF version of my resume with detailed information about my experience, skills,
+                            and projects.</p>
                         <button class="resume-btn" onclick="alert('Resume download would go here')">
-                            <span>📥</span>
-                            Download Resume PDF
+                            <i class="fas fa-download"></i>
+                            Download PDF
                         </button>
+                    </div>
+
+                    <div class="action-card">
+                        <h4>🔗 View Online</h4>
+                        <p>Open an interactive version of my resume in your browser for quick reference and easy
+                            navigation.</p>
                         <button class="resume-btn secondary" onclick="alert('Full resume would open here')">
-                            <span>🔗</span>
-                            View Full Resume
+                            <i class="fas fa-external-link-alt"></i>
+                            View in Browser
                         </button>
                     </div>
                 </div>
@@ -507,10 +516,10 @@
                 <h2 class="contact-title">Let's Build Something</h2>
             </div>
             <p class="contact-subtitle">
-                Got an interesting project or opportunity? I'm always open to discussing 
+                Got an interesting project or opportunity? I'm always open to discussing
                 software development, AI research, or just connecting with fellow tech enthusiasts.
             </p>
-            
+
             <div class="contact-grid">
                 <a href="mailto:nea1@iastate.edu" class="contact-card">
                     <div class="contact-icon">
@@ -520,7 +529,7 @@
                     <p>nea1@iastate.edu</p>
                     <span class="contact-arrow">→</span>
                 </a>
-                
+
                 <a href="https://linkedin.com/in/nealks" target="_blank" class="contact-card">
                     <div class="contact-icon">
                         <i class="fab fa-linkedin"></i>
@@ -529,7 +538,7 @@
                     <p>Connect with me</p>
                     <span class="contact-arrow">→</span>
                 </a>
-                
+
                 <a href="https://github.com/NealKSharma" target="_blank" class="contact-card">
                     <div class="contact-icon">
                         <i class="fab fa-github"></i>
@@ -539,7 +548,7 @@
                     <span class="contact-arrow">→</span>
                 </a>
             </div>
-            
+
             <div class="footer-text">
                 <p>© 2025 Neal Kaushik Sharma</p>
                 <p>Designed & Built with passion</p>
