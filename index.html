@@ -10,11 +10,18 @@
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="responsive.css">
 </head>
 
 <body>
     <!-- Cursor Glow Effect -->
     <div class="cursor-glow"></div>
+
+    <!-- Logo -->
+    <a href="#about" class="logo-container" id="logoContainer">
+        <span class="logo-text">NKS</span>
+        <span class="logo-underline"></span>
+    </a>
 
     <!-- Hamburger Navigation -->
     <nav class="floating-nav">
@@ -48,12 +55,6 @@
     <!-- Hero Section -->
     <section id="about">
         <div class="noise-overlay"></div>
-        <div class="hero-grid">
-            <div class="grid-line"></div>
-            <div class="grid-line"></div>
-            <div class="grid-line"></div>
-        </div>
-
         <div class="hero-container">
             <div class="home-content">
                 <h1 class="hero-title">
@@ -81,10 +82,9 @@
                                 <span>Frameworks</span>
                             </div>
                             <div class="category-tags">
-                                <span class="hero-skill-tag">ASP.NET Core</span>
+                                <span class="hero-skill-tag">.NET</span>
                                 <span class="hero-skill-tag">Spring Boot</span>
                                 <span class="hero-skill-tag">PyTorch</span>
-                                <span class="hero-skill-tag">TensorFlow</span>
                             </div>
                         </div>
                         <div class="skill-category">
@@ -131,7 +131,7 @@
     <!-- About Section -->
     <section id="about-details">
         <div class="noise-overlay"></div>
-        <div class="about-content-wrapper">
+        <div class="content-wrapper">
             <div class="section-header">
                 <span class="section-number">01</span>
                 <h2 class="section-title">About Me</h2>
@@ -149,7 +149,7 @@
                         </div>
                     </div>
 
-                    <div class="education-card">
+                    <div class="info-card">
                         <div class="info-header">
                             <i class="fas fa-graduation-cap"></i>
                             <h3>Education</h3>
@@ -157,10 +157,10 @@
                         <div class="info-content">
                             <strong>Iowa State University</strong>
                             <strong>
-                            <p>B.S. Computer Science - Sophomore</p>
-                            <p>Minor in Artificial Intelligence</p>
-                            <p>Honors Student</p>
-                            <div class="info-badge">GPA: 3.8 - Dean's List</div>
+                                <p>B.S. Computer Science - Sophomore</p>
+                                <p>Minor in Artificial Intelligence</p>
+                                <p>Honors Student</p>
+                                <div class="info-badge">GPA: 3.8 - Dean's List</div>
                             </strong>
                         </div>
                     </div>
@@ -168,22 +168,22 @@
 
                 <div class="about-right">
                     <div class="about-text">
-                        <p> My computer science journey started back in eighth grade with a simple question:
-                            “How can I mod Minecraft?” That curiosity led me to learn Java, and before long,
-                            I wasn’t just playing games — I was creating inside them. Ever since then, computers
+                        <p>My computer science journey started back in eighth grade with a simple question:
+                            "How can I mod Minecraft?" That curiosity led me to learn Java, and before long,
+                            I wasn't just playing games — I was creating inside them. Ever since then, computers
                             have felt like home. From playing Road Rash on a chunky old monitor with a ball mouse
-                            to accidentally breaking my grandfather’s PC while trying to upgrade its RAM, every
+                            to accidentally breaking my grandfather's PC while trying to upgrade its RAM, every
                             experience just pulled me deeper into this world. I even taught myself web development
                             long before it showed up in any class, not because I had to, but because I genuinely loved
                             figuring things out.
                         </p>
-                        <p> That excitement hasn’t faded — if anything, it’s grown. Coding has always been a passion for
+                        <p>That excitement hasn't faded — if anything, it's grown. Coding has always been a passion for
                             me,
-                            and it’s something I want to stick with for the long run. I’m not completely sure which
+                            and it's something I want to stick with for the long run. I'm not completely sure which
                             direction
-                            I’ll go yet, but I know my interests lie somewhere between web development, software
+                            I'll go yet, but I know my interests lie somewhere between web development, software
                             engineering,
-                            and artificial intelligence. Whether it’s building systems that people actually use,
+                            and artificial intelligence. Whether it's building systems that people actually use,
                             researching
                             AI safety, or just exploring new technologies, what drives me is the challenge of turning
                             ideas
@@ -207,39 +207,59 @@
         <div class="carousel-container">
             <div class="carousel-wrapper">
                 <div class="carousel-track" id="experienceTrack">
+
                     <!-- Experience 1 -->
                     <div class="carousel-slide active">
                         <div class="grid-card">
                             <div class="grid-image">
-                                <img src="images/Tcs.png" alt="TCS Experience">
+                                <img src="images/TCS.png" alt="TCS Experience">
                             </div>
                             <div class="grid-content">
-                                <h2>💼 Software Engineer Intern</h2>
+                                <h2>💼 Software Engineer Intern
+                                    <span class="badge">June 2025 – Aug 2025</span>
+                                </h2>
                                 <div class="item-header">
                                     <h3>Tata Consultancy Services</h3>
-                                    <span class="date-badge">June 2025 – Aug 2025</span>
                                 </div>
                                 <p class="item-description">
-                                    Contributed to full-stack web development projects, designing and implementing an
-                                    Online Retail Management System using modern technologies and cloud services.
+                                    Completed a three-month, on-site internship focused on full-stack web application
+                                    development under a structured mentorship program. Worked in a multidisciplinary
+                                    team that included frontend, backend, database, QA, and cloud engineers, giving me
+                                    exposure to the full software development lifecycle. My main project involved
+                                    developing an
+                                    enterprise-grade <strong>Online Retail Management System</strong>, where I
+                                    implemented secure authentication, product management, and checkout modules.
+                                    Throughout the
+                                    internship, I gained practical experience in the <strong>Agile workflow</strong>,
+                                    learned <strong>Azure Cloud fundamentals</strong>, and collaborated closely with
+                                    mentors to
+                                    deploy and test real-world solutions.
                                 </p>
                                 <div class="item-details">
-                                    <h4>Key Responsibilities:</h4>
+                                    <h4>Key Contributions:</h4>
                                     <ul>
-                                        <li>Developed e-commerce platform using C# and ASP.NET Core MVC</li>
-                                        <li>Designed database schemas in SQL Server for data management</li>
-                                        <li>Created responsive user interfaces with modern web technologies</li>
-                                        <li>Collaborated with cross-functional teams in Agile environment</li>
+                                        <li>Developed and integrated backend modules in <strong>C# and ASP.NET Core
+                                                MVC</strong> with REST APIs, and real-time SQL Server data connections.
+                                        </li>
+                                        <li>Implemented <strong>secure authentication, role-based access, and session
+                                                management</strong> to protect data and improve reliability.</li>
+                                        <li>Designed database schemas, optimized stored procedures, and improved query
+                                            performance using <strong>SQL Server</strong>.</li>
+                                        <li>Collaborated with DevOps engineers to deploy builds through Azure Pipelines
+                                            and gained hands-on experience with <strong>Function Apps, Key Vaults, and
+                                                Data Factory</strong>.</li>
+                                        <li>Participated in daily scrums, sprint planning, and code reviews,
+                                            enhancing my
+                                            understanding of <strong>industry-standard Agile practices</strong>.</li>
                                     </ul>
                                 </div>
                                 <div class="tech-stack">
-                                    <div class="tech-tags">
-                                        <span class="tech-badge">C#</span>
-                                        <span class="tech-badge">ASP.NET Core</span>
-                                        <span class="tech-badge">SQL Server</span>
-                                        <span class="tech-badge">Azure</span>
-                                        <span class="tech-badge">JavaScript</span>
-                                    </div>
+                                    <span class="tech-badge">C#</span>
+                                    <span class="tech-badge">ASP.NET Core MVC</span>
+                                    <span class="tech-badge">SQL Server</span>
+                                    <span class="tech-badge">Azure</span>
+                                    <span class="tech-badge">AJAX</span>
+                                    <span class="tech-badge">Agile</span>
                                 </div>
                             </div>
                         </div>
@@ -249,35 +269,57 @@
                     <div class="carousel-slide">
                         <div class="grid-card">
                             <div class="grid-image">
-                                <img src="images/ai-research.jpg" alt="AI Research">
+                                <img src="images/AI Research.jpg" alt="AI Research">
                             </div>
                             <div class="grid-content">
-                                <h2>🔬 Undergraduate Researcher</h2>
+                                <h2>🔬 Undergraduate Researcher
+                                    <span class="badge">August 2025 – Present</span>
+                                </h2>
                                 <div class="item-header">
-                                    <h3>Iowa State University - AI/ML Safety Lab</h3>
-                                    <span class="date-badge">August 2025 - Present</span>
+                                    <h3>Iowa State University – AI/ML Safety Lab</h3>
                                 </div>
                                 <p class="item-description">
-                                    Conducting cutting-edge research on machine learning safety, focusing on malicious
-                                    unlearning attacks and predictive uncertainty in AI systems.
+                                    Conducting ongoing research under <strong>Ph.D. student Wei Qian</strong> and
+                                    <strong>Professor Wallapak Tavanapong</strong> at Iowa State University.
+                                    Our work explores vulnerabilities in <strong>predictive uncertainty</strong> during
+                                    the <strong>machine unlearning</strong> process — the practice of making AI models
+                                    “forget” specific data without complete retraining. The goal is to understand how
+                                    adversarial
+                                    data manipulation can distort a model’s confidence calibration, creating potential
+                                    safety hazards in
+                                    <strong>high-stakes AI systems</strong> such as autonomous vehicles and medical
+                                    diagnostics. My contributions involve developing and testing unlearning algorithms,
+                                    conducting uncertainty evaluation experiments, and assisting in publication
+                                    preparation for academic conferences.
                                 </p>
                                 <div class="item-details">
                                     <h4>Research Focus:</h4>
                                     <ul>
-                                        <li>Investigating vulnerabilities in machine unlearning processes</li>
-                                        <li>Analyzing predictive uncertainty in neural networks</li>
-                                        <li>Developing methods to detect malicious unlearning attacks</li>
-                                        <li>Implementing experiments using PyTorch and TensorFlow</li>
+                                        <li>Investigating <strong>malicious unlearning attacks</strong> that distort
+                                            predictive confidence and identifying potential vulnerabilities in
+                                            uncertainty-aware AI systems.</li>
+                                        <li>Implementing and comparing <strong>unlearning algorithms</strong> and
+                                            <strong>uncertainty quantification methods</strong>
+                                            (including Bayesian and post-hoc calibration techniques).
+                                        </li>
+                                        <li>Running controlled experiments in <strong>PyTorch</strong> to analyze
+                                            effects on predictive entropy, reliability diagrams, and
+                                            uncertainty.</li>
+                                        <li>Performing literature synthesis and evaluating results across various
+                                            unlearning strategies for publication-ready results.</li>
+                                        <li>Collaborating with graduate researchers to design frameworks that evaluate
+                                            <strong>AI safety, robustness, and ethical implications</strong> of
+                                            unlearning mechanisms.
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="tech-stack">
-                                    <div class="tech-tags">
-                                        <span class="tech-badge">Python</span>
-                                        <span class="tech-badge">PyTorch</span>
-                                        <span class="tech-badge">TensorFlow</span>
-                                        <span class="tech-badge">ML</span>
-                                        <span class="tech-badge">AI Safety</span>
-                                    </div>
+                                    <span class="tech-badge">Python</span>
+                                    <span class="tech-badge">PyTorch</span>
+                                    <span class="tech-badge">TensorFlow</span>
+                                    <span class="tech-badge">Machine Unlearning</span>
+                                    <span class="tech-badge">Uncertainty Quantification</span>
+                                    <span class="tech-badge">AI Safety</span>
                                 </div>
                             </div>
                         </div>
@@ -287,38 +329,66 @@
                     <div class="carousel-slide">
                         <div class="grid-card">
                             <div class="grid-image">
-                                <img src="images/TIC100625998_fast.png" alt="Astronomy Research">
+                                <img src="images/outburster.png" alt="Astronomy Research">
                             </div>
                             <div class="grid-content">
-                                <h2>🔭 Research Assistant</h2>
+                                <h2>🔭 Research Assistant
+                                    <span class="badge">March 2025 – April 2025</span>
+                                </h2>
                                 <div class="item-header">
-                                    <h3>Iowa State University - Astronomy Department</h3>
-                                    <span class="date-badge">March 2025 - April 2025</span>
+                                    <h3>Iowa State University – Department of Physics & Astronomy</h3>
                                 </div>
                                 <p class="item-description">
-                                    Assisted in analyzing white dwarf star data from NASA's TESS mission, contributing
-                                    to stellar classification and data visualization efforts.
+                                    Worked under <strong>Ph.D. student Ian Clark</strong> in the <strong>Department of
+                                        Physics & Astronomy</strong>
+                                    at Iowa State University. The research focused on identifying and analyzing
+                                    <strong>out-bursting white dwarf stars</strong> using observational data from NASA’s
+                                    <strong>TESS (Transiting Exoplanet Survey Satellite)</strong> mission.
+                                    Our goal was to detect and characterize stellar brightness variations that could
+                                    indicate
+                                    accretion-driven eruptions or thermonuclear events. My work combined computational
+                                    data processing
+                                    and visualization to support the classification of white dwarf candidates and
+                                    uncover patterns
+                                    in stellar behavior within large-scale time-series datasets.
                                 </p>
                                 <div class="item-details">
                                     <h4>Project Contributions:</h4>
                                     <ul>
-                                        <li>Processed and analyzed light curve data from NASA TESS mission</li>
-                                        <li>Developed Python scripts for automated data cleaning</li>
-                                        <li>Created data visualizations to identify stellar patterns</li>
-                                        <li>Assisted in classifying white dwarf stars</li>
+                                        <li>Processed and cleaned <strong>TESS light curve data</strong> using
+                                            <strong>Python</strong>, and
+                                            <strong>NumPy</strong> to detect outliers and
+                                            correct noise distortions.
+                                        </li>
+                                        <li>Developed and visualized <strong>Hertzsprung–Russell (HR) diagrams</strong>
+                                            and time-series
+                                            plots to identify outbursting stars and variability trends.</li>
+                                        <li>Applied <strong>data normalization</strong>, smoothing, and signal
+                                            thresholding to improve detection accuracy for faint stellar fluctuations.
+                                        </li>
+                                        <li>Documented analyzed targets and contributed to a shared database summarizing
+                                            stellar
+                                            classification metrics and observed magnitude changes.</li>
+                                        <li>Collaborated with graduate researchers to interpret statistical results,
+                                            refine
+                                            <strong>detection criteria</strong>, and prepare findings for internal
+                                            presentations.
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="tech-stack">
-                                    <div class="tech-tags">
-                                        <span class="tech-badge">Python</span>
-                                        <span class="tech-badge">NumPy</span>
-                                        <span class="tech-badge">Matplotlib</span>
-                                        <span class="tech-badge">Data Analysis</span>
-                                    </div>
+                                    <span class="tech-badge">Python</span>
+                                    <span class="tech-badge">NumPy</span>
+                                    <span class="tech-badge">Pandas</span>
+                                    <span class="tech-badge">Matplotlib</span>
+                                    <span class="tech-badge">Data Visualization</span>
+                                    <span class="tech-badge">Signal Processing</span>
+                                    <span class="tech-badge">Astrophysics</span>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -337,46 +407,62 @@
         <div class="carousel-container">
             <div class="carousel-wrapper">
                 <div class="carousel-track" id="projectTrack">
+
                     <!-- Project 1 -->
                     <div class="carousel-slide active">
                         <div class="grid-card">
                             <div class="grid-image">
-                                <img src="images/brewmaster-project.jpg" alt="BrewMaster Project">
+                                <img src="images/BrewMaster.jpg" alt="BrewMaster Project">
                             </div>
                             <div class="grid-content">
-                                <h2>☕ Online Retail Management System</h2>
-                                <p class="project-subtitle">BrewMaster - Full-Stack E-Commerce Platform</p>
+                                <h2>☕ Online Retail Management System
+                                    <a href="https://github.com/NealKSharma/OnlineRetailManagementSystem"
+                                        class="project-btn primary" target="_blank">
+                                        <i class="fab fa-github"></i> GitHub
+                                    </a>
+                                </h2>
+                                <p class="project-subtitle">BrewMaster – Full-Stack E-Commerce Platform</p>
                                 <p class="item-description">
-                                    A comprehensive, domain-independent e-commerce solution demonstrated through a
-                                    coffee retail store. Enterprise-grade platform showcasing modern web development
-                                    practices.
+                                    A <strong>full-stack e-commerce web application</strong> developed as
+                                    <strong>BrewMaster</strong>, a simulated coffee retail store.
+                                    Designed for scalability and security, it implements a <strong>domain-independent
+                                        retail management system</strong> supporting
+                                    user accounts, product inventory, and order processing. Built using <strong>ASP.NET
+                                        Core MVC, C#, and SQL Server</strong>,
+                                    it follows the <strong>MVC architecture</strong> pattern with a centralized
+                                    <strong>Database Helper</strong> for clean data handling,
+                                    AJAX-driven UI updates, and robust authentication mechanisms. The project
+                                    demonstrates <strong>enterprise-grade</strong>
+                                    architecture, modular design, and cloud deployment practices.
                                 </p>
                                 <div class="item-details">
-                                    <h4>Key Features:</h4>
+                                    <h4>Key Features & Contributions:</h4>
                                     <ul>
-                                        <li>Secure user authentication & role-based access control</li>
-                                        <li>Dynamic shopping cart & checkout system</li>
-                                        <li>Admin dashboard with analytics</li>
-                                        <li>Advanced product search & filtering</li>
+                                        <li>Implemented secure <strong>user authentication</strong> with <strong>SHA256
+                                                + salt</strong> hashing, role-based access control,
+                                            and dynamic profile updates with validation.</li>
+                                        <li>Developed an interactive <strong>admin dashboard</strong> to monitor users,
+                                            orders, and logs in real time.</li>
+                                        <li>Built <strong>AJAX-based product management</strong> with live table
+                                            updates, binary image uploads, and
+                                            autofill editing functionality for streamlined admin operations.</li>
+                                        <li>Designed a responsive <strong>shopping cart and checkout system</strong>
+                                            with SQL data sync, notifications, and automatic stock handling.</li>
+                                        <li>Engineered detailed <strong>audit trails and error logging</strong> using
+                                            structured SQL tables for system transparency.</li>
+                                        <li>Deployed on <strong>Microsoft Azure</strong> with Function Apps and Key
+                                            Vault integration for secure, cloud-ready scalability.</li>
                                     </ul>
                                 </div>
                                 <div class="tech-stack">
-                                    <div class="tech-tags">
-                                        <span class="tech-badge">C#</span>
-                                        <span class="tech-badge">ASP.NET Core</span>
-                                        <span class="tech-badge">SQL Server</span>
-                                        <span class="tech-badge">Entity Framework</span>
-                                        <span class="tech-badge">Bootstrap</span>
-                                    </div>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/NealKSharma" class="project-btn primary"
-                                        target="_blank">
-                                        <i class="fab fa-github"></i> GitHub
-                                    </a>
-                                    <a href="#" class="project-btn secondary">
-                                        <i class="fas fa-external-link-alt"></i> Demo
-                                    </a>
+                                    <span class="tech-badge">C#</span>
+                                    <span class="tech-badge">ASP.NET Core MVC</span>
+                                    <span class="tech-badge">SQL Server</span>
+                                    <span class="tech-badge">ADO.NET</span>
+                                    <span class="tech-badge">Azure</span>
+                                    <span class="tech-badge">AJAX</span>
+                                    <span class="tech-badge">jQuery</span>
+                                    <span class="tech-badge">HTML/CSS</span>
                                 </div>
                             </div>
                         </div>
@@ -386,92 +472,75 @@
                     <div class="carousel-slide">
                         <div class="grid-card">
                             <div class="grid-image">
-                                <img src="images/nas-project.jpg" alt="NAS Project">
+                                <img src="images/NAS.jpg" alt="NAS Project">
                             </div>
                             <div class="grid-content">
-                                <h2>🖥️ Network Attached Storage (NAS)</h2>
-                                <p class="project-subtitle">Personal Server Infrastructure</p>
+                                <h2>🖥️ Network Attached Storage (NAS)
+                                    <a href="https://github.com/NealKSharma" class="project-btn primary"
+                                        target="_blank">
+                                        <i class="fab fa-github"></i> GitHub
+                                    </a>
+                                </h2>
+                                <p class="project-subtitle">Personal Server Infrastructure & Automation System</p>
                                 <p class="item-description">
-                                    Built a custom NAS and server solution using Raspberry Pi 5, featuring automated
-                                    backups, remote access capabilities, and secure networking.
+                                    A <strong>self-hosted Network Attached Storage (NAS)</strong> and personal server
+                                    setup running on a
+                                    <strong>Raspberry Pi 5</strong>, designed for automated backups, remote file access,
+                                    and secure
+                                    networking. Built with <strong>OpenMediaVault</strong> on Debian Linux, it provides
+                                    shared network
+                                    folders accessible from multiple devices, with backup automation and security tools
+                                    that emulate
+                                    lightweight <strong>DevOps and cloud practices</strong> in a home-lab environment.
+                                    This system enables
+                                    reliable data storage, remote administration, and network-level resilience.
                                 </p>
                                 <div class="item-details">
-                                    <h4>Key Features:</h4>
+                                    <h4>Key Features & Implementations:</h4>
                                     <ul>
-                                        <li>OpenMediaVault on Debian Linux</li>
-                                        <li>Automated daily backups with rotation</li>
-                                        <li>Wake-on-LAN triggers for power management</li>
-                                        <li>OpenVPN secure remote access</li>
+                                        <li>Configured <strong>OpenMediaVault</strong> on Debian Linux to manage file
+                                            sharing, system
+                                            health, and network drives accessible from Windows and Linux PCs.</li>
+                                        <li>Developed <strong>bash automation scripts</strong> for daily and remote
+                                            server backups,
+                                            including rotation management and <strong>Wake-on-LAN</strong> triggers for
+                                            power-efficient
+                                            operations.</li>
+                                        <li>Integrated <strong>OpenVPN</strong> for encrypted remote access and deployed
+                                            <strong>Docker-based services</strong> for modular application hosting and
+                                            system isolation.
+                                        </li>
+                                        <li>Set up a local <strong>web hosting environment</strong> for tools
+                                            and web
+                                            apps, with real-time system monitoring via a custom dashboard.</li>
+                                        <li>Hardened the server with custom firewall rules
+                                            and network policies
+                                            to ensure secure and stable 24/7 uptime.</li>
                                     </ul>
                                 </div>
                                 <div class="tech-stack">
-                                    <div class="tech-tags">
-                                        <span class="tech-badge">Raspberry Pi 5</span>
-                                        <span class="tech-badge">Debian Linux</span>
-                                        <span class="tech-badge">OpenMediaVault</span>
-                                        <span class="tech-badge">Docker</span>
-                                        <span class="tech-badge">OpenVPN</span>
-                                    </div>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/NealKSharma" class="project-btn primary"
-                                        target="_blank">
-                                        <i class="fab fa-github"></i> Documentation
-                                    </a>
+                                    <span class="tech-badge">Raspberry Pi 5</span>
+                                    <span class="tech-badge">Debian Linux</span>
+                                    <span class="tech-badge">OpenMediaVault</span>
+                                    <span class="tech-badge">Docker</span>
+                                    <span class="tech-badge">OpenVPN</span>
+                                    <span class="tech-badge">Shell Scripting</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Project 3 -->
-                    <div class="carousel-slide">
-                        <div class="grid-card">
-                            <div class="grid-image">
-                                <img src="images/ai-research-project.jpg" alt="AI Research">
-                            </div>
-                            <div class="grid-content">
-                                <h2>🤖 AI Research: Malicious Unlearning</h2>
-                                <p class="project-subtitle">Machine Learning Safety Research</p>
-                                <p class="item-description">
-                                    Ongoing research investigating vulnerabilities in predictive uncertainty during
-                                    machine unlearning processes in safety-critical AI systems.
-                                </p>
-                                <div class="item-details">
-                                    <h4>Research Areas:</h4>
-                                    <ul>
-                                        <li>Uncertainty quantification in machine learning</li>
-                                        <li>Machine unlearning techniques and vulnerabilities</li>
-                                        <li>Adversarial attack analysis on AI models</li>
-                                        <li>Healthcare and autonomous systems safety</li>
-                                    </ul>
-                                </div>
-                                <div class="tech-stack">
-                                    <div class="tech-tags">
-                                        <span class="tech-badge">Python</span>
-                                        <span class="tech-badge">PyTorch</span>
-                                        <span class="tech-badge">TensorFlow</span>
-                                        <span class="tech-badge">ML</span>
-                                        <span class="tech-badge">AI Safety</span>
-                                    </div>
-                                </div>
-                                <div class="project-links">
-                                    <a href="#" class="project-btn primary">
-                                        <i class="fas fa-file-pdf"></i> Paper (Coming Soon)
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
         <div class="carousel-indicators" id="projectIndicators"></div>
     </section>
 
+
     <!-- Resume Section -->
     <section id="resume">
         <div class="noise-overlay"></div>
-        <div class="resume-content-wrapper">
+        <div class="content-wrapper">
             <div class="section-header">
                 <span class="section-number">04</span>
                 <h2 class="section-title">Resume</h2>
@@ -487,22 +556,23 @@
                         <h4>📥 Download Resume</h4>
                         <p>Get the full PDF version of my resume with detailed information about my experience, skills,
                             and projects.</p>
-                        <button class="resume-btn" onclick="alert('Resume download would go here')">
+                        <a href="Resources/Neal Kaushik Sharma - Resume.pdf" download class="btn-primary">
                             <i class="fas fa-download"></i>
                             Download PDF
-                        </button>
+                        </a>
                     </div>
 
                     <div class="action-card">
                         <h4>🔗 View Online</h4>
                         <p>Open an interactive version of my resume in your browser for quick reference and easy
                             navigation.</p>
-                        <button class="resume-btn secondary" onclick="alert('Full resume would open here')">
+                        <a href="Resources/Neal Kaushik Sharma - Resume.pdf" target="_blank" class="btn-primary">
                             <i class="fas fa-external-link-alt"></i>
                             View in Browser
-                        </button>
+                        </a>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -513,11 +583,11 @@
         <div class="contact-container">
             <div class="section-header">
                 <span class="section-number">05</span>
-                <h2 class="contact-title">Let's Build Something</h2>
+                <h2 class="contact-title">Let's Connect</h2>
             </div>
             <p class="contact-subtitle">
-                Got an interesting project or opportunity? I'm always open to discussing
-                software development, AI research, or just connecting with fellow tech enthusiasts.
+                I'm always open to discussing software development, AI research, or just connecting with fellow tech
+                enthusiasts.
             </p>
 
             <div class="contact-grid">

@@ -1,12 +1,11 @@
-// Cursor glow effect
+// ===== CURSOR GLOW EFFECT =====
 const cursorGlow = document.querySelector('.cursor-glow');
-
 document.addEventListener('mousemove', (e) => {
     cursorGlow.style.left = e.clientX + 'px';
     cursorGlow.style.top = e.clientY + 'px';
 });
 
-// Hamburger menu toggle
+// ===== HAMBURGER MENU =====
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
 
@@ -15,23 +14,32 @@ hamburger.addEventListener('click', (e) => {
     navMenu.classList.toggle('active');
 });
 
-// Close menu when nav item is clicked
 document.querySelectorAll('.nav-item').forEach(item => {
-    item.addEventListener('click', (e) => {
-        e.stopPropagation();
+    item.addEventListener('click', () => {
         navMenu.classList.remove('active');
     });
 });
 
-// Close menu when clicking outside
 document.addEventListener('click', (e) => {
-    const floatingNav = document.querySelector('.floating-nav');
-    if (!floatingNav.contains(e.target)) {
+    if (!document.querySelector('.floating-nav').contains(e.target)) {
         navMenu.classList.remove('active');
     }
 });
 
-// Typing animation
+// ===== LOGO CLICK =====
+const logoContainer = document.getElementById('logoContainer');
+if (logoContainer) {
+    logoContainer.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (sectionManager) {
+            sectionManager.smoothScrollToSelector('#about');
+        } else {
+            document.querySelector('#about').scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+}
+
+// ===== TYPING ANIMATION =====
 const words = ["Software Developer", "AI Researcher", "Full-Stack Engineer", "Tech Enthusiast"];
 let wordIndex = 0;
 let charIndex = 0;
@@ -63,12 +71,11 @@ function type() {
     }
 }
 
-// Unified Section Manager - treats everything as sections with optional slides
+// ===== UNIFIED SECTION MANAGER =====
 class UnifiedSectionManager {
     constructor() {
         this.sections = [];
         this.currentSectionIndex = 0;
-        this.currentSlideIndex = 0;
         this.isScrolling = false;
         this.lastScrollTime = 0;
         this.SCROLL_COOLDOWN = 600;
@@ -96,12 +103,9 @@ class UnifiedSectionManager {
             };
 
             if (section.isCarousel) {
-                // Find carousel components
                 section.track = sectionEl.querySelector('[id$="Track"]');
                 section.indicatorsContainer = sectionEl.querySelector('[id$="Indicators"]');
                 section.slides = Array.from(section.track.querySelectorAll('.carousel-slide'));
-                
-                // Initialize indicators
                 this.initializeIndicators(section);
             }
 
@@ -114,13 +118,80 @@ class UnifiedSectionManager {
         
         section.indicatorsContainer.innerHTML = '';
         
+        // Create wrapper for arrows and indicators
+        const navWrapper = document.createElement('div');
+        navWrapper.className = 'carousel-nav';
+        
+        // Create left arrow
+        const leftArrow = document.createElement('button');
+        leftArrow.className = 'carousel-arrow carousel-arrow-left';
+        leftArrow.innerHTML = '<i class="fas fa-chevron-left"></i>';
+        leftArrow.addEventListener('click', () => this.previousSlide(section.index));
+        
+        // Create indicators container
+        const indicatorsWrapper = document.createElement('div');
+        indicatorsWrapper.className = 'carousel-indicators';
+        
         section.slides.forEach((slide, index) => {
             const indicator = document.createElement('div');
             indicator.className = 'indicator';
             if (index === 0) indicator.classList.add('active');
             indicator.addEventListener('click', () => this.goToSlide(section.index, index));
-            section.indicatorsContainer.appendChild(indicator);
+            indicatorsWrapper.appendChild(indicator);
         });
+        
+        // Create right arrow
+        const rightArrow = document.createElement('button');
+        rightArrow.className = 'carousel-arrow carousel-arrow-right';
+        rightArrow.innerHTML = '<i class="fas fa-chevron-right"></i>';
+        rightArrow.addEventListener('click', () => this.nextSlide(section.index));
+        
+        // Append all elements
+        navWrapper.appendChild(leftArrow);
+        navWrapper.appendChild(indicatorsWrapper);
+        navWrapper.appendChild(rightArrow);
+        section.indicatorsContainer.appendChild(navWrapper);
+        
+        // Store arrow references
+        section.leftArrow = leftArrow;
+        section.rightArrow = rightArrow;
+        
+        // Update arrow states
+        this.updateArrowStates(section);
+    }
+
+    updateArrowStates(section) {
+        if (!section.leftArrow || !section.rightArrow) return;
+        
+        // Update left arrow
+        if (section.currentSlide === 0) {
+            section.leftArrow.classList.add('disabled');
+        } else {
+            section.leftArrow.classList.remove('disabled');
+        }
+        
+        // Update right arrow
+        if (section.currentSlide === section.slides.length - 1) {
+            section.rightArrow.classList.add('disabled');
+        } else {
+            section.rightArrow.classList.remove('disabled');
+        }
+    }
+
+    previousSlide(sectionIndex) {
+        const section = this.sections[sectionIndex];
+        if (!section.isCarousel || section.currentSlide === 0) return;
+        
+        section.currentSlide--;
+        this.updateCarouselSlide(section);
+    }
+
+    nextSlide(sectionIndex) {
+        const section = this.sections[sectionIndex];
+        if (!section.isCarousel || section.currentSlide === section.slides.length - 1) return;
+        
+        section.currentSlide++;
+        this.updateCarouselSlide(section);
     }
 
     initializeScrollListener() {
@@ -130,54 +201,31 @@ class UnifiedSectionManager {
             e.preventDefault();
             e.stopPropagation();
             
-            // Immediate gate - only process if we're ready
-            if (!canProcess) {
-                return;
-            }
+            if (!canProcess) return;
             
             const now = Date.now();
-            
-            // Enforce cooldown
-            if (this.isScrolling || (now - this.lastScrollTime) < this.SCROLL_COOLDOWN) {
-                return;
-            }
-
-            // Ignore tiny movements
-            if (Math.abs(e.deltaY) < this.DELTA_THRESHOLD) {
-                return;
-            }
+            if (this.isScrolling || (now - this.lastScrollTime) < this.SCROLL_COOLDOWN) return;
+            if (Math.abs(e.deltaY) < this.DELTA_THRESHOLD) return;
             
             const direction = e.deltaY > 0 ? 'forward' : 'backward';
+            if (!this.canMove(direction)) return;
             
-            // Check if we can actually move before locking
-            if (!this.canMove(direction)) {
-                return;
-            }
-            
-            // Block all events immediately for 150ms
             canProcess = false;
-            setTimeout(() => {
-                canProcess = true;
-            }, 150);
+            setTimeout(() => canProcess = true, 150);
             
-            // Lock BOTH flags immediately before any processing
             this.isScrolling = true;
             this.lastScrollTime = now;
-            
             this.handleScroll(direction);
             
         }, { passive: false });
 
-        // Snap to nearest section on manual scroll end
         let scrollEndTimeout;
         window.addEventListener('scroll', () => {
             if (this.isScrolling) return;
             
             clearTimeout(scrollEndTimeout);
             scrollEndTimeout = setTimeout(() => {
-                if (!this.isScrolling) {
-                    this.snapToNearestSection();
-                }
+                if (!this.isScrolling) this.snapToNearestSection();
             }, 150);
         });
     }
@@ -187,19 +235,15 @@ class UnifiedSectionManager {
         
         if (direction === 'forward') {
             if (currentSection.isCarousel) {
-                // Can move if not at last slide, or not at last section
                 return currentSection.currentSlide < currentSection.slides.length - 1 || 
                        this.currentSectionIndex < this.sections.length - 1;
             } else {
-                // Can move if not at last section
                 return this.currentSectionIndex < this.sections.length - 1;
             }
         } else {
             if (currentSection.isCarousel) {
-                // Can move if not at first slide, or not at first section
                 return currentSection.currentSlide > 0 || this.currentSectionIndex > 0;
             } else {
-                // Can move if not at first section
                 return this.currentSectionIndex > 0;
             }
         }
@@ -209,32 +253,24 @@ class UnifiedSectionManager {
         const currentSection = this.sections[this.currentSectionIndex];
         
         if (currentSection.isCarousel) {
-            // In a carousel section
             if (direction === 'forward') {
-                // Try to advance slide
                 if (currentSection.currentSlide < currentSection.slides.length - 1) {
                     currentSection.currentSlide++;
                     this.updateCarouselSlide(currentSection);
-                    // Release lock for carousel transitions (no animation)
                     this.isScrolling = false;
                 } else {
-                    // At last slide, move to next section
                     this.moveToNextSection();
                 }
             } else {
-                // Try to go back slide
                 if (currentSection.currentSlide > 0) {
                     currentSection.currentSlide--;
                     this.updateCarouselSlide(currentSection);
-                    // Release lock for carousel transitions (no animation)
                     this.isScrolling = false;
                 } else {
-                    // At first slide, move to previous section
                     this.moveToPreviousSection();
                 }
             }
         } else {
-            // Regular section - just move to next/previous section
             if (direction === 'forward') {
                 this.moveToNextSection();
             } else {
@@ -266,20 +302,21 @@ class UnifiedSectionManager {
     }
 
     updateCarouselSlide(section) {
-        // Update slide positions
         section.slides.forEach((slide, index) => {
             slide.classList.toggle('active', index === section.currentSlide);
         });
 
         section.track.style.transform = `translateX(-${section.currentSlide * 100}%)`;
 
-        // Update indicators
         if (section.indicatorsContainer) {
             const indicators = section.indicatorsContainer.querySelectorAll('.indicator');
             indicators.forEach((indicator, index) => {
                 indicator.classList.toggle('active', index === section.currentSlide);
             });
         }
+        
+        // Update arrow states
+        this.updateArrowStates(section);
     }
 
     goToSlide(sectionIndex, slideIndex) {
@@ -323,12 +360,10 @@ class UnifiedSectionManager {
         const element = document.querySelector(selector);
         if (!element) return;
 
-        // Find which section this is
         const sectionIndex = this.sections.findIndex(s => s.element === element);
         if (sectionIndex !== -1) {
             this.currentSectionIndex = sectionIndex;
             
-            // Reset carousel if clicking on one
             const section = this.sections[sectionIndex];
             if (section.isCarousel) {
                 section.currentSlide = 0;
@@ -393,7 +428,7 @@ class UnifiedSectionManager {
     }
 }
 
-// Initialize when DOM is ready
+// ===== INITIALIZATION =====
 let sectionManager;
 
 document.addEventListener('DOMContentLoaded', function () {
