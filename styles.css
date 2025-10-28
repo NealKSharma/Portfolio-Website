@@ -12,38 +12,6 @@ html {
     overflow-y: scroll;
 }
 
-/* For smaller laptops - INCREASE base font size */
-@media screen and (max-width: 1920px) {
-    html {
-        font-size: 70%; /* Larger base */
-    }
-}
-
-@media screen and (max-width: 1600px) {
-    html {
-        font-size: 72%; /* Even larger */
-    }
-}
-
-@media screen and (max-width: 1440px) {
-    html {
-        font-size: 74%; /* Larger still */
-    }
-}
-
-/* For 4K displays - keep original or slightly reduce */
-@media screen and (min-width: 2560px) {
-    html {
-        font-size: 62.5%; /* Original size */
-    }
-}
-
-@media screen and (min-width: 3440px) {
-    html {
-        font-size: 60%; /* Slightly smaller for ultra-wide 4K */
-    }
-}
-
 body {
     font-family: 'Space Grotesk', sans-serif;
     background: #0a0a0a;
