@@ -1,3 +1,121 @@
+// ===== UNIVERSAL FONT SIZE SYSTEM =====
+
+(function() {
+    function calculateOptimalFontSize() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const dpr = window.devicePixelRatio || 1;
+        
+        let fontSize;
+        
+        // Base size by DPR (Windows/OS Scaling)
+        if (dpr >= 2.0) {
+            fontSize = 55;
+        } else if (dpr >= 1.75) {
+            fontSize = 58;
+        } else if (dpr >= 1.5) {
+            fontSize = 62.5;
+        } else if (dpr >= 1.25) {
+            fontSize = 68;
+        } else {
+            fontSize = 74;
+        }
+        
+        // Adjust for viewport width
+        if (width >= 3840) {
+            fontSize *= 0.85;
+        } else if (width >= 2560) {
+            fontSize *= 0.90;
+        } else if (width >= 1920) {
+            fontSize *= 0.95;
+        } else if (width >= 1600) {
+            fontSize *= 1.0;
+        } else if (width >= 1366) {
+            fontSize *= 1.02;
+        } else if (width >= 1024) {
+            fontSize *= 0.85;
+        } else if (width >= 768) {
+            fontSize *= 0.80;
+        } else if (width >= 600) {
+            fontSize *= 0.75;
+        } else if (width >= 480) {
+            fontSize *= 0.72;
+        } else {
+            fontSize *= 0.70;
+        }
+        
+        // Adjust for viewport height
+        if (height < 600) {
+            fontSize *= 0.85;
+        } else if (height < 768) {
+            fontSize *= 0.90;
+        } else if (height < 900) {
+            fontSize *= 0.95;
+        } else if (height >= 1400) {
+            fontSize *= 1.05;
+        }
+        
+        // Aspect ratio fine-tuning
+        const aspectRatio = width / height;
+        if (aspectRatio > 2.2) {
+            fontSize *= 0.92;
+        } else if (aspectRatio < 1.3) {
+            fontSize *= 1.08;
+        }
+        
+        // Clamp between 35% and 75%
+        fontSize = Math.max(35, Math.min(75, fontSize));
+        
+        document.documentElement.style.fontSize = fontSize + '%';
+    }
+    
+    calculateOptimalFontSize();
+    
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(calculateOptimalFontSize, 300);
+    });
+    
+    window.addEventListener('load', () => {
+        setTimeout(calculateOptimalFontSize, 200);
+    });
+    
+    // Observe carousel changes
+    const observer = new MutationObserver(() => {
+        calculateOptimalFontSize();
+    });
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        const carouselTracks = document.querySelectorAll('.carousel-track');
+        carouselTracks.forEach(track => {
+            observer.observe(track, {
+                attributes: true,
+                attributeFilter: ['style']
+            });
+        });
+    });
+    
+    window.recalculateFontSize = calculateOptimalFontSize;
+})();
+
+// Overflow prevention CSS
+const style = document.createElement('style');
+style.textContent = `
+    html, body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+    section, .carousel-slide, .grid-card, .grid-content {
+        overflow-x: hidden !important;
+        max-width: 100% !important;
+    }
+    .tech-stack, .hero-skills, .category-tags {
+        flex-wrap: wrap !important;
+    }
+`;
+document.head.appendChild(style);
+
 // ===== CURSOR GLOW EFFECT =====
 const cursorGlow = document.querySelector('.cursor-glow');
 document.addEventListener('mousemove', (e) => {
