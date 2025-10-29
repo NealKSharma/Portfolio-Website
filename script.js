@@ -71,29 +71,21 @@
 
     calculateOptimalFontSize();
 
+    let initialWidth = window.innerWidth;
     let resizeTimer;
+
     window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(calculateOptimalFontSize, 300);
+        if (window.innerWidth !== initialWidth) {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                calculateOptimalFontSize();
+                initialWidth = window.innerWidth;
+            }, 300);
+        }
     });
 
     window.addEventListener('load', () => {
         setTimeout(calculateOptimalFontSize, 200);
-    });
-
-    // Observe carousel changes
-    const observer = new MutationObserver(() => {
-        calculateOptimalFontSize();
-    });
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const carouselTracks = document.querySelectorAll('.carousel-track');
-        carouselTracks.forEach(track => {
-            observer.observe(track, {
-                attributes: true,
-                attributeFilter: ['style']
-            });
-        });
     });
 
     window.recalculateFontSize = calculateOptimalFontSize;
@@ -233,119 +225,134 @@ function type() {
     }
 }
 
-// ===== TOUCH SWIPE HANDLER =====
-class TouchSwipeHandler {
-    constructor(element, onSwipeLeft, onSwipeRight, onSwipeUp, onSwipeDown) {
-        this.element = element;
-        this.onSwipeLeft = onSwipeLeft;
-        this.onSwipeRight = onSwipeRight;
-        this.onSwipeUp = onSwipeUp;
-        this.onSwipeDown = onSwipeDown;
-        this.touchStartX = 0;
-        this.touchStartY = 0;
-        this.touchEndX = 0;
-        this.touchEndY = 0;
-        this.touchStartTime = 0;
-        this.minSwipeDistance = 50;
-        this.maxSwipeTime = 300;
-
-        this.init();
-    }
-
-    init() {
-        this.element.addEventListener('touchstart', (e) => {
-            this.touchStartX = e.changedTouches[0].screenX;
-            this.touchStartY = e.changedTouches[0].screenY;
-            this.touchStartTime = Date.now();
-        }, { passive: true });
-
-        this.element.addEventListener('touchend', (e) => {
-            this.touchEndX = e.changedTouches[0].screenX;
-            this.touchEndY = e.changedTouches[0].screenY;
-            const swipeDistanceX = this.touchEndX - this.touchStartX;
-            const swipeDistanceY = this.touchEndY - this.touchStartY;
-            const swipeTime = Date.now() - this.touchStartTime;
-
-            if (swipeTime < this.maxSwipeTime) {
-                // Determine if swipe is more horizontal or vertical
-                if (Math.abs(swipeDistanceX) > Math.abs(swipeDistanceY)) {
-                    // Horizontal swipe
-                    if (Math.abs(swipeDistanceX) > this.minSwipeDistance) {
-                        if (swipeDistanceX > 0) {
-                            this.onSwipeRight && this.onSwipeRight();
-                        } else {
-                            this.onSwipeLeft && this.onSwipeLeft();
-                        }
-                    }
-                } else {
-                    // Vertical swipe
-                    if (Math.abs(swipeDistanceY) > this.minSwipeDistance) {
-                        if (swipeDistanceY > 0) {
-                            this.onSwipeDown && this.onSwipeDown();
-                        } else {
-                            this.onSwipeUp && this.onSwipeUp();
-                        }
-                    }
-                }
-            }
-        }, { passive: true });
-    }
-}
-
-// ===== CAROUSEL TOUCH SWIPE HANDLER =====
+// ===== CAROUSEL TOUCH SWIPE HANDLER (TABLET ONLY) =====
 class CarouselTouchSwipeHandler {
-    constructor(element, onSwipeLeft, onSwipeRight) {
-        this.element = element;
-        this.onSwipeLeft = onSwipeLeft;
-        this.onSwipeRight = onSwipeRight;
-        this.touchStartX = 0;
-        this.touchEndX = 0;
-        this.touchStartTime = 0;
-        this.minSwipeDistance = 50;
-        this.maxSwipeTime = 300;
+    constructor(trackElement, sectionIndex, manager) {
+        // `trackElement` should be the element you already pass (the track)
+        this.track = trackElement;
+        this.sectionIndex = sectionIndex;
+        this.manager = manager;
+
+        this.pointerDown = false;
+        this.startX = 0;
+        this.currentX = 0;
+        this.minSwipeDistance = 50; // px
+        this.locked = false;        // prevents multi-trigger during transition
+
+        // Bind methods
+        this.onPointerDown = this.onPointerDown.bind(this);
+        this.onPointerMove = this.onPointerMove.bind(this);
+        this.onPointerUp = this.onPointerUp.bind(this);
+        this.onPointerCancel = this.onPointerCancel.bind(this);
+        this.onTransitionEnd = this.onTransitionEnd.bind(this);
 
         this.init();
     }
 
     init() {
-        this.element.addEventListener('touchstart', (e) => {
-            this.touchStartX = e.changedTouches[0].screenX;
-            this.touchStartTime = Date.now();
-            this.element.style.transition = 'none';
-        }, { passive: true });
+        // Ensure the element can receive pointer events
+        this.track.style.touchAction = this.track.style.touchAction || 'pan-y';
 
-        this.element.addEventListener('touchmove', (e) => {
-            const touchCurrentX = e.changedTouches[0].screenX;
-            const diff = touchCurrentX - this.touchStartX;
-            // Add subtle drag feedback
-            const currentTransform = this.element.style.transform.match(/-?\d+/);
-            const baseTranslate = currentTransform ? parseInt(currentTransform[0]) : 0;
-            this.element.style.transform = `translateX(calc(${baseTranslate}% + ${diff * 0.3}px))`;
-        }, { passive: true });
+        // Pointer events
+        this.track.addEventListener('pointerdown', this.onPointerDown, { passive: false });
+        window.addEventListener('pointermove', this.onPointerMove, { passive: false });
+        window.addEventListener('pointerup', this.onPointerUp, { passive: false });
+        this.track.addEventListener('pointercancel', this.onPointerCancel, { passive: false });
 
-        this.element.addEventListener('touchend', (e) => {
-            this.touchEndX = e.changedTouches[0].screenX;
-            const swipeDistance = this.touchEndX - this.touchStartX;
-            const swipeTime = Date.now() - this.touchStartTime;
+        // Listen for transition end to unlock (use capture=false)
+        this.track.addEventListener('transitionend', this.onTransitionEnd);
+    }
 
-            // Restore transition
-            this.element.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+    onPointerDown(e) {
+        // Only handle primary button/touch
+        if (e.isPrimary === false || this.locked) return;
 
-            if (Math.abs(swipeDistance) > this.minSwipeDistance && swipeTime < this.maxSwipeTime) {
-                if (swipeDistance > 0) {
-                    this.onSwipeRight();
-                } else {
-                    this.onSwipeLeft();
-                }
+        this.pointerDown = true;
+        this.startX = e.clientX;
+        this.currentX = this.startX;
+
+        // capture pointer so we get move/up even if finger leaves the element
+        try { this.track.setPointerCapture(e.pointerId); } catch (err) { /* not critical */ }
+
+        // Prevent page from accidentally scrolling horizontally while swiping
+        e.preventDefault();
+    }
+
+    onPointerMove(e) {
+        if (!this.pointerDown || this.locked) return;
+        this.currentX = e.clientX;
+        // We intentionally DO NOT translate the track here (optional visual drag).
+        // Prevent default so the browser doesn't treat it as a scroll gesture.
+        e.preventDefault();
+    }
+
+    onPointerUp(e) {
+        if (!this.pointerDown || this.locked) {
+            this.resetPointer(e);
+            return;
+        }
+        this.pointerDown = false;
+
+        // release capture
+        try { this.track.releasePointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+
+        const diff = this.startX - this.currentX;
+        const abs = Math.abs(diff);
+
+        if (abs >= this.minSwipeDistance && !this.locked) {
+            // Determine direction
+            const goNext = diff > 0; // swipe left -> next
+            // Prevent manager from being spammed during slide transition
+            this.locked = true;
+            if (goNext) {
+                this.manager.nextSlide(this.sectionIndex);
             } else {
-                // Reset position if swipe was incomplete
-                const currentSlide = this.element.querySelector('.carousel-slide.active');
-                if (currentSlide) {
-                    const slideIndex = Array.from(this.element.children).indexOf(currentSlide);
-                    this.element.style.transform = `translateX(-${slideIndex * 100}%)`;
-                }
+                this.manager.previousSlide(this.sectionIndex);
             }
-        }, { passive: true });
+            // Do NOT unlock here — wait for transitionend on the track (onTransitionEnd).
+        } else {
+            // Not enough movement: do nothing (snap back)
+            // We still want to ensure track is not locked.
+            // No-op; subsequent swipes will still work.
+        }
+
+        e.preventDefault();
+    }
+
+    onPointerCancel(e) {
+        this.resetPointer(e);
+    }
+
+    resetPointer(e) {
+        this.pointerDown = false;
+        this.startX = 0;
+        this.currentX = 0;
+        try {
+            if (e && e.pointerId != null) this.track.releasePointerCapture(e.pointerId);
+        } catch (err) { /* ignore */ }
+    }
+
+    onTransitionEnd(e) {
+        // Only respond to transform transitions on this track element
+        if (e.target !== this.track) return;
+        if (e.propertyName && e.propertyName !== 'transform') return;
+
+        // unlock the swipe lock so user can swipe again
+        this.locked = false;
+
+        // Also ensure manager.isScrolling is cleared if you rely on that flag:
+        if (this.manager) {
+            this.manager.isScrolling = false;
+        }
+    }
+
+    destroy() {
+        // in case you want to remove listeners
+        this.track.removeEventListener('pointerdown', this.onPointerDown, { passive: false });
+        window.removeEventListener('pointermove', this.onPointerMove, { passive: false });
+        window.removeEventListener('pointerup', this.onPointerUp, { passive: false });
+        this.track.removeEventListener('pointercancel', this.onPointerCancel, { passive: false });
+        this.track.removeEventListener('transitionend', this.onTransitionEnd);
     }
 }
 
@@ -370,15 +377,7 @@ class UnifiedSectionManager {
             this.initializeDesktopScrollListener();
         }
 
-        // Mobile: Use touch swipe for section navigation
-        if (this.deviceType === 'mobile') {
-            this.initializeMobileSectionSwipe();
-        }
-
-        // Both mobile and tablet: Use touch swipe for carousels
-        if (this.deviceType === 'mobile' || this.deviceType === 'tablet') {
-            this.initializeCarouselTouchSwipe();
-        }
+        // Touch swipe disabled for mobile and tablet - use arrow buttons instead
 
         this.initializeNavigation();
     }
@@ -416,135 +415,13 @@ class UnifiedSectionManager {
         });
     }
 
-    initializeMobileSectionSwipe() {
-        let touchStartY = 0;
-        let touchEndY = 0;
-        let touchStartX = 0;
-        let touchStartTime = 0;
-        const minSwipeDistance = 50;
-        const maxSwipeTime = 300;
-        let isTransitioning = false;
-        let swipeDirection = null; // 'horizontal' or 'vertical'
-
-        // Disable default scrolling on mobile
-        document.body.style.overflowY = 'hidden';
-        document.body.style.height = '100vh';
-
-        // Create a container wrapper for smooth transitions
-        const sectionsContainer = document.createElement('div');
-        sectionsContainer.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    `;
-
-        // Move all sections into the container
-        this.sections.forEach(section => {
-            sectionsContainer.appendChild(section.element);
-            section.element.style.height = '100vh';
-            section.element.style.minHeight = '100vh';
-        });
-
-        document.body.insertBefore(sectionsContainer, document.body.firstChild);
-        this.sectionsContainer = sectionsContainer;
-
-        // Update container position
-        this.updateSectionPosition = () => {
-            sectionsContainer.style.transform = `translateY(-${this.currentSectionIndex * 100}vh)`;
-        };
-
-        document.body.addEventListener('touchstart', (e) => {
-            if (isTransitioning) return;
-            touchStartY = e.changedTouches[0].screenY;
-            touchStartX = e.changedTouches[0].screenX;
-            touchStartTime = Date.now();
-            swipeDirection = null; // Reset direction
-            sectionsContainer.style.transition = 'none';
-        }, { passive: true });
-
-        document.body.addEventListener('touchmove', (e) => {
-            if (isTransitioning) return;
-
-            const touchCurrentY = e.changedTouches[0].screenY;
-            const touchCurrentX = e.changedTouches[0].screenX;
-            const diffY = touchCurrentY - touchStartY;
-            const diffX = touchCurrentX - touchStartX;
-
-            // Determine swipe direction on first significant move
-            if (swipeDirection === null && (Math.abs(diffX) > 10 || Math.abs(diffY) > 10)) {
-                swipeDirection = Math.abs(diffX) > Math.abs(diffY) ? 'horizontal' : 'vertical';
-            }
-
-            // Check if we're in a carousel section
-            const currentSection = this.sections[this.currentSectionIndex];
-            const isInCarousel = currentSection && currentSection.isCarousel;
-
-            // Only apply vertical drag if:
-            // 1. Direction is vertical, OR
-            // 2. Not in a carousel section
-            if (swipeDirection === 'vertical' || !isInCarousel) {
-                const baseTranslate = -this.currentSectionIndex * 100;
-                const dragPercentage = (diffY / window.innerHeight) * 100;
-                sectionsContainer.style.transform = `translateY(${baseTranslate + dragPercentage}vh)`;
-            }
-        }, { passive: true });
-
-        document.body.addEventListener('touchend', (e) => {
-            if (isTransitioning) return;
-
-            touchEndY = e.changedTouches[0].screenY;
-            const swipeDistanceY = touchEndY - touchStartY;
-            const swipeTime = Date.now() - touchStartTime;
-
-            sectionsContainer.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-
-            // Check if we're in a carousel section
-            const currentSection = this.sections[this.currentSectionIndex];
-            const isInCarousel = currentSection && currentSection.isCarousel;
-
-            // Only process vertical swipe if direction was vertical or not in carousel
-            if ((swipeDirection === 'vertical' || !isInCarousel) &&
-                Math.abs(swipeDistanceY) > minSwipeDistance &&
-                swipeTime < maxSwipeTime) {
-
-                isTransitioning = true;
-
-                if (swipeDistanceY < 0 && this.currentSectionIndex < this.sections.length - 1) {
-                    // Swipe up - next section
-                    this.currentSectionIndex++;
-                } else if (swipeDistanceY > 0 && this.currentSectionIndex > 0) {
-                    // Swipe down - previous section
-                    this.currentSectionIndex--;
-                }
-
-                this.updateSectionPosition();
-                this.updateActiveNav();
-
-                setTimeout(() => {
-                    isTransitioning = false;
-                }, 600);
-            } else {
-                // Snap back to current section
-                this.updateSectionPosition();
-            }
-
-            swipeDirection = null; // Reset for next swipe
-        }, { passive: true });
-
-        // Initialize position
-        this.updateSectionPosition();
-    }
-
     initializeCarouselTouchSwipe() {
         this.sections.forEach(section => {
             if (section.isCarousel && section.track) {
                 new CarouselTouchSwipeHandler(
                     section.track,
-                    () => this.nextSlide(section.index),
-                    () => this.previousSlide(section.index)
+                    section.index,
+                    this
                 );
             }
         });
@@ -739,12 +616,26 @@ class UnifiedSectionManager {
     }
 
     updateCarouselSlide(section) {
+        // Update active slide classes
         section.slides.forEach((slide, index) => {
             slide.classList.toggle('active', index === section.currentSlide);
         });
 
-        section.track.style.transform = `translateX(-${section.currentSlide * 100}%)`;
+        // Ensure the track has the correct transition (this shouldn't override your CSS, just ensures it's present)
+        if (section.track) {
+            // set inline transition only if not present so we don't fight your stylesheet
+            if (!section.track.style.transition) {
+                section.track.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            }
 
+            // set a data attribute to indicate an animation is running (optional)
+            section.track.dataset.animating = 'true';
+
+            // Apply transform
+            section.track.style.transform = `translateX(-${section.currentSlide * 100}%)`;
+        }
+
+        // Update indicators
         if (section.indicatorsContainer) {
             const indicators = section.indicatorsContainer.querySelectorAll('.indicator');
             indicators.forEach((indicator, index) => {
@@ -755,11 +646,11 @@ class UnifiedSectionManager {
         // Update arrow states
         this.updateArrowStates(section);
 
-        // Add swipe feedback animation
-        if (this.deviceType !== 'desktop') {
-            section.track.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-        }
+        // ensure manager scrolling flag is set while animating
+        this.isScrolling = true;
     }
+
+
 
     goToSlide(sectionIndex, slideIndex) {
         const section = this.sections[sectionIndex];

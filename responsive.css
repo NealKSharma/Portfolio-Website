@@ -229,7 +229,7 @@ body.menu-open {
     }
 
     .about-text p {
-        font-size: 2rem;
+        font-size: 1.9rem;
         line-height: 1.7;
     }
 
@@ -335,8 +335,12 @@ body.menu-open {
 
     /* Navigation - Mobile optimized */
     .floating-nav {
-        right: 1rem;
-        top: 1rem;
+        position: fixed !important;
+        right: 1rem !important;
+        top: max(1rem, env(safe-area-inset-top, 1rem) + 1rem) !important;
+        z-index: 99999 !important;
+        transform: none !important;
+        will-change: auto !important;
     }
 
     .hamburger {
@@ -470,11 +474,12 @@ body.menu-open {
 
     /* About Section - Mobile with side-by-side layout */
     #about-details {
-        padding-top: 0;
+        padding: 0;
+        margin: 0;
     }
 
     #about-details .content-wrapper {
-        padding-top: 2rem;
+        padding-top: 0rem;
     }
 
     #about-details .section-header {
@@ -490,7 +495,7 @@ body.menu-open {
 
     .about-left {
         display: grid;
-        grid-template-columns: 1fr 2fr;
+        grid-template-columns: 1fr 1fr;
         gap: 1.5rem;
         align-items: start;
         width: 100%;
@@ -519,25 +524,25 @@ body.menu-open {
     }
 
     .info-header i {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
 
     .info-header h3 {
-        font-size: 1.6rem;
+        font-size: 2rem;
     }
 
     .info-content strong {
-        font-size: 1.4rem;
+        font-size: 1.8rem;
         margin-bottom: 0.6rem;
     }
 
     .info-content p {
-        font-size: 1.2rem;
+        font-size: 1.6rem;
     }
 
     .info-badge {
         padding: 0.6rem 1rem;
-        font-size: 1.1rem;
+        font-size: 1.3rem;
         margin-top: 0.8rem;
     }
 
@@ -646,8 +651,8 @@ body.menu-open {
     }
 
     .grid-image {
-        min-height: 220px;
-        max-height: 300px;
+        min-height: 140px;
+        max-height: 180px;
         padding: 1.2rem;
         overflow: hidden;
     }
@@ -667,6 +672,23 @@ body.menu-open {
     .grid-content h2 {
         font-size: clamp(1.6rem, 4vw, 2rem);
         margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: nowrap;
+    }
+
+    .grid-content h2 .project-btn {
+        padding: 0.8rem 0.4rem;
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        gap: 0.5rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .grid-content h2 .project-btn i {
+        font-size: 1.4rem;
     }
 
     .item-header {
@@ -871,7 +893,7 @@ body.menu-open {
     }
 
     .contact-arrow {
-        font-size: 2rem;
+        display: none;
     }
 
     /* Footer */
