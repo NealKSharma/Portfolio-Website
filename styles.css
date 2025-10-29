@@ -103,73 +103,10 @@ section {
     transition: opacity 0.3s ease;
 }
 
-/* ===== LOGO ===== */
-.logo-container {
-    position: fixed;
-    right: 10rem;
-    top: 2.3rem;
-    z-index: 9999;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    cursor: pointer;
-    animation: logoFadeIn 1s ease-out 0.2s both;
-}
-
-@keyframes logoFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
+@media screen and (max-width: 1024px) {
+    .cursor-glow {
+        display: none;
     }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.logo-text {
-    font-size: 3.5rem;
-    font-weight: 900;
-    letter-spacing: 0.3rem;
-    background: linear-gradient(135deg, #b74b4b 0%, #e76f6f 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: logoBreathe 3s ease-in-out infinite;
-}
-
-@keyframes logoBreathe {
-
-    0%,
-    100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.02);
-    }
-}
-
-.logo-container:hover .logo-text {
-    letter-spacing: 0.5rem;
-    animation: none;
-    transform: scale(1.05);
-}
-
-.logo-underline {
-    height: 3px;
-    width: 0;
-    background: linear-gradient(90deg, #b74b4b, #e76f6f);
-    border-radius: 2px;
-    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    margin-top: 0.3rem;
-}
-
-.logo-container:hover .logo-underline {
-    width: 100%;
 }
 
 /* ===== NAVIGATION ===== */

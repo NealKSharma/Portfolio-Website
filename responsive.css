@@ -1,17 +1,92 @@
+/* ===== MOBILE/TABLET SCROLL BEHAVIOR ===== */
+@media screen and (max-width: 1024px) {
+    html {
+        scroll-behavior: smooth;
+        scroll-snap-type: none !important;
+    }
+
+    body {
+        scroll-snap-type: none !important;
+    }
+
+    section {
+        scroll-snap-align: none !important;
+    }
+
+    /* Hide cursor glow on mobile */
+    .cursor-glow {
+        display: none !important;
+    }
+}
+
+/* ===== MENU BACKDROP ===== */
+.nav-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 9997;
+}
+
+.nav-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
+/* ===== REMOVE HOVER EFFECTS ON TOUCH DEVICES ===== */
+@media (hover: none) and (pointer: coarse) {
+
+    /* Disable hover animations */
+    * {
+        transition-duration: 0.2s !important;
+    }
+
+    .skill-category:hover,
+    .info-card:hover,
+    .action-card:hover,
+    .contact-card:hover {
+        transform: none !important;
+    }
+
+    .hamburger:hover,
+    .nav-item:hover .nav-label {
+        transform: none !important;
+    }
+
+    .social-icons a:hover {
+        transform: scale(1.1) !important;
+    }
+
+    .about-image-container:hover .about-image {
+        transform: none !important;
+    }
+
+    .image-overlay {
+        opacity: 0 !important;
+    }
+
+    /* Simplify button hovers */
+    .btn-primary:hover,
+    .project-btn:hover {
+        transform: translateY(-1px) !important;
+    }
+
+}
+
 /* ===== TABLET DEVICES (768px - 1024px) ===== */
 @media screen and (max-width: 1024px) {
     html {
         font-size: 58%;
-    }
-
-    /* Logo adjustments */
-    .logo-container {
-        right: 5rem;
-        top: 2rem;
-    }
-
-    .logo-text {
-        font-size: 3rem;
     }
 
     /* Navigation */
@@ -76,17 +151,6 @@
     /* Base padding adjustments */
     .content-wrapper {
         padding: 0 2.5rem;
-    }
-
-    /* Logo */
-    .logo-container {
-        right: 3rem;
-        top: 1.8rem;
-    }
-
-    .logo-text {
-        font-size: 2.8rem;
-        letter-spacing: 0.2rem;
     }
 
     /* Section headers */
@@ -264,32 +328,9 @@
     .content-wrapper {
         padding: 0 2rem;
         height: auto;
-        min-height: 100vh;
+        min-height: calc(100vh - 10rem);
         padding-top: 7rem;
-    }
-
-    /* Logo - Mobile optimized */
-    .logo-container {
-        position: fixed;
-        left: 2rem;
-        right: auto;
-        top: 1.5rem;
-        z-index: 9999;
-    }
-
-    .logo-text {
-        font-size: 2.5rem;
-        letter-spacing: 0.15rem;
-    }
-
-    @keyframes logoBreathe {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.01); }
-    }
-
-    .logo-container:hover .logo-text {
-        letter-spacing: 0.2rem;
-        transform: scale(1.02);
+        padding-bottom: 3rem;
     }
 
     /* Navigation - Mobile optimized */
@@ -372,17 +413,17 @@
 
     /* Hero Skills - Stacked on mobile */
     .hero-skills-section {
-        margin: 0 auto 3rem;
+        margin: 0 auto 2.5rem;
     }
 
     .hero-skills {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 1.2rem;
     }
 
     .skill-category {
-        padding: 2rem 1.5rem;
-        border-radius: 1.2rem;
+        padding: 1.5rem 1.2rem;
+        border-radius: 1rem;
     }
 
     .category-header {
@@ -409,14 +450,15 @@
 
     /* Social Icons */
     .social-icons {
-        gap: 1.2rem;
+        gap: 1.5rem;
         margin-bottom: 3rem;
     }
 
     .social-icons a {
-        width: 4rem;
-        height: 4rem;
-        font-size: 1.6rem;
+        width: 4.5rem;
+        height: 4.5rem;
+        font-size: 1.8rem;
+        padding: 1rem;
     }
 
     /* Scroll Indicator */
@@ -430,11 +472,11 @@
     #about-details {
         padding-top: 0;
     }
-    
+
     #about-details .content-wrapper {
         padding-top: 2rem;
     }
-    
+
     #about-details .section-header {
         margin-bottom: 1.5rem;
     }
@@ -514,7 +556,7 @@
 
     /* Carousel Sections - Mobile with overflow fixes */
     .carousel-section {
-        min-height: 100vh;
+        min-height: auto;
         height: auto;
         overflow: hidden;
         padding: 0;
@@ -560,6 +602,38 @@
 
     .carousel-indicators {
         gap: 0.8rem;
+    }
+
+    /* Enhanced touch targets for carousel */
+    .carousel-arrow {
+        min-width: 44px;
+        min-height: 44px;
+        touch-action: manipulation;
+    }
+
+    .indicator {
+        min-width: 32px;
+        min-height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        touch-action: manipulation;
+    }
+
+    .indicator::before {
+        content: '';
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(183, 75, 75, 0.3);
+        border: 2px solid #b74b4b;
+        transition: all 0.3s ease;
+    }
+
+    .indicator.active::before {
+        background: #b74b4b;
+        transform: scale(1.3);
+        box-shadow: 0 0 15px rgba(183, 75, 75, 0.6);
     }
 
     /* Grid Card - Mobile Vertical Layout */
@@ -692,7 +766,7 @@
     #resume {
         padding-top: 0;
     }
-    
+
     #resume .content-wrapper {
         padding-top: 8rem;
     }
@@ -750,7 +824,7 @@
     #contact {
         padding-top: 0;
     }
-    
+
     .contact-container {
         padding: 0 2rem;
         padding-top: 2rem;
@@ -814,15 +888,6 @@
 @media screen and (max-width: 375px) {
     html {
         font-size: 48%;
-    }
-
-    .logo-container {
-        left: 1.5rem;
-        top: 1.2rem;
-    }
-
-    .logo-text {
-        font-size: 2.3rem;
     }
 
     .floating-nav {
@@ -925,8 +990,8 @@
 
 /* ===== PRINT STYLES ===== */
 @media print {
+
     .cursor-glow,
-    .logo-container,
     .floating-nav,
     .scroll-indicator,
     .carousel-indicators,
