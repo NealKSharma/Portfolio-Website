@@ -1,10 +1,33 @@
-// ===== UNIVERSAL FONT SIZE SYSTEM =====
+// ===== DEVICE DETECTION =====
+function isMobile() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isMobileDevice = /android|webos|iphone|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+    const isSmallScreen = window.innerWidth <= 768;
+    return isMobileDevice && isSmallScreen;
+}
 
+function isTablet() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isTabletDevice = /ipad|android(?!.*mobile)|tablet/i.test(userAgent);
+    const isMediumScreen = window.innerWidth > 768 && window.innerWidth <= 1024;
+    return isTabletDevice || isMediumScreen;
+}
+
+function isDesktop() {
+    return !isMobile() && !isTablet();
+}
+
+// ===== UNIVERSAL FONT SIZE SYSTEM (DESKTOP ONLY) =====
 (function () {
     let fontSizeCalculated = false;
 
+    // Exit early on mobile/tablet - let CSS handle it
+    if (!isDesktop()) {
+        return;
+    }
+
     function hasVerticalOverflow() {
-        const TOLERANCE = 10;
+        const TOLERANCE = 0;
         const gridContents = document.querySelectorAll('.grid-content');
         for (let content of gridContents) {
             const contentDiff = content.scrollHeight - content.clientHeight;
@@ -27,10 +50,7 @@
         else if (width >= 1600) fontSize = 75;
         else if (width >= 1366) fontSize = 75;
         else if (width >= 1024) fontSize = 68;
-        else if (width >= 768) fontSize = 65;
-        else if (width >= 600) fontSize = 60;
-        else if (width >= 480) fontSize = 58;
-        else fontSize = 56;
+        else fontSize = 65;
 
         if (height < 600) fontSize *= 0.85;
         else if (height < 768) fontSize *= 0.90;
@@ -50,18 +70,17 @@
         let fontSize = calculateOptimalFontSize();
         document.documentElement.style.fontSize = fontSize + '%';
 
-        // Immediate check with no delay
         requestAnimationFrame(() => {
             if (!hasVerticalOverflow()) {
                 fontSizeCalculated = true;
                 return;
             }
 
-            const maxIterations = 40;
+            const maxIterations = 50;
             let iterations = 0;
 
             while (hasVerticalOverflow() && fontSize > 35 && iterations < maxIterations) {
-                fontSize -= 2;
+                fontSize -= 1.5;
                 document.documentElement.style.fontSize = fontSize + '%';
                 iterations++;
             }
@@ -70,7 +89,6 @@
         });
     }
 
-    // Run immediately - no delay
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', adjustFontSizeForOverflow);
     } else {
@@ -97,126 +115,151 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// ===== DEVICE DETECTION =====
-function isMobile() {
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isMobileDevice = /android|webos|iphone|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
-    const isSmallScreen = window.innerWidth <= 768;
-    return isMobileDevice && isSmallScreen;
-}
-
-function isTablet() {
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isTabletDevice = /ipad|android(?!.*mobile)|tablet/i.test(userAgent);
-    const isMediumScreen = window.innerWidth > 768 && window.innerWidth <= 1024;
-    return isTabletDevice || isMediumScreen;
-}
-
-function isDesktop() {
-    return !isMobile() && !isTablet();
-}
-
 // ===== CURSOR GLOW EFFECT (DESKTOP ONLY) =====
-const cursorGlow = document.querySelector('.cursor-glow');
-if (isDesktop() && cursorGlow) {
-    document.addEventListener('mousemove', (e) => {
+(function() {
+    const cursorGlow = document.querySelector('.cursor-glow');
+    if (!isDesktop() || !cursorGlow) return;
+    
+    const handleMouseMove = (e) => {
         cursorGlow.style.left = e.clientX + 'px';
         cursorGlow.style.top = e.clientY + 'px';
+    };
+    
+    document.addEventListener('mousemove', handleMouseMove);
+    
+    window.addEventListener('beforeunload', () => {
+        document.removeEventListener('mousemove', handleMouseMove);
     });
-}
+})();
 
 // ===== HAMBURGER MENU WITH BACKDROP =====
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('navMenu');
+(function() {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
 
-if (hamburger && navMenu) {
+    if (!hamburger || !navMenu) return;
+
     const backdrop = document.createElement('div');
     backdrop.className = 'nav-backdrop';
     document.body.appendChild(backdrop);
 
-    hamburger.addEventListener('click', (e) => {
+    const closeMenu = () => {
+        navMenu.classList.remove('active');
+        backdrop.classList.remove('active');
+        document.body.classList.remove('menu-open');
+    };
+
+    const toggleMenu = (e) => {
         e.stopPropagation();
         navMenu.classList.toggle('active');
         backdrop.classList.toggle('active');
         document.body.classList.toggle('menu-open');
-    });
+    };
 
-    backdrop.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        backdrop.classList.remove('active');
-        document.body.classList.remove('menu-open');
-    });
+    hamburger.addEventListener('click', toggleMenu);
+    backdrop.addEventListener('click', closeMenu);
 
     document.querySelectorAll('.nav-item').forEach(item => {
-        item.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            backdrop.classList.remove('active');
-            document.body.classList.remove('menu-open');
-        });
+        item.addEventListener('click', closeMenu);
     });
 
     if (!isDesktop()) {
         let lastScrollY = window.scrollY;
-        window.addEventListener('scroll', () => {
+        const handleScroll = () => {
             const currentScrollY = window.scrollY;
             if (Math.abs(currentScrollY - lastScrollY) > 50) {
-                navMenu.classList.remove('active');
-                backdrop.classList.remove('active');
-                document.body.classList.remove('menu-open');
+                closeMenu();
             }
             lastScrollY = currentScrollY;
-        });
+        };
+        window.addEventListener('scroll', handleScroll);
     }
 
-    document.addEventListener('click', (e) => {
+    const handleClickOutside = (e) => {
         const floatingNav = document.querySelector('.floating-nav');
         if (floatingNav && !floatingNav.contains(e.target)) {
-            navMenu.classList.remove('active');
-            backdrop.classList.remove('active');
-            document.body.classList.remove('menu-open');
+            closeMenu();
         }
-    });
-}
+    };
 
-// ===== TYPING ANIMATION (WITH MEMORY LEAK FIX) =====
-const words = ["Software Developer", "AI Researcher", "Full-Stack Engineer", "Tech Enthusiast"];
-let wordIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-let typingTimeout = null;
+    document.addEventListener('click', handleClickOutside);
+})();
 
-function type() {
-    const typingElement = document.querySelector('.typing-text');
-    if (!typingElement) {
-        if (typingTimeout) clearTimeout(typingTimeout);
-        return;
+// ===== TYPING ANIMATION =====
+(function() {
+    const words = ["Software Developer", "AI Researcher", "Full-Stack Engineer", "Tech Enthusiast"];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typingTimeout = null;
+    let isPageVisible = true;
+    let typingEnabled = true;
+
+    function type() {
+        const typingElement = document.querySelector('.typing-text');
+        if (!typingElement || !typingEnabled || !isPageVisible) {
+            if (typingTimeout) {
+                clearTimeout(typingTimeout);
+                typingTimeout = null;
+            }
+            return;
+        }
+
+        const currentWord = words[wordIndex];
+
+        if (isDeleting) {
+            typingElement.textContent = currentWord.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            typingElement.textContent = currentWord.substring(0, charIndex + 1);
+            charIndex++;
+        }
+
+        let delay;
+        if (!isDeleting && charIndex === currentWord.length) {
+            isDeleting = true;
+            delay = 2000;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            delay = 500;
+        } else {
+            delay = isDeleting ? 50 : 100;
+        }
+
+        typingTimeout = setTimeout(type, delay);
     }
 
-    const currentWord = words[wordIndex];
+    const handleVisibilityChange = () => {
+        isPageVisible = !document.hidden;
+        if (!isPageVisible) {
+            if (typingTimeout) {
+                clearTimeout(typingTimeout);
+                typingTimeout = null;
+            }
+        } else if (typingEnabled) {
+            type();
+        }
+    };
 
-    if (isDeleting) {
-        typingElement.textContent = currentWord.substring(0, charIndex - 1);
-        charIndex--;
+    const cleanup = () => {
+        typingEnabled = false;
+        if (typingTimeout) {
+            clearTimeout(typingTimeout);
+            typingTimeout = null;
+        }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('beforeunload', cleanup);
+
+    // Start typing
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', type);
     } else {
-        typingElement.textContent = currentWord.substring(0, charIndex + 1);
-        charIndex++;
+        type();
     }
-
-    if (!isDeleting && charIndex === currentWord.length) {
-        isDeleting = true;
-        typingTimeout = setTimeout(type, 2000);
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        typingTimeout = setTimeout(type, 500);
-    } else {
-        typingTimeout = setTimeout(type, isDeleting ? 50 : 100);
-    }
-}
-
-window.addEventListener('beforeunload', () => {
-    if (typingTimeout) clearTimeout(typingTimeout);
-});
+})();
 
 // ===== CAROUSEL TOUCH SWIPE HANDLER (MOBILE/TABLET) =====
 class CarouselTouchSwipeHandler {
@@ -231,17 +274,17 @@ class CarouselTouchSwipeHandler {
         this.minSwipeDistance = 50;
         this.locked = false;
 
-        this.onPointerDown = this.onPointerDown.bind(this);
-        this.onPointerMove = this.onPointerMove.bind(this);
-        this.onPointerUp = this.onPointerUp.bind(this);
-        this.onPointerCancel = this.onPointerCancel.bind(this);
-        this.onTransitionEnd = this.onTransitionEnd.bind(this);
+        this.onPointerDown = this.handlePointerDown.bind(this);
+        this.onPointerMove = this.handlePointerMove.bind(this);
+        this.onPointerUp = this.handlePointerUp.bind(this);
+        this.onPointerCancel = this.handlePointerCancel.bind(this);
+        this.onTransitionEnd = this.handleTransitionEnd.bind(this);
 
         this.init();
     }
 
     init() {
-        this.track.style.touchAction = this.track.style.touchAction || 'pan-y';
+        this.track.style.touchAction = 'pan-y';
 
         this.track.addEventListener('pointerdown', this.onPointerDown, { passive: false });
         window.addEventListener('pointermove', this.onPointerMove, { passive: false });
@@ -250,31 +293,35 @@ class CarouselTouchSwipeHandler {
         this.track.addEventListener('transitionend', this.onTransitionEnd);
     }
 
-    onPointerDown(e) {
+    handlePointerDown(e) {
         if (e.isPrimary === false || this.locked) return;
 
         this.pointerDown = true;
         this.startX = e.clientX;
         this.currentX = this.startX;
 
-        try { this.track.setPointerCapture(e.pointerId); } catch (err) { }
+        try { 
+            this.track.setPointerCapture(e.pointerId); 
+        } catch (err) {}
         e.preventDefault();
     }
 
-    onPointerMove(e) {
+    handlePointerMove(e) {
         if (!this.pointerDown || this.locked) return;
         this.currentX = e.clientX;
         e.preventDefault();
     }
 
-    onPointerUp(e) {
+    handlePointerUp(e) {
         if (!this.pointerDown || this.locked) {
             this.resetPointer(e);
             return;
         }
         this.pointerDown = false;
 
-        try { this.track.releasePointerCapture(e.pointerId); } catch (err) { }
+        try { 
+            this.track.releasePointerCapture(e.pointerId); 
+        } catch (err) {}
 
         const diff = this.startX - this.currentX;
         const abs = Math.abs(diff);
@@ -292,7 +339,7 @@ class CarouselTouchSwipeHandler {
         e.preventDefault();
     }
 
-    onPointerCancel(e) {
+    handlePointerCancel(e) {
         this.resetPointer(e);
     }
 
@@ -302,10 +349,10 @@ class CarouselTouchSwipeHandler {
         this.currentX = 0;
         try {
             if (e && e.pointerId != null) this.track.releasePointerCapture(e.pointerId);
-        } catch (err) { }
+        } catch (err) {}
     }
 
-    onTransitionEnd(e) {
+    handleTransitionEnd(e) {
         if (e.target !== this.track) return;
         if (e.propertyName && e.propertyName !== 'transform') return;
 
@@ -322,6 +369,14 @@ class CarouselTouchSwipeHandler {
         window.removeEventListener('pointerup', this.onPointerUp);
         this.track.removeEventListener('pointercancel', this.onPointerCancel);
         this.track.removeEventListener('transitionend', this.onTransitionEnd);
+        
+        this.track = null;
+        this.manager = null;
+        this.onPointerDown = null;
+        this.onPointerMove = null;
+        this.onPointerUp = null;
+        this.onPointerCancel = null;
+        this.onTransitionEnd = null;
     }
 }
 
@@ -332,12 +387,19 @@ class UnifiedSectionManager {
         this.currentSectionIndex = 0;
         this.isScrolling = false;
         this.lastScrollTime = 0;
-        this.SCROLL_COOLDOWN = 600;
+        this.SCROLL_COOLDOWN = 400;
         this.DELTA_THRESHOLD = 35;
         this.HORIZONTAL_DELTA_THRESHOLD = 30;
         this.headerOffset = 0;
 
         this.deviceType = this.detectDevice();
+        
+        this.wheelHandler = null;
+        this.scrollHandler = null;
+        this.scrollEndTimeout = null;
+        this.rafId = null;
+        this.swipeHandlers = [];
+        this.navClickHandlers = [];
 
         this.initializeSections();
 
@@ -363,26 +425,28 @@ class UnifiedSectionManager {
         const sectionElements = document.querySelectorAll('section');
 
         sectionElements.forEach((sectionEl, index) => {
+            const trackEl = sectionEl.querySelector('[id$="Track"]');
+            const indicatorsEl = sectionEl.querySelector('[id$="Indicators"]');
+            const slidesArray = trackEl ? Array.from(trackEl.querySelectorAll('.carousel-slide')) : [];
+
             const section = {
                 element: sectionEl,
                 id: sectionEl.id,
                 index: index,
                 isCarousel: sectionEl.classList.contains('carousel-section'),
-                slides: [],
+                slides: slidesArray,
                 currentSlide: 0,
-                track: null,
-                indicatorsContainer: null,
-                isAnimating: false
+                track: trackEl,
+                indicatorsContainer: indicatorsEl,
+                isAnimating: false,
+                leftArrow: null,
+                rightArrow: null,
+                transitionHandler: null
             };
 
-            if (section.isCarousel) {
-                section.track = sectionEl.querySelector('[id$="Track"]');
-                section.indicatorsContainer = sectionEl.querySelector('[id$="Indicators"]');
-                if (section.track) {
-                    section.slides = Array.from(section.track.querySelectorAll('.carousel-slide'));
-                    this.initializeIndicators(section);
-                    this.initializeCarouselTransitionHandler(section);
-                }
+            if (section.isCarousel && section.track) {
+                this.initializeIndicators(section);
+                this.initializeCarouselTransitionHandler(section);
             }
 
             this.sections.push(section);
@@ -392,22 +456,25 @@ class UnifiedSectionManager {
     initializeCarouselTransitionHandler(section) {
         if (!section.track) return;
 
-        section.track.addEventListener('transitionend', (e) => {
+        section.transitionHandler = (e) => {
             if (e.target === section.track && e.propertyName === 'transform') {
                 section.isAnimating = false;
                 this.isScrolling = false;
             }
-        });
+        };
+
+        section.track.addEventListener('transitionend', section.transitionHandler);
     }
 
     initializeCarouselTouchSwipe() {
         this.sections.forEach(section => {
             if (section.isCarousel && section.track) {
-                new CarouselTouchSwipeHandler(
+                const handler = new CarouselTouchSwipeHandler(
                     section.track,
                     section.index,
                     this
                 );
+                this.swipeHandlers.push(handler);
             }
         });
     }
@@ -423,7 +490,10 @@ class UnifiedSectionManager {
         const leftArrow = document.createElement('button');
         leftArrow.className = 'carousel-arrow carousel-arrow-left';
         leftArrow.innerHTML = '<i class="fas fa-chevron-left"></i>';
-        leftArrow.addEventListener('click', () => this.previousSlide(section.index));
+        
+        const leftHandler = () => this.previousSlide(section.index);
+        leftArrow.addEventListener('click', leftHandler);
+        leftArrow._handler = leftHandler;
 
         const indicatorsWrapper = document.createElement('div');
         indicatorsWrapper.className = 'carousel-indicators';
@@ -432,14 +502,21 @@ class UnifiedSectionManager {
             const indicator = document.createElement('div');
             indicator.className = 'indicator';
             if (index === 0) indicator.classList.add('active');
-            indicator.addEventListener('click', () => this.goToSlide(section.index, index));
+            
+            const indicatorHandler = () => this.goToSlide(section.index, index);
+            indicator.addEventListener('click', indicatorHandler);
+            indicator._handler = indicatorHandler;
+            
             indicatorsWrapper.appendChild(indicator);
         });
 
         const rightArrow = document.createElement('button');
         rightArrow.className = 'carousel-arrow carousel-arrow-right';
         rightArrow.innerHTML = '<i class="fas fa-chevron-right"></i>';
-        rightArrow.addEventListener('click', () => this.nextSlide(section.index));
+        
+        const rightHandler = () => this.nextSlide(section.index);
+        rightArrow.addEventListener('click', rightHandler);
+        rightArrow._handler = rightHandler;
 
         navWrapper.appendChild(leftArrow);
         navWrapper.appendChild(indicatorsWrapper);
@@ -470,7 +547,7 @@ class UnifiedSectionManager {
 
     previousSlide(sectionIndex) {
         const section = this.sections[sectionIndex];
-        if (!section.isCarousel || section.currentSlide === 0 || section.isAnimating) return;
+        if (!section || !section.isCarousel || section.currentSlide === 0 || section.isAnimating) return;
 
         section.currentSlide--;
         this.updateCarouselSlide(section);
@@ -478,7 +555,7 @@ class UnifiedSectionManager {
 
     nextSlide(sectionIndex) {
         const section = this.sections[sectionIndex];
-        if (!section.isCarousel || section.currentSlide === section.slides.length - 1 || section.isAnimating) return;
+        if (!section || !section.isCarousel || section.currentSlide === section.slides.length - 1 || section.isAnimating) return;
 
         section.currentSlide++;
         this.updateCarouselSlide(section);
@@ -486,8 +563,9 @@ class UnifiedSectionManager {
 
     initializeDesktopScrollListener() {
         let canProcess = true;
+        let processTimeout = null;
 
-        window.addEventListener('wheel', (e) => {
+        this.wheelHandler = (e) => {
             e.preventDefault();
             e.stopPropagation();
 
@@ -497,24 +575,29 @@ class UnifiedSectionManager {
             if (this.isScrolling || (now - this.lastScrollTime) < this.SCROLL_COOLDOWN) return;
 
             const currentSection = this.sections[this.currentSectionIndex];
+            if (!currentSection) return;
+
             const absVertical = Math.abs(e.deltaY);
             const absHorizontal = Math.abs(e.deltaX);
 
-            // HORIZONTAL SCROLLING (trackpad left/right) - Only for carousel sections
             const isHorizontalScroll = absHorizontal > absVertical && absHorizontal > this.HORIZONTAL_DELTA_THRESHOLD;
-            
+
             if (isHorizontalScroll && currentSection.isCarousel && !currentSection.isAnimating) {
-                const direction = e.deltaX > 0 ? 'next' : 'prev';
+                if (absHorizontal < this.DELTA_THRESHOLD) return;
                 
+                const direction = e.deltaX > 0 ? 'next' : 'prev';
+
                 if (direction === 'next' && currentSection.currentSlide < currentSection.slides.length - 1) {
                     canProcess = false;
-                    setTimeout(() => canProcess = true, 150);
+                    if (processTimeout) clearTimeout(processTimeout);
+                    processTimeout = setTimeout(() => canProcess = true, 150);
                     this.lastScrollTime = now;
                     currentSection.currentSlide++;
                     this.updateCarouselSlide(currentSection);
                 } else if (direction === 'prev' && currentSection.currentSlide > 0) {
                     canProcess = false;
-                    setTimeout(() => canProcess = true, 150);
+                    if (processTimeout) clearTimeout(processTimeout);
+                    processTimeout = setTimeout(() => canProcess = true, 150);
                     this.lastScrollTime = now;
                     currentSection.currentSlide--;
                     this.updateCarouselSlide(currentSection);
@@ -522,29 +605,31 @@ class UnifiedSectionManager {
                 return;
             }
 
-            // VERTICAL SCROLLING - section to section navigation
             if (absVertical < this.DELTA_THRESHOLD) return;
 
             const direction = e.deltaY > 0 ? 'forward' : 'backward';
-            
+
             canProcess = false;
-            setTimeout(() => canProcess = true, 150);
+            if (processTimeout) clearTimeout(processTimeout);
+            processTimeout = setTimeout(() => canProcess = true, 150);
 
             this.isScrolling = true;
             this.lastScrollTime = now;
             this.handleScroll(direction);
+        };
 
-        }, { passive: false });
+        window.addEventListener('wheel', this.wheelHandler, { passive: false });
 
-        let scrollEndTimeout;
-        window.addEventListener('scroll', () => {
+        this.scrollHandler = () => {
             if (this.isScrolling) return;
 
-            clearTimeout(scrollEndTimeout);
-            scrollEndTimeout = setTimeout(() => {
+            if (this.scrollEndTimeout) clearTimeout(this.scrollEndTimeout);
+            this.scrollEndTimeout = setTimeout(() => {
                 if (!this.isScrolling) this.snapToNearestSection();
             }, 150);
-        });
+        };
+
+        window.addEventListener('scroll', this.scrollHandler, { passive: true });
     }
 
     handleScroll(direction) {
@@ -575,6 +660,8 @@ class UnifiedSectionManager {
 
     scrollToCurrentSection() {
         const section = this.sections[this.currentSectionIndex];
+        if (!section) return;
+        
         const targetPosition = section.element.offsetTop - this.headerOffset;
 
         this.isScrolling = true;
@@ -582,6 +669,8 @@ class UnifiedSectionManager {
     }
 
     updateCarouselSlide(section) {
+        if (!section) return;
+
         section.isAnimating = true;
 
         section.slides.forEach((slide, index) => {
@@ -604,13 +693,18 @@ class UnifiedSectionManager {
 
     goToSlide(sectionIndex, slideIndex) {
         const section = this.sections[sectionIndex];
-        if (!section.isCarousel || section.isAnimating) return;
+        if (!section || !section.isCarousel || section.isAnimating) return;
 
         section.currentSlide = slideIndex;
         this.updateCarouselSlide(section);
     }
 
     smoothScrollTo(targetPosition) {
+        if (this.rafId) {
+            cancelAnimationFrame(this.rafId);
+            this.rafId = null;
+        }
+
         const startPosition = window.pageYOffset;
         const distance = targetPosition - startPosition;
         const duration = 500;
@@ -628,15 +722,16 @@ class UnifiedSectionManager {
             window.scrollTo(0, startPosition + (distance * ease));
 
             if (timeElapsed < duration) {
-                requestAnimationFrame(animation);
+                this.rafId = requestAnimationFrame(animation);
             } else {
                 window.scrollTo(0, targetPosition);
+                this.rafId = null;
                 this.isScrolling = false;
                 this.updateActiveNav();
             }
         };
 
-        requestAnimationFrame(animation);
+        this.rafId = requestAnimationFrame(animation);
     }
 
     smoothScrollToSelector(selector) {
@@ -648,7 +743,7 @@ class UnifiedSectionManager {
             this.currentSectionIndex = sectionIndex;
 
             const section = this.sections[sectionIndex];
-            if (section.isCarousel) {
+            if (section && section.isCarousel) {
                 section.currentSlide = 0;
                 this.updateCarouselSlide(section);
             }
@@ -666,7 +761,7 @@ class UnifiedSectionManager {
     updateActiveNav() {
         const currentSection = this.sections[this.currentSectionIndex];
         if (!currentSection) return;
-        
+
         const sectionId = currentSection.id;
 
         document.querySelectorAll('.nav-item').forEach(link => {
@@ -685,6 +780,7 @@ class UnifiedSectionManager {
         let closestDistance = Infinity;
 
         this.sections.forEach((section, index) => {
+            if (!section) return;
             const sectionTop = section.element.offsetTop;
             const distance = Math.abs(scrollPos - sectionTop);
 
@@ -696,43 +792,136 @@ class UnifiedSectionManager {
 
         if (closestDistance > 10) {
             this.currentSectionIndex = closestIndex;
-            const targetPosition = this.sections[closestIndex].element.offsetTop - this.headerOffset;
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
-            this.updateActiveNav();
+            const section = this.sections[closestIndex];
+            if (section) {
+                const targetPosition = section.element.offsetTop - this.headerOffset;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                this.updateActiveNav();
+            }
         }
     }
 
     initializeNavigation() {
         document.querySelectorAll('.nav-item').forEach(anchor => {
-            anchor.addEventListener('click', (e) => {
+            const handler = (e) => {
                 e.preventDefault();
                 const targetId = anchor.getAttribute('href');
                 this.smoothScrollToSelector(targetId);
 
                 document.querySelectorAll('.nav-item').forEach(link => link.classList.remove('active'));
                 anchor.classList.add('active');
-            });
+            };
+
+            anchor.addEventListener('click', handler);
+            this.navClickHandlers.push({ element: anchor, handler: handler });
         });
     }
 
     destroy() {
-        if (typingTimeout) clearTimeout(typingTimeout);
-        this.sections.forEach(section => {
-            if (section.track) {
-                section.track.replaceWith(section.track.cloneNode(true));
-            }
+        // Cancel animations
+        if (this.rafId) {
+            cancelAnimationFrame(this.rafId);
+            this.rafId = null;
+        }
+
+        // Clear timeouts
+        if (this.scrollEndTimeout) {
+            clearTimeout(this.scrollEndTimeout);
+            this.scrollEndTimeout = null;
+        }
+
+        // Remove wheel and scroll listeners
+        if (this.wheelHandler) {
+            window.removeEventListener('wheel', this.wheelHandler);
+            this.wheelHandler = null;
+        }
+
+        if (this.scrollHandler) {
+            window.removeEventListener('scroll', this.scrollHandler);
+            this.scrollHandler = null;
+        }
+
+        // Remove navigation handlers
+        this.navClickHandlers.forEach(({ element, handler }) => {
+            element.removeEventListener('click', handler);
         });
+        this.navClickHandlers = [];
+
+        // Destroy swipe handlers
+        this.swipeHandlers.forEach(handler => {
+            if (handler && handler.destroy) handler.destroy();
+        });
+        this.swipeHandlers = [];
+
+        // Clean up sections
+        this.sections.forEach(section => {
+            if (!section) return;
+
+            // Remove transition handler
+            if (section.track && section.transitionHandler) {
+                section.track.removeEventListener('transitionend', section.transitionHandler);
+                section.transitionHandler = null;
+            }
+
+            // Remove arrow handlers
+            if (section.leftArrow && section.leftArrow._handler) {
+                section.leftArrow.removeEventListener('click', section.leftArrow._handler);
+                section.leftArrow._handler = null;
+            }
+
+            if (section.rightArrow && section.rightArrow._handler) {
+                section.rightArrow.removeEventListener('click', section.rightArrow._handler);
+                section.rightArrow._handler = null;
+            }
+
+            // Remove indicator handlers
+            if (section.indicatorsContainer) {
+                const indicators = section.indicatorsContainer.querySelectorAll('.indicator');
+                indicators.forEach(indicator => {
+                    if (indicator._handler) {
+                        indicator.removeEventListener('click', indicator._handler);
+                        indicator._handler = null;
+                    }
+                });
+            }
+
+            // Null out references
+            section.element = null;
+            section.track = null;
+            section.indicatorsContainer = null;
+            section.leftArrow = null;
+            section.rightArrow = null;
+            section.slides = [];
+        });
+
+        this.sections = [];
     }
 }
 
 // ===== INITIALIZATION =====
-let sectionManager;
+let sectionManager = null;
 
-document.addEventListener('DOMContentLoaded', function () {
-    type();
+function initApp() {
+    if (sectionManager) {
+        sectionManager.destroy();
+    }
     sectionManager = new UnifiedSectionManager();
     sectionManager.updateActiveNav();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
+}
+
+// Cleanup on page unload
+window.addEventListener('beforeunload', () => {
+    if (sectionManager) {
+        sectionManager.destroy();
+        sectionManager = null;
+    }
 });
