@@ -80,7 +80,7 @@ section {
 .section-number {
     font-size: clamp(6rem, 10vw, 12rem);
     font-weight: 900;
-    color: rgba(183, 75, 75, 0.1);
+    color: rgba(183, 75, 75, 0.555);
     line-height: 1;
     flex-shrink: 0;
 }
@@ -519,7 +519,6 @@ section {
 .about-image {
     position: relative;
     width: 100%;
-    height: 100%;
     object-fit: cover;
     border-radius: 2rem;
     z-index: 2;

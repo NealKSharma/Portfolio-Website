@@ -1,94 +1,83 @@
 // ===== UNIVERSAL FONT SIZE SYSTEM =====
 
 (function () {
+    let fontSizeCalculated = false;
+
+    function hasVerticalOverflow() {
+        const TOLERANCE = 10;
+        const gridContents = document.querySelectorAll('.grid-content');
+        for (let content of gridContents) {
+            const contentDiff = content.scrollHeight - content.clientHeight;
+            if (contentDiff > TOLERANCE) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     function calculateOptimalFontSize() {
         const width = window.innerWidth;
         const height = window.innerHeight;
-        const dpr = window.devicePixelRatio || 1;
 
         let fontSize;
 
-        // Base size by DPR (Windows/OS Scaling)
-        if (dpr >= 2.0) {
-            fontSize = 55;
-        } else if (dpr >= 1.75) {
-            fontSize = 58;
-        } else if (dpr >= 1.5) {
-            fontSize = 62.5;
-        } else if (dpr >= 1.25) {
-            fontSize = 68;
-        } else {
-            fontSize = 74;
-        }
+        if (width >= 3840) fontSize = 68;
+        else if (width >= 2560) fontSize = 72;
+        else if (width >= 1920) fontSize = 75;
+        else if (width >= 1600) fontSize = 75;
+        else if (width >= 1366) fontSize = 75;
+        else if (width >= 1024) fontSize = 68;
+        else if (width >= 768) fontSize = 65;
+        else if (width >= 600) fontSize = 60;
+        else if (width >= 480) fontSize = 58;
+        else fontSize = 56;
 
-        // Adjust for viewport width
-        if (width >= 3840) {
-            fontSize *= 0.85;
-        } else if (width >= 2560) {
-            fontSize *= 0.90;
-        } else if (width >= 1920) {
-            fontSize *= 0.95;
-        } else if (width >= 1600) {
-            fontSize *= 1.0;
-        } else if (width >= 1366) {
-            fontSize *= 1.02;
-        } else if (width >= 1024) {
-            fontSize *= 0.85;
-        } else if (width >= 768) {
-            fontSize *= 0.80;
-        } else if (width >= 600) {
-            fontSize *= 0.75;
-        } else if (width >= 480) {
-            fontSize *= 0.72;
-        } else {
-            fontSize *= 0.70;
-        }
+        if (height < 600) fontSize *= 0.85;
+        else if (height < 768) fontSize *= 0.90;
+        else if (height < 900) fontSize *= 0.95;
+        else if (height >= 1400) fontSize *= 1.05;
 
-        // Adjust for viewport height
-        if (height < 600) {
-            fontSize *= 0.85;
-        } else if (height < 768) {
-            fontSize *= 0.90;
-        } else if (height < 900) {
-            fontSize *= 0.95;
-        } else if (height >= 1400) {
-            fontSize *= 1.05;
-        }
-
-        // Aspect ratio fine-tuning
         const aspectRatio = width / height;
-        if (aspectRatio > 2.2) {
-            fontSize *= 0.92;
-        } else if (aspectRatio < 1.3) {
-            fontSize *= 1.08;
-        }
+        if (aspectRatio > 2.2) fontSize *= 0.92;
+        else if (aspectRatio < 1.3) fontSize *= 1.08;
 
-        // Clamp between 35% and 75%
-        fontSize = Math.max(35, Math.min(75, fontSize));
-
-        document.documentElement.style.fontSize = fontSize + '%';
+        return Math.max(35, Math.min(75, fontSize));
     }
 
-    calculateOptimalFontSize();
+    function adjustFontSizeForOverflow() {
+        if (fontSizeCalculated) return;
 
-    let initialWidth = window.innerWidth;
-    let resizeTimer;
+        let fontSize = calculateOptimalFontSize();
+        document.documentElement.style.fontSize = fontSize + '%';
 
-    window.addEventListener('resize', () => {
-        if (window.innerWidth !== initialWidth) {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                calculateOptimalFontSize();
-                initialWidth = window.innerWidth;
-            }, 300);
-        }
-    });
+        // Immediate check with no delay
+        requestAnimationFrame(() => {
+            if (!hasVerticalOverflow()) {
+                fontSizeCalculated = true;
+                return;
+            }
 
-    window.addEventListener('load', () => {
-        setTimeout(calculateOptimalFontSize, 200);
-    });
+            const maxIterations = 40;
+            let iterations = 0;
 
-    window.recalculateFontSize = calculateOptimalFontSize;
+            while (hasVerticalOverflow() && fontSize > 35 && iterations < maxIterations) {
+                fontSize -= 2;
+                document.documentElement.style.fontSize = fontSize + '%';
+                iterations++;
+            }
+
+            fontSizeCalculated = true;
+        });
+    }
+
+    // Run immediately - no delay
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', adjustFontSizeForOverflow);
+    } else {
+        adjustFontSizeForOverflow();
+    }
+
+    window.recalculateFontSize = adjustFontSizeForOverflow;
 })();
 
 // Overflow prevention CSS
@@ -110,7 +99,6 @@ document.head.appendChild(style);
 
 // ===== DEVICE DETECTION =====
 function isMobile() {
-    // Check if device is mobile/phone (not tablet)
     const userAgent = navigator.userAgent.toLowerCase();
     const isMobileDevice = /android|webos|iphone|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
     const isSmallScreen = window.innerWidth <= 768;
@@ -118,7 +106,6 @@ function isMobile() {
 }
 
 function isTablet() {
-    // Check if device is tablet
     const userAgent = navigator.userAgent.toLowerCase();
     const isTabletDevice = /ipad|android(?!.*mobile)|tablet/i.test(userAgent);
     const isMediumScreen = window.innerWidth > 768 && window.innerWidth <= 1024;
@@ -131,7 +118,7 @@ function isDesktop() {
 
 // ===== CURSOR GLOW EFFECT (DESKTOP ONLY) =====
 const cursorGlow = document.querySelector('.cursor-glow');
-if (isDesktop()) {
+if (isDesktop() && cursorGlow) {
     document.addEventListener('mousemove', (e) => {
         cursorGlow.style.left = e.clientX + 'px';
         cursorGlow.style.top = e.clientY + 'px';
@@ -142,66 +129,68 @@ if (isDesktop()) {
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
 
-// Create backdrop element
-const backdrop = document.createElement('div');
-backdrop.className = 'nav-backdrop';
-document.body.appendChild(backdrop);
+if (hamburger && navMenu) {
+    const backdrop = document.createElement('div');
+    backdrop.className = 'nav-backdrop';
+    document.body.appendChild(backdrop);
 
-hamburger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    navMenu.classList.toggle('active');
-    backdrop.classList.toggle('active');
-    document.body.classList.toggle('menu-open');
-});
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navMenu.classList.toggle('active');
+        backdrop.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
+    });
 
-// Close menu on backdrop click
-backdrop.addEventListener('click', () => {
-    navMenu.classList.remove('active');
-    backdrop.classList.remove('active');
-    document.body.classList.remove('menu-open');
-});
-
-// Close menu on nav item click
-document.querySelectorAll('.nav-item').forEach(item => {
-    item.addEventListener('click', () => {
+    backdrop.addEventListener('click', () => {
         navMenu.classList.remove('active');
         backdrop.classList.remove('active');
         document.body.classList.remove('menu-open');
     });
-});
 
-// Close menu on scroll (mobile/tablet only)
-if (!isDesktop()) {
-    let lastScrollY = window.scrollY;
-    window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
-        if (Math.abs(currentScrollY - lastScrollY) > 50) {
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            backdrop.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        });
+    });
+
+    if (!isDesktop()) {
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            if (Math.abs(currentScrollY - lastScrollY) > 50) {
+                navMenu.classList.remove('active');
+                backdrop.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            }
+            lastScrollY = currentScrollY;
+        });
+    }
+
+    document.addEventListener('click', (e) => {
+        const floatingNav = document.querySelector('.floating-nav');
+        if (floatingNav && !floatingNav.contains(e.target)) {
             navMenu.classList.remove('active');
             backdrop.classList.remove('active');
             document.body.classList.remove('menu-open');
         }
-        lastScrollY = currentScrollY;
     });
 }
 
-// Close menu on click outside
-document.addEventListener('click', (e) => {
-    if (!document.querySelector('.floating-nav').contains(e.target)) {
-        navMenu.classList.remove('active');
-        backdrop.classList.remove('active');
-        document.body.classList.remove('menu-open');
-    }
-});
-
-// ===== TYPING ANIMATION =====
+// ===== TYPING ANIMATION (WITH MEMORY LEAK FIX) =====
 const words = ["Software Developer", "AI Researcher", "Full-Stack Engineer", "Tech Enthusiast"];
 let wordIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
+let typingTimeout = null;
 
 function type() {
     const typingElement = document.querySelector('.typing-text');
-    if (!typingElement) return;
+    if (!typingElement) {
+        if (typingTimeout) clearTimeout(typingTimeout);
+        return;
+    }
 
     const currentWord = words[wordIndex];
 
@@ -215,20 +204,23 @@ function type() {
 
     if (!isDeleting && charIndex === currentWord.length) {
         isDeleting = true;
-        setTimeout(type, 2000);
+        typingTimeout = setTimeout(type, 2000);
     } else if (isDeleting && charIndex === 0) {
         isDeleting = false;
         wordIndex = (wordIndex + 1) % words.length;
-        setTimeout(type, 500);
+        typingTimeout = setTimeout(type, 500);
     } else {
-        setTimeout(type, isDeleting ? 50 : 100);
+        typingTimeout = setTimeout(type, isDeleting ? 50 : 100);
     }
 }
 
-// ===== CAROUSEL TOUCH SWIPE HANDLER (TABLET ONLY) =====
+window.addEventListener('beforeunload', () => {
+    if (typingTimeout) clearTimeout(typingTimeout);
+});
+
+// ===== CAROUSEL TOUCH SWIPE HANDLER (MOBILE/TABLET) =====
 class CarouselTouchSwipeHandler {
     constructor(trackElement, sectionIndex, manager) {
-        // `trackElement` should be the element you already pass (the track)
         this.track = trackElement;
         this.sectionIndex = sectionIndex;
         this.manager = manager;
@@ -236,10 +228,9 @@ class CarouselTouchSwipeHandler {
         this.pointerDown = false;
         this.startX = 0;
         this.currentX = 0;
-        this.minSwipeDistance = 50; // px
-        this.locked = false;        // prevents multi-trigger during transition
+        this.minSwipeDistance = 50;
+        this.locked = false;
 
-        // Bind methods
         this.onPointerDown = this.onPointerDown.bind(this);
         this.onPointerMove = this.onPointerMove.bind(this);
         this.onPointerUp = this.onPointerUp.bind(this);
@@ -250,39 +241,29 @@ class CarouselTouchSwipeHandler {
     }
 
     init() {
-        // Ensure the element can receive pointer events
         this.track.style.touchAction = this.track.style.touchAction || 'pan-y';
 
-        // Pointer events
         this.track.addEventListener('pointerdown', this.onPointerDown, { passive: false });
         window.addEventListener('pointermove', this.onPointerMove, { passive: false });
         window.addEventListener('pointerup', this.onPointerUp, { passive: false });
         this.track.addEventListener('pointercancel', this.onPointerCancel, { passive: false });
-
-        // Listen for transition end to unlock (use capture=false)
         this.track.addEventListener('transitionend', this.onTransitionEnd);
     }
 
     onPointerDown(e) {
-        // Only handle primary button/touch
         if (e.isPrimary === false || this.locked) return;
 
         this.pointerDown = true;
         this.startX = e.clientX;
         this.currentX = this.startX;
 
-        // capture pointer so we get move/up even if finger leaves the element
-        try { this.track.setPointerCapture(e.pointerId); } catch (err) { /* not critical */ }
-
-        // Prevent page from accidentally scrolling horizontally while swiping
+        try { this.track.setPointerCapture(e.pointerId); } catch (err) { }
         e.preventDefault();
     }
 
     onPointerMove(e) {
         if (!this.pointerDown || this.locked) return;
         this.currentX = e.clientX;
-        // We intentionally DO NOT translate the track here (optional visual drag).
-        // Prevent default so the browser doesn't treat it as a scroll gesture.
         e.preventDefault();
     }
 
@@ -293,27 +274,19 @@ class CarouselTouchSwipeHandler {
         }
         this.pointerDown = false;
 
-        // release capture
-        try { this.track.releasePointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+        try { this.track.releasePointerCapture(e.pointerId); } catch (err) { }
 
         const diff = this.startX - this.currentX;
         const abs = Math.abs(diff);
 
         if (abs >= this.minSwipeDistance && !this.locked) {
-            // Determine direction
-            const goNext = diff > 0; // swipe left -> next
-            // Prevent manager from being spammed during slide transition
+            const goNext = diff > 0;
             this.locked = true;
             if (goNext) {
                 this.manager.nextSlide(this.sectionIndex);
             } else {
                 this.manager.previousSlide(this.sectionIndex);
             }
-            // Do NOT unlock here — wait for transitionend on the track (onTransitionEnd).
-        } else {
-            // Not enough movement: do nothing (snap back)
-            // We still want to ensure track is not locked.
-            // No-op; subsequent swipes will still work.
         }
 
         e.preventDefault();
@@ -329,29 +302,25 @@ class CarouselTouchSwipeHandler {
         this.currentX = 0;
         try {
             if (e && e.pointerId != null) this.track.releasePointerCapture(e.pointerId);
-        } catch (err) { /* ignore */ }
+        } catch (err) { }
     }
 
     onTransitionEnd(e) {
-        // Only respond to transform transitions on this track element
         if (e.target !== this.track) return;
         if (e.propertyName && e.propertyName !== 'transform') return;
 
-        // unlock the swipe lock so user can swipe again
         this.locked = false;
 
-        // Also ensure manager.isScrolling is cleared if you rely on that flag:
         if (this.manager) {
             this.manager.isScrolling = false;
         }
     }
 
     destroy() {
-        // in case you want to remove listeners
-        this.track.removeEventListener('pointerdown', this.onPointerDown, { passive: false });
-        window.removeEventListener('pointermove', this.onPointerMove, { passive: false });
-        window.removeEventListener('pointerup', this.onPointerUp, { passive: false });
-        this.track.removeEventListener('pointercancel', this.onPointerCancel, { passive: false });
+        this.track.removeEventListener('pointerdown', this.onPointerDown);
+        window.removeEventListener('pointermove', this.onPointerMove);
+        window.removeEventListener('pointerup', this.onPointerUp);
+        this.track.removeEventListener('pointercancel', this.onPointerCancel);
         this.track.removeEventListener('transitionend', this.onTransitionEnd);
     }
 }
@@ -365,19 +334,20 @@ class UnifiedSectionManager {
         this.lastScrollTime = 0;
         this.SCROLL_COOLDOWN = 600;
         this.DELTA_THRESHOLD = 35;
+        this.HORIZONTAL_DELTA_THRESHOLD = 30;
         this.headerOffset = 0;
 
-        // Device detection
         this.deviceType = this.detectDevice();
 
         this.initializeSections();
 
-        // Desktop: Use wheel scrolling
         if (this.deviceType === 'desktop') {
             this.initializeDesktopScrollListener();
         }
 
-        // Touch swipe disabled for mobile and tablet - use arrow buttons instead
+        if (this.deviceType === 'mobile' || this.deviceType === 'tablet') {
+            this.initializeCarouselTouchSwipe();
+        }
 
         this.initializeNavigation();
     }
@@ -386,7 +356,7 @@ class UnifiedSectionManager {
         if (isDesktop()) return 'desktop';
         if (isMobile()) return 'mobile';
         if (isTablet()) return 'tablet';
-        return 'desktop'; // fallback
+        return 'desktop';
     }
 
     initializeSections() {
@@ -401,17 +371,32 @@ class UnifiedSectionManager {
                 slides: [],
                 currentSlide: 0,
                 track: null,
-                indicatorsContainer: null
+                indicatorsContainer: null,
+                isAnimating: false
             };
 
             if (section.isCarousel) {
                 section.track = sectionEl.querySelector('[id$="Track"]');
                 section.indicatorsContainer = sectionEl.querySelector('[id$="Indicators"]');
-                section.slides = Array.from(section.track.querySelectorAll('.carousel-slide'));
-                this.initializeIndicators(section);
+                if (section.track) {
+                    section.slides = Array.from(section.track.querySelectorAll('.carousel-slide'));
+                    this.initializeIndicators(section);
+                    this.initializeCarouselTransitionHandler(section);
+                }
             }
 
             this.sections.push(section);
+        });
+    }
+
+    initializeCarouselTransitionHandler(section) {
+        if (!section.track) return;
+
+        section.track.addEventListener('transitionend', (e) => {
+            if (e.target === section.track && e.propertyName === 'transform') {
+                section.isAnimating = false;
+                this.isScrolling = false;
+            }
         });
     }
 
@@ -432,17 +417,14 @@ class UnifiedSectionManager {
 
         section.indicatorsContainer.innerHTML = '';
 
-        // Create wrapper for arrows and indicators
         const navWrapper = document.createElement('div');
         navWrapper.className = 'carousel-nav';
 
-        // Create left arrow
         const leftArrow = document.createElement('button');
         leftArrow.className = 'carousel-arrow carousel-arrow-left';
         leftArrow.innerHTML = '<i class="fas fa-chevron-left"></i>';
         leftArrow.addEventListener('click', () => this.previousSlide(section.index));
 
-        // Create indicators container
         const indicatorsWrapper = document.createElement('div');
         indicatorsWrapper.className = 'carousel-indicators';
 
@@ -454,37 +436,31 @@ class UnifiedSectionManager {
             indicatorsWrapper.appendChild(indicator);
         });
 
-        // Create right arrow
         const rightArrow = document.createElement('button');
         rightArrow.className = 'carousel-arrow carousel-arrow-right';
         rightArrow.innerHTML = '<i class="fas fa-chevron-right"></i>';
         rightArrow.addEventListener('click', () => this.nextSlide(section.index));
 
-        // Append all elements
         navWrapper.appendChild(leftArrow);
         navWrapper.appendChild(indicatorsWrapper);
         navWrapper.appendChild(rightArrow);
         section.indicatorsContainer.appendChild(navWrapper);
 
-        // Store arrow references
         section.leftArrow = leftArrow;
         section.rightArrow = rightArrow;
 
-        // Update arrow states
         this.updateArrowStates(section);
     }
 
     updateArrowStates(section) {
         if (!section.leftArrow || !section.rightArrow) return;
 
-        // Update left arrow
         if (section.currentSlide === 0) {
             section.leftArrow.classList.add('disabled');
         } else {
             section.leftArrow.classList.remove('disabled');
         }
 
-        // Update right arrow
         if (section.currentSlide === section.slides.length - 1) {
             section.rightArrow.classList.add('disabled');
         } else {
@@ -494,7 +470,7 @@ class UnifiedSectionManager {
 
     previousSlide(sectionIndex) {
         const section = this.sections[sectionIndex];
-        if (!section.isCarousel || section.currentSlide === 0) return;
+        if (!section.isCarousel || section.currentSlide === 0 || section.isAnimating) return;
 
         section.currentSlide--;
         this.updateCarouselSlide(section);
@@ -502,7 +478,7 @@ class UnifiedSectionManager {
 
     nextSlide(sectionIndex) {
         const section = this.sections[sectionIndex];
-        if (!section.isCarousel || section.currentSlide === section.slides.length - 1) return;
+        if (!section.isCarousel || section.currentSlide === section.slides.length - 1 || section.isAnimating) return;
 
         section.currentSlide++;
         this.updateCarouselSlide(section);
@@ -519,11 +495,38 @@ class UnifiedSectionManager {
 
             const now = Date.now();
             if (this.isScrolling || (now - this.lastScrollTime) < this.SCROLL_COOLDOWN) return;
-            if (Math.abs(e.deltaY) < this.DELTA_THRESHOLD) return;
+
+            const currentSection = this.sections[this.currentSectionIndex];
+            const absVertical = Math.abs(e.deltaY);
+            const absHorizontal = Math.abs(e.deltaX);
+
+            // HORIZONTAL SCROLLING (trackpad left/right) - Only for carousel sections
+            const isHorizontalScroll = absHorizontal > absVertical && absHorizontal > this.HORIZONTAL_DELTA_THRESHOLD;
+            
+            if (isHorizontalScroll && currentSection.isCarousel && !currentSection.isAnimating) {
+                const direction = e.deltaX > 0 ? 'next' : 'prev';
+                
+                if (direction === 'next' && currentSection.currentSlide < currentSection.slides.length - 1) {
+                    canProcess = false;
+                    setTimeout(() => canProcess = true, 150);
+                    this.lastScrollTime = now;
+                    currentSection.currentSlide++;
+                    this.updateCarouselSlide(currentSection);
+                } else if (direction === 'prev' && currentSection.currentSlide > 0) {
+                    canProcess = false;
+                    setTimeout(() => canProcess = true, 150);
+                    this.lastScrollTime = now;
+                    currentSection.currentSlide--;
+                    this.updateCarouselSlide(currentSection);
+                }
+                return;
+            }
+
+            // VERTICAL SCROLLING - section to section navigation
+            if (absVertical < this.DELTA_THRESHOLD) return;
 
             const direction = e.deltaY > 0 ? 'forward' : 'backward';
-            if (!this.canMove(direction)) return;
-
+            
             canProcess = false;
             setTimeout(() => canProcess = true, 150);
 
@@ -544,52 +547,11 @@ class UnifiedSectionManager {
         });
     }
 
-    canMove(direction) {
-        const currentSection = this.sections[this.currentSectionIndex];
-
-        if (direction === 'forward') {
-            if (currentSection.isCarousel) {
-                return currentSection.currentSlide < currentSection.slides.length - 1 ||
-                    this.currentSectionIndex < this.sections.length - 1;
-            } else {
-                return this.currentSectionIndex < this.sections.length - 1;
-            }
-        } else {
-            if (currentSection.isCarousel) {
-                return currentSection.currentSlide > 0 || this.currentSectionIndex > 0;
-            } else {
-                return this.currentSectionIndex > 0;
-            }
-        }
-    }
-
     handleScroll(direction) {
-        const currentSection = this.sections[this.currentSectionIndex];
-
-        if (currentSection.isCarousel) {
-            if (direction === 'forward') {
-                if (currentSection.currentSlide < currentSection.slides.length - 1) {
-                    currentSection.currentSlide++;
-                    this.updateCarouselSlide(currentSection);
-                    this.isScrolling = false;
-                } else {
-                    this.moveToNextSection();
-                }
-            } else {
-                if (currentSection.currentSlide > 0) {
-                    currentSection.currentSlide--;
-                    this.updateCarouselSlide(currentSection);
-                    this.isScrolling = false;
-                } else {
-                    this.moveToPreviousSection();
-                }
-            }
+        if (direction === 'forward') {
+            this.moveToNextSection();
         } else {
-            if (direction === 'forward') {
-                this.moveToNextSection();
-            } else {
-                this.moveToPreviousSection();
-            }
+            this.moveToPreviousSection();
         }
     }
 
@@ -597,6 +559,8 @@ class UnifiedSectionManager {
         if (this.currentSectionIndex < this.sections.length - 1) {
             this.currentSectionIndex++;
             this.scrollToCurrentSection();
+        } else {
+            this.isScrolling = false;
         }
     }
 
@@ -604,6 +568,8 @@ class UnifiedSectionManager {
         if (this.currentSectionIndex > 0) {
             this.currentSectionIndex--;
             this.scrollToCurrentSection();
+        } else {
+            this.isScrolling = false;
         }
     }
 
@@ -616,26 +582,16 @@ class UnifiedSectionManager {
     }
 
     updateCarouselSlide(section) {
-        // Update active slide classes
+        section.isAnimating = true;
+
         section.slides.forEach((slide, index) => {
             slide.classList.toggle('active', index === section.currentSlide);
         });
 
-        // Ensure the track has the correct transition (this shouldn't override your CSS, just ensures it's present)
         if (section.track) {
-            // set inline transition only if not present so we don't fight your stylesheet
-            if (!section.track.style.transition) {
-                section.track.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-            }
-
-            // set a data attribute to indicate an animation is running (optional)
-            section.track.dataset.animating = 'true';
-
-            // Apply transform
             section.track.style.transform = `translateX(-${section.currentSlide * 100}%)`;
         }
 
-        // Update indicators
         if (section.indicatorsContainer) {
             const indicators = section.indicatorsContainer.querySelectorAll('.indicator');
             indicators.forEach((indicator, index) => {
@@ -643,18 +599,12 @@ class UnifiedSectionManager {
             });
         }
 
-        // Update arrow states
         this.updateArrowStates(section);
-
-        // ensure manager scrolling flag is set while animating
-        this.isScrolling = true;
     }
-
-
 
     goToSlide(sectionIndex, slideIndex) {
         const section = this.sections[sectionIndex];
-        if (!section.isCarousel) return;
+        if (!section.isCarousel || section.isAnimating) return;
 
         section.currentSlide = slideIndex;
         this.updateCarouselSlide(section);
@@ -705,7 +655,6 @@ class UnifiedSectionManager {
         }
 
         if (this.deviceType !== 'desktop') {
-            // Simple smooth scroll for mobile/tablet
             element.scrollIntoView({ behavior: 'smooth' });
         } else {
             this.isScrolling = true;
@@ -716,6 +665,8 @@ class UnifiedSectionManager {
 
     updateActiveNav() {
         const currentSection = this.sections[this.currentSectionIndex];
+        if (!currentSection) return;
+        
         const sectionId = currentSection.id;
 
         document.querySelectorAll('.nav-item').forEach(link => {
@@ -727,7 +678,7 @@ class UnifiedSectionManager {
     }
 
     snapToNearestSection() {
-        if (this.deviceType !== 'desktop') return; // No snapping on mobile/tablet
+        if (this.deviceType !== 'desktop') return;
 
         const scrollPos = window.pageYOffset + this.headerOffset;
         let closestIndex = 0;
@@ -764,6 +715,15 @@ class UnifiedSectionManager {
                 document.querySelectorAll('.nav-item').forEach(link => link.classList.remove('active'));
                 anchor.classList.add('active');
             });
+        });
+    }
+
+    destroy() {
+        if (typingTimeout) clearTimeout(typingTimeout);
+        this.sections.forEach(section => {
+            if (section.track) {
+                section.track.replaceWith(section.track.cloneNode(true));
+            }
         });
     }
 }
