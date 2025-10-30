@@ -7,7 +7,7 @@
 
 html {
     font-size: 62.5%;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     scrollbar-width: none;
     overflow-x: hidden;
     overflow-y: auto;
@@ -54,7 +54,6 @@ section {
     justify-content: center;
     overflow-x: hidden;
     overflow-y: visible;
-    scroll-snap-align: start;
 }
 
 .content-wrapper {
