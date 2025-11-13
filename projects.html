@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Neal Kaushik Sharma</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="responsive.css">
+    <style>
+        /* Page-specific styles for projects.html */
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .project-header h2 {
+            font-size: 1.8rem;
+            color: #e0e0e0;
+        }
+
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1.8rem;
+            background: linear-gradient(135deg, #b74b4b 0%, #e76f6f 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(183, 75, 75, 0.3);
+        }
+
+        .github-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(183, 75, 75, 0.5);
+        }
+
+        .project-subtitle {
+            font-size: 1.2rem;
+            color: #b74b4b;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .project-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .project-features h4 {
+            color: #b74b4b;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .project-features li {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .project-features li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #b74b4b;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+
+    <aside class="side-rail">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="experience.html">Experience</a>
+            <a href="projects.html" class="active">Projects</a>
+            <a href="resume.html">Resume</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-container">
+            <article class="content-card">
+                <div class="card-image">
+                    <img src="images/BrewMaster.png" alt="BrewMaster Project">
+                </div>
+                <div class="card-content">
+                    <div class="project-header">
+                        <h2>Online Retail Management System</h2>
+                        <a href="https://github.com/NealKSharma/OnlineRetailManagementSystem" class="github-btn" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                    <p class="project-subtitle">BrewMaster – Full-Stack E-Commerce Platform</p>
+                    <p class="project-description">
+                        A <strong>full-stack e-commerce web application</strong> developed as
+                        <strong>BrewMaster</strong>, a simulated coffee retail store.
+                        Designed for scalability and security, it implements a <strong>domain-independent
+                        retail management system</strong> supporting user accounts, product inventory, and order processing. 
+                        Built using <strong>ASP.NET Core MVC, C#, and SQL Server</strong>, it follows the <strong>MVC architecture</strong> 
+                        pattern with a centralized <strong>Database Helper</strong> for clean data handling, AJAX-driven UI updates, 
+                        and robust authentication mechanisms.
+                    </p>
+                    <div class="project-features">
+                        <h4>Key Features & Contributions:</h4>
+                        <ul>
+                            <li>Implemented secure <strong>user authentication</strong> with <strong>SHA256 + salt</strong> hashing, role-based access control, and dynamic profile updates with validation.</li>
+                            <li>Developed an interactive <strong>admin dashboard</strong> to monitor users, orders, and logs in real time.</li>
+                            <li>Built <strong>AJAX-based product management</strong> with live table updates, binary image uploads, and autofill editing functionality for streamlined admin operations.</li>
+                            <li>Designed a responsive <strong>shopping cart and checkout system</strong> with SQL data sync, notifications, and automatic stock handling.</li>
+                            <li>Engineered detailed <strong>audit trails and error logging</strong> using structured SQL tables for system transparency.</li>
+                            <li>Deployed on <strong>Microsoft Azure</strong> with Function Apps and Key Vault integration for secure, cloud-ready scalability.</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">C#</span>
+                        <span class="tech-badge">.NET</span>
+                        <span class="tech-badge">SQL</span>
+                        <span class="tech-badge">Azure</span>
+                        <span class="tech-badge">jQuery</span>
+                        <span class="tech-badge">HTML/CSS</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="content-card">
+                <div class="card-image">
+                    <img src="images/NAS.png" alt="NAS Project">
+                </div>
+                <div class="card-content">
+                    <div class="project-header">
+                        <h2>Network Attached Storage (NAS)</h2>
+                    </div>
+                    <p class="project-subtitle">Personal Server Infrastructure & Automation System</p>
+                    <p class="project-description">
+                        A <strong>self-hosted Network Attached Storage (NAS)</strong> and personal server
+                        setup running on a <strong>Raspberry Pi 5</strong>, designed for automated backups, remote file access,
+                        and secure networking. Built with <strong>OpenMediaVault</strong> on Debian Linux, it provides
+                        shared network folders accessible from multiple devices, with backup automation and security tools
+                        that emulate lightweight <strong>DevOps and cloud practices</strong> in a home-lab environment.
+                    </p>
+                    <div class="project-features">
+                        <h4>Key Features & Implementations:</h4>
+                        <ul>
+                            <li>Configured <strong>OpenMediaVault</strong> on Debian Linux to manage file sharing, system health, and network drives accessible from Windows and Linux PCs.</li>
+                            <li>Developed <strong>bash automation scripts</strong> for daily and remote server backups, including rotation management and <strong>Wake-on-LAN</strong> triggers for power-efficient operations.</li>
+                            <li>Integrated <strong>OpenVPN</strong> for encrypted remote access and deployed <strong>Docker-based services</strong> for modular application hosting and system isolation.</li>
+                            <li>Set up a local <strong>web hosting environment</strong> for tools and web apps, with real-time system monitoring via a custom dashboard.</li>
+                            <li>Hardened the server with custom firewall rules and network policies to ensure secure and stable 24/7 uptime.</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Raspberry Pi</span>
+                        <span class="tech-badge">Linux</span>
+                        <span class="tech-badge">OpenMediaVault</span>
+                        <span class="tech-badge">Docker</span>
+                        <span class="tech-badge">OpenVPN</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+</body>
+</html>

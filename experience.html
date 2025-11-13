@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience - Neal Kaushik Sharma</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="responsive.css">
+    <style>
+        /* Page-specific styles for experience.html */
+        .card-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title h2 {
+            font-size: 1.8rem;
+            color: #e0e0e0;
+        }
+
+        .date-badge {
+            background: rgba(183, 75, 75, 0.25);
+            border: 2px solid #b74b4b;
+            padding: 0.5rem 1.5rem;
+            border-radius: 3rem;
+            color: #e76f6f;
+            font-weight: 600;
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        .company-name {
+            font-size: 1.3rem;
+            color: #b74b4b;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .contributions h4 {
+            color: #b74b4b;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .contributions ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contributions li {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .contributions li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #b74b4b;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+
+    <aside class="side-rail">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="experience.html" class="active">Experience</a>
+            <a href="projects.html">Projects</a>
+            <a href="resume.html">Resume</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-container">
+            <article class="content-card">
+                <div class="card-image">
+                    <img src="images/TCS.png" alt="TCS Experience">
+                </div>
+                <div class="card-content">
+                    <div class="card-title">
+                        <h2>Software Engineer Intern</h2>
+                        <span class="date-badge">June 2025 – Aug 2025</span>
+                    </div>
+                    <h3 class="company-name">Tata Consultancy Services</h3>
+                    <p class="card-description">
+                        Completed a three-month, on-site internship focused on full-stack web application
+                        development under a structured mentorship program. Worked in a multidisciplinary
+                        team that included frontend, backend, database, QA, and cloud engineers, giving me
+                        exposure to the full software development lifecycle. My main project involved
+                        developing an enterprise-grade <strong>Online Retail Management System</strong>, where I
+                        implemented secure authentication, product management, and checkout modules.
+                    </p>
+                    <div class="contributions">
+                        <h4>Key Contributions:</h4>
+                        <ul>
+                            <li>Developed and integrated backend modules in <strong>C# and ASP.NET Core MVC</strong> with REST APIs, and real-time SQL Server data connections.</li>
+                            <li>Implemented <strong>secure authentication, role-based access, and session management</strong> to protect data and improve reliability.</li>
+                            <li>Designed database schemas, optimized stored procedures, and improved query performance using <strong>SQL Server</strong>.</li>
+                            <li>Collaborated with DevOps engineers to deploy builds through Azure Pipelines and gained hands-on experience with <strong>Function Apps, Key Vaults, and Data Factory</strong>.</li>
+                            <li>Participated in daily scrums, sprint planning, and code reviews, enhancing my understanding of <strong>industry-standard Agile practices</strong>.</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">C#</span>
+                        <span class="tech-badge">.NET</span>
+                        <span class="tech-badge">SQL</span>
+                        <span class="tech-badge">Azure</span>
+                        <span class="tech-badge">AJAX</span>
+                        <span class="tech-badge">Agile</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="content-card">
+                <div class="card-image">
+                    <img src="images/AI Research.png" alt="AI Research">
+                </div>
+                <div class="card-content">
+                    <div class="card-title">
+                        <h2>Research Assistant</h2>
+                        <span class="date-badge">August 2025 – Present</span>
+                    </div>
+                    <h3 class="company-name">ISU, Department of Computer Science</h3>
+                    <p class="card-description">
+                        Conducting ongoing research under <strong>Ph.D. student Wei Qian</strong> and
+                        <strong>Professor Wallapak Tavanapong</strong> at Iowa State University.
+                        Our work explores vulnerabilities in <strong>predictive uncertainty</strong> during
+                        the <strong>machine unlearning</strong> process – the practice of making AI models
+                        "forget" specific data without complete retraining.
+                    </p>
+                    <div class="contributions">
+                        <h4>Research Focus:</h4>
+                        <ul>
+                            <li>Investigating <strong>malicious unlearning attacks</strong> that distort predictive confidence and identifying potential vulnerabilities in uncertainty-aware AI systems.</li>
+                            <li>Implementing and comparing <strong>unlearning algorithms</strong> and <strong>uncertainty quantification methods</strong> (including Bayesian and post-hoc calibration techniques).</li>
+                            <li>Running controlled experiments in <strong>PyTorch</strong> to analyze effects on predictive entropy, reliability diagrams, and uncertainty.</li>
+                            <li>Performing literature synthesis and evaluating results across various unlearning strategies for publication-ready results.</li>
+                            <li>Collaborating with graduate researchers to design frameworks that evaluate <strong>AI safety, robustness, and ethical implications</strong> of unlearning mechanisms.</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">PyTorch</span>
+                        <span class="tech-badge">TensorFlow</span>
+                        <span class="tech-badge">Machine Unlearning</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="content-card">
+                <div class="card-image">
+                    <img src="images/outburster.png" alt="Astronomy Research">
+                </div>
+                <div class="card-content">
+                    <div class="card-title">
+                        <h2>Research Assistant</h2>
+                        <span class="date-badge">March 2025 – April 2025</span>
+                    </div>
+                    <h3 class="company-name">ISU, Department of Physics & Astronomy</h3>
+                    <p class="card-description">
+                        Worked under <strong>Ph.D. student Ian Clark</strong> in the <strong>Department of Physics & Astronomy</strong>
+                        at Iowa State University. The research focused on identifying and analyzing
+                        <strong>out-bursting white dwarf stars</strong> using observational data from NASA's
+                        <strong>TESS (Transiting Exoplanet Survey Satellite)</strong> mission.
+                    </p>
+                    <div class="contributions">
+                        <h4>Project Contributions:</h4>
+                        <ul>
+                            <li>Processed and cleaned <strong>TESS light curve data</strong> using <strong>Python</strong>, and <strong>NumPy</strong> to detect outliers and correct noise distortions.</li>
+                            <li>Developed and visualized <strong>Hertzsprung–Russell (HR) diagrams</strong> and time-series plots to identify outbursting stars and variability trends.</li>
+                            <li>Applied <strong>data normalization</strong>, smoothing, and signal thresholding to improve detection accuracy for faint stellar fluctuations.</li>
+                            <li>Documented analyzed targets and contributed to a shared database summarizing stellar classification metrics and observed magnitude changes.</li>
+                            <li>Collaborated with graduate researchers to interpret statistical results, refine <strong>detection criteria</strong>, and prepare findings for internal presentations.</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">NumPy</span>
+                        <span class="tech-badge">Matplotlib</span>
+                        <span class="tech-badge">Data Visualization</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+</body>
+</html>

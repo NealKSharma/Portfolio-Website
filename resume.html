@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Neal Kaushik Sharma</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="responsive.css">
+    <style>
+        /* Page-specific styles for resume.html */
+        .main-content {
+            min-height: 100vh;
+        }
+
+        .resume-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .download-section {
+            text-align: center;
+            margin: 2rem;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(135deg, #b74b4b 0%, #e76f6f 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(183, 75, 75, 0.3);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(183, 75, 75, 0.5);
+        }
+
+        .pdf-viewer-container {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .pdf-viewer {
+            width: 100%;
+            height: 181.7vh;
+            border: none;
+        }
+
+        .fallback-message {
+            display: none;
+            text-align: center;
+            padding: 4rem 2rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .fallback-message h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #b74b4b;
+        }
+
+        .fallback-message p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive overrides */
+        @media (max-width: 1024px) {
+            .pdf-viewer {
+                height: 70vh;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pdf-viewer {
+                height: 60vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="noise-overlay"></div>
+
+    <aside class="side-rail">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="experience.html">Experience</a>
+            <a href="projects.html">Projects</a>
+            <a href="resume.html" class="active">Resume</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+
+        <div class="resume-container">
+
+            <div class="pdf-viewer-container">
+                <iframe src="Resume.pdf#toolbar=0&navpanes=0&scrollbar=1" class="pdf-viewer" title="Resume PDF Viewer">
+                </iframe>
+                <div class="fallback-message">
+                    <h3>Unable to display PDF</h3>
+                    <p>Your browser doesn't support embedded PDFs. Please download the resume instead.</p>
+                    <a href="Resume.pdf" download class="download-btn">
+                        <i class="fas fa-download"></i>
+                        Download PDF
+                    </a>
+                </div>
+            </div>
+
+            <div class="download-section">
+                <a href="Resume.pdf" download class="download-btn">
+                    <i class="fas fa-download"></i>
+                    Download PDF
+                </a>
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+        // Check if PDF loaded successfully
+        const pdfViewer = document.querySelector('.pdf-viewer');
+        const fallbackMessage = document.querySelector('.fallback-message');
+
+        pdfViewer.addEventListener('error', () => {
+            pdfViewer.style.display = 'none';
+            fallbackMessage.style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neal Kaushik Sharma - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="responsive.css">
+    <style>
+        /* Page-specific styles for index.html */
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .landing-container {
+            display: flex;
+            height: 100vh;
+            position: relative;
+            z-index: 10;
+        }
+
+        .content-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            text-align: center;
+            margin-left: 230px;
+        }
+
+        .hero-title {
+            font-size: 6rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #b74b4b 0%, #e76f6f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            height: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        .typing-text {
+            color: #b74b4b;
+        }
+
+        .typing-cursor {
+            color: #b74b4b;
+            animation: blink 1s step-end infinite;
+            margin-left: 0.5rem;
+        }
+
+        @keyframes blink {
+
+            0%,
+            50% {
+                opacity: 1;
+            }
+
+            51%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .hero-desc {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 2rem;
+            animation: fadeIn 1s ease-out 0.9s both;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 4rem;
+            height: 4rem;
+            background-color: transparent;
+            border: 2px solid #b74b4b;
+            font-size: 1.5rem;
+            border-radius: 50%;
+            transition: all 0.4s ease;
+            color: #b74b4b;
+        }
+
+        .social-icons a:hover {
+            color: #0a0a0a;
+            transform: scale(1.2) translateY(-5px);
+            background-color: #b74b4b;
+            box-shadow: 0 0 25px rgba(183, 75, 75, 0.6);
+        }
+
+        /* Responsive overrides for index page */
+        @media (max-width: 1024px) {
+            .landing-container {
+                flex-direction: column;
+            }
+
+            .hero-title {
+                font-size: 4rem;
+            }
+
+            .hero-subtitle {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.5rem;
+                height: 3rem;
+            }
+
+            .hero-desc {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="noise-overlay"></div>
+
+    <div class="landing-container">
+        <aside class="side-rail">
+            <nav>
+                <a href="index.html" class="active">Home</a>
+                <a href="about.html">About</a>
+                <a href="experience.html">Experience</a>
+                <a href="projects.html">Projects</a>
+                <a href="resume.html">Resume</a>
+            </nav>
+        </aside>
+
+        <div class="content-side">
+            <h1 class="hero-title">
+                NEAL KAUSHIK<br>
+                <span class="gradient-text">SHARMA</span>
+            </h1>
+
+            <div class="hero-subtitle">
+                <span class="typing-container">
+                    <span class="typing-text"></span>
+                    <span class="typing-cursor">|</span>
+                </span>
+            </div>
+
+            <p class="hero-desc">
+                Computer Science Student @ Iowa State University
+            </p>
+
+            <div class="social-icons">
+                <a href="https://github.com/NealKSharma" target="_blank"><i class="fa-brands fa-github"></i></a>
+                <a href="https://linkedin.com/in/nealks" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="mailto:nea1@iastate.edu"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Typing Animation
+        const words = ["Software Developer", "AI Researcher", "Full-Stack Engineer", "Tech Enthusiast"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const typingElement = document.querySelector('.typing-text');
+            if (!typingElement) return;
+
+            const currentWord = words[wordIndex];
+
+            if (isDeleting) {
+                typingElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let delay;
+            if (!isDeleting && charIndex === currentWord.length) {
+                isDeleting = true;
+                delay = 2000;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                delay = 500;
+            } else {
+                delay = isDeleting ? 50 : 100;
+            }
+
+            setTimeout(type, delay);
+        }
+
+        type();
+    </script>
+</body>
+
+</html>

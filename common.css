@@ -1,0 +1,207 @@
+/* Common Styles - Used across all pages */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: #0a0a0a;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(10, 10, 10, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #b74b4b, #e76f6f);
+    border-radius: 10px;
+    border: 2px solid rgba(10, 10, 10, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #e76f6f, #b74b4b);
+}
+
+/* Noise Overlay */
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Side Rail Navigation */
+.side-rail {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 250px;
+    background: rgba(255, 255, 255, 0.02);
+    border-right: 1px solid rgba(183, 75, 75, 0.2);
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem;
+    z-index: 1000;
+}
+
+.side-rail nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.side-rail a {
+    font-size: 2rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 0.5rem 0;
+    border-radius: 0;
+    position: relative;
+}
+
+.side-rail a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #b74b4b, #e76f6f);
+    transition: width 0.3s ease;
+}
+
+.side-rail a:hover {
+    color: #e76f6f;
+    background: transparent;
+    transform: translateX(10px);
+}
+
+.side-rail a.active {
+    background: transparent;
+    color: #e76f6f;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 250px;
+    padding: 3rem;
+    position: relative;
+    z-index: 10;
+}
+
+/* Common Card Styles - Used in Experience and Projects */
+.content-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.content-card {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    gap: 0;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.5rem;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.content-card:hover {
+    box-shadow: 0 15px 50px rgba(183, 75, 75, 0.2);
+    border-color: rgba(183, 75, 75, 0.3);
+}
+
+.card-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    background: rgba(255, 255, 255, 0.01);
+}
+
+.card-image img {
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.card-content {
+    padding: 2rem 1rem;
+}
+
+.tech-stack {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.tech-badge {
+    background: rgba(183, 75, 75, 0.2);
+    border: 2px solid rgba(183, 75, 75, 0.5);
+    padding: 0.7rem 1.5rem;
+    border-radius: 2rem;
+    font-size: 1.1rem;
+    color: #e76f6f;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.tech-badge:hover {
+    background: rgba(183, 75, 75, 0.35);
+    border-color: #b74b4b;
+    transform: scale(1.05);
+}
+
+/* Common Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive overrides for cards */
+@media (max-width: 1024px) {
+    .content-card {
+        grid-template-columns: 1fr;
+    }
+
+    .card-image {
+        padding: 2rem;
+    }
+
+    .card-image img {
+        max-height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-content {
+        padding: 2rem;
+    }
+}

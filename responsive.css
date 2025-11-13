@@ -1,0 +1,46 @@
+/* Responsive Styles - Media queries for all pages */
+
+@media (max-width: 1024px) {
+    .side-rail {
+        width: 220px;
+    }
+
+    .main-content {
+        margin-left: 220px;
+        padding: 3rem;
+    }
+
+    .page-title {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .side-rail {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid rgba(183, 75, 75, 0.2);
+        padding: 1.5rem;
+    }
+
+    .side-rail nav {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 1.5rem;
+    }
+
+    .side-rail a {
+        font-size: 1.5rem;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 2rem;
+    }
+
+    .page-title {
+        font-size: 3rem;
+    }
+}

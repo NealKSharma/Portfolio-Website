@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Neal Kaushik Sharma</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="responsive.css">
+    <style>
+        /* Page-specific styles for about.html */
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .profile-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .profile-image-container {
+            position: relative;
+            width: 100%;
+            max-width: 350px;
+            height: 350px;
+            border-radius: 2rem;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .image-border {
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, #b74b4b, #e76f6f, #b74b4b);
+            border-radius: 2rem;
+            z-index: 1;
+            animation: borderRotate 3s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        .profile-image {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 2rem;
+            z-index: 2;
+        }
+
+        .education-card {
+            background: rgba(183, 75, 75, 0.08);
+            border: 2px solid rgba(183, 75, 75, 0.3);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            padding-bottom: 0rem;
+            transition: all 0.4s ease;
+            margin-right: 1rem;
+        }
+
+        .education-card:hover {
+            background: rgba(183, 75, 75, 0.15);
+            border-color: #b74b4b;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(183, 75, 75, 0.3);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .header-with-badge {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .badge {
+            background: rgba(183, 75, 75, 0.25);
+            border: 2px solid #b74b4b;
+            padding: 0.5rem 1rem;
+            border-radius: 3rem;
+            color: #e76f6f;
+            font-weight: 600;
+            font-size: 1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(183, 75, 75, 0.2);
+        }
+
+        .card-header i {
+            font-size: 2.5rem;
+            color: #b74b4b;
+        }
+
+        .card-header h3 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .card-content strong {
+            display: block;
+            font-size: 1.5rem;
+            color: #b74b4b;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-badge {
+            display: inline-block;
+            background: rgba(183, 75, 75, 0.2);
+            color: #b74b4b;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .about-text p {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: justify;
+        }
+
+        /* Responsive overrides */
+        @media (max-width: 1024px) {
+            .profile-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .profile-image-container {
+                max-width: 300px;
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-image-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .about-text p {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="noise-overlay"></div>
+
+    <aside class="side-rail">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html" class="active">About</a>
+            <a href="experience.html">Experience</a>
+            <a href="projects.html">Projects</a>
+            <a href="resume.html">Resume</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+
+        <div class="about-container">
+            <section class="profile-section">
+                <div class="profile-image-container">
+                    <div class="image-border"></div>
+                    <img src="images/Profile Picture.jpg" alt="Neal Sharma" class="profile-image">
+                </div>
+
+                <div class="education-card">
+                    <div class="card-header">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Education</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="header-with-badge">
+                            <strong>Iowa State University</strong>
+                            <span class="badge">August 2024 – May 2028</span>
+                        </div>
+                        <p>B.S. Computer Science, Sophomore</p>
+                        <p>Minor in Artificial Intelligence and Data Science</p>
+                        <p>Honors Student</p>
+                        <div class="info-badge">GPA: 3.8 - Dean's List</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="about-text">
+                <p>
+                    My computer science journey began back in eighth grade with a simple question:
+                    "How can I mod Minecraft?" That bit of curiosity pushed me to learn Java, and
+                    before long, I was not just playing games but creating inside them. Ever since,
+                    computers have felt like home. From playing Road Rash on a bulky old monitor with
+                    a ball mouse to accidentally breaking my grandfather's PC while trying to upgrade
+                    its RAM, every moment pulled me deeper into this world. I taught myself web
+                    development long before it appeared in any class, not because I had to, but because
+                    I genuinely loved figuring things out.
+                </p>
+                <p>
+                    That excitement has not faded; if anything, it has grown. Coding has always been a
+                    passion for me, and it is something I want to pursue for the long run. I am not
+                    completely sure which direction I will take yet, but I know my interests fall
+                    somewhere between web development, software engineering, and artificial intelligence.
+                    Whether it is building systems that people actually use, researching AI safety, or
+                    exploring new technologies, what drives me is the challenge of turning ideas into real,
+                    working solutions that make a difference.
+                </p>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>
