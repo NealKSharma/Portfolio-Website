@@ -17,6 +17,89 @@ body {
     overflow-x: hidden;
 }
 
+/* Hamburger Menu Styles */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1002;
+    width: 40px;
+    height: 40px;
+    position: relative;
+}
+
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background: #e76f6f;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    display: block;
+    position: absolute;
+}
+
+.hamburger span:nth-child(1) {
+    top: 10px;
+}
+
+.hamburger span:nth-child(2) {
+    top: 18px;
+}
+
+.hamburger span:nth-child(3) {
+    top: 26px;
+}
+
+.hamburger:hover span {
+    background: #b74b4b;
+}
+
+.hamburger.active span:nth-child(1) {
+    top: 18px;
+    transform: rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    top: 18px;
+    transform: rotate(-45deg);
+}
+
+/* Navigation backdrop */
+.nav-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.nav-backdrop.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Prevent body scroll when menu is open */
+body.menu-open {
+    overflow: hidden;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 12px;
@@ -111,6 +194,7 @@ body {
     padding: 3rem;
     position: relative;
     z-index: 10;
+    min-height: 100vh;
 }
 
 /* Common Card Styles - Used in Experience and Projects */
@@ -148,6 +232,7 @@ body {
 
 .card-image img {
     max-width: 100%;
+    height: auto;
     object-fit: contain;
 }
 
@@ -171,6 +256,7 @@ body {
     color: #e76f6f;
     font-weight: 600;
     transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 .tech-badge:hover {
@@ -181,8 +267,15 @@ body {
 
 /* Common Animations */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Responsive overrides for cards */
@@ -196,12 +289,18 @@ body {
     }
 
     .card-image img {
-        max-height: 200px;
+        max-height: 250px;
     }
 }
 
 @media (max-width: 768px) {
     .card-content {
-        padding: 2rem;
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-content {
+        padding: 1.5rem 1rem;
     }
 }

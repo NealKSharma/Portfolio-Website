@@ -1,5 +1,6 @@
 /* Responsive Styles - Media queries for all pages */
 
+/* Tablets and Small Laptops */
 @media (max-width: 1024px) {
     .side-rail {
         width: 220px;
@@ -7,40 +8,488 @@
 
     .main-content {
         margin-left: 220px;
-        padding: 3rem;
+        padding: 3rem 2rem;
     }
 
     .page-title {
         font-size: 3.5rem;
     }
+
+    .content-card {
+        grid-template-columns: 1fr;
+    }
+
+    .card-image {
+        padding: 2rem;
+    }
+
+    .card-image img {
+        max-height: 250px;
+    }
 }
 
+/* Tablets */
 @media (max-width: 768px) {
     .side-rail {
         width: 100%;
         height: auto;
-        position: relative;
+        position: fixed;
+        top: 0;
         border-right: none;
         border-bottom: 1px solid rgba(183, 75, 75, 0.2);
-        padding: 1.5rem;
+        padding: 1rem 1.5rem;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .hamburger {
+        display: flex !important;
     }
 
     .side-rail nav {
-        flex-direction: row;
-        overflow-x: auto;
-        gap: 1.5rem;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(20px);
+        border-left: 1px solid rgba(183, 75, 75, 0.3);
+        flex-direction: column;
+        gap: 0;
+        padding: 5rem 2rem 2rem 2rem;
+        transition: right 0.3s ease;
+        z-index: 1001;
+        overflow-y: auto;
+    }
+
+    .side-rail nav.active {
+        right: 0;
     }
 
     .side-rail a {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
+    .side-rail a:hover {
+        transform: translateX(10px);
+    }
+
+    .side-rail a::before {
+        display: none;
+    }
+
+    /* Adjust main content */
     .main-content {
         margin-left: 0;
-        padding: 2rem;
+        margin-top: 80px;
+        padding: 2rem 1.5rem;
+    }
+
+    /* Main content */
+    .main-content {
+        margin-left: 0;
+        margin-top: 80px;
+        padding: 2rem 1.5rem;
     }
 
     .page-title {
         font-size: 3rem;
+    }
+
+    /* Content cards */
+    .card-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .card-title h2,
+    .project-header h2 {
+        font-size: 1.6rem;
+    }
+
+    .company-name,
+    .project-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .card-description,
+    .project-description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+
+    .contributions h4,
+    .project-features h4 {
+        font-size: 1.2rem;
+    }
+
+    .contributions li,
+    .project-features li {
+        font-size: 1rem;
+    }
+
+    .date-badge {
+        padding: 0.4rem 1.2rem;
+        font-size: 1rem;
+    }
+
+    .tech-badge {
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+    }
+
+    /* Home page */
+    .landing-container {
+        padding-top: 80px;
+    }
+
+    .content-side {
+        margin-left: 0;
+        padding: 2rem 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.8rem;
+        height: 3rem;
+    }
+
+    .hero-desc {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+    }
+
+    .social-icons {
+        gap: 1.5rem;
+    }
+
+    .social-icons a {
+        width: 3.5rem;
+        height: 3.5rem;
+        font-size: 1.3rem;
+    }
+
+    /* About page */
+    .profile-section {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .profile-image-container {
+        max-width: 280px;
+        height: 280px;
+    }
+
+    .education-card {
+        margin-right: 0;
+    }
+
+    .card-header h3 {
+        font-size: 1.8rem;
+    }
+
+    .card-content strong {
+        font-size: 1.3rem;
+    }
+
+    .card-content p {
+        font-size: 1.2rem;
+    }
+
+    .info-badge {
+        font-size: 1.1rem;
+        padding: 0.7rem 1.3rem;
+    }
+
+    .about-text p {
+        font-size: 1.2rem;
+    }
+
+    /* Resume page */
+    .pdf-viewer {
+        height: 60vh;
+    }
+
+    .download-btn {
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+    }
+
+    .github-btn {
+        padding: 0.7rem 1.6rem;
+        font-size: 1rem;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 480px) {
+    .side-rail {
+        padding: 0.8rem 1rem;
+    }
+
+    .side-rail nav {
+        width: 260px;
+        padding: 4rem 1.5rem 1.5rem 1.5rem;
+    }
+
+    .side-rail a {
+        font-size: 1.4rem;
+    }
+
+    .main-content {
+        margin-top: 70px;
+        padding: 1.5rem 1rem;
+    }
+
+    /* Main content */
+    .main-content {
+        margin-top: 70px;
+        padding: 1.5rem 1rem;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+    }
+
+    .content-container {
+        gap: 2.5rem;
+    }
+
+    /* Cards */
+    .card-image {
+        padding: 1.5rem 1rem;
+        min-height: 180px;
+    }
+
+    .card-image img {
+        max-height: 200px;
+    }
+
+    .card-content {
+        padding: 1.5rem 1rem;
+    }
+
+    .card-title,
+    .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .card-title h2,
+    .project-header h2 {
+        font-size: 1.4rem;
+        line-height: 1.3;
+    }
+
+    .company-name,
+    .project-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .card-description,
+    .project-description {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .contributions h4,
+    .project-features h4 {
+        font-size: 1.1rem;
+    }
+
+    .contributions li,
+    .project-features li {
+        font-size: 0.95rem;
+        padding-left: 1.3rem;
+        line-height: 1.5;
+    }
+
+    .date-badge {
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .tech-stack {
+        gap: 0.6rem;
+        margin-top: 1.5rem;
+    }
+
+    .tech-badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .github-btn {
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
+        gap: 0.6rem;
+    }
+
+    /* Home page */
+    .landing-container {
+        padding-top: 70px;
+    }
+
+    .content-side {
+        padding: 1.5rem 1rem;
+        padding-top: 2rem;
+        margin-left: 0;
+    }
+
+    .hero-title {
+        font-size: 2.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.4rem;
+        height: 2.5rem;
+    }
+
+    .hero-desc {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .social-icons {
+        gap: 1.2rem;
+    }
+
+    .social-icons a {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.2rem;
+    }
+
+    /* About page */
+    .profile-image-container {
+        max-width: 240px;
+        height: 240px;
+    }
+
+    .education-card {
+        padding: 1.5rem;
+    }
+
+    .card-header {
+        gap: 1rem;
+    }
+
+    .card-header i {
+        font-size: 2rem;
+    }
+
+    .card-header h3 {
+        font-size: 1.5rem;
+    }
+
+    .header-with-badge {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .badge {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .card-content strong {
+        font-size: 1.2rem;
+    }
+
+    .card-content p {
+        font-size: 1.1rem;
+    }
+
+    .info-badge {
+        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
+    }
+
+    .about-text {
+        gap: 1.5rem;
+    }
+
+    .about-text p {
+        font-size: 1.05rem;
+        line-height: 1.7;
+    }
+
+    /* Resume page */
+    .pdf-viewer {
+        min-height: 66vh;
+    }
+
+    .download-section {
+        margin: 1.5rem 0;
+    }
+
+    .download-btn {
+        padding: 0.9rem 1.8rem;
+        font-size: 1.1rem;
+    }
+
+    .fallback-message h3 {
+        font-size: 1.6rem;
+    }
+
+    .fallback-message p {
+        font-size: 1.1rem;
+    }
+}
+
+/* Very small devices */
+@media (max-width: 360px) {
+    .hero-title {
+        font-size: 2.4rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+        height: 2.2rem;
+    }
+
+    .card-title h2,
+    .project-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .about-text p {
+        font-size: 1rem;
+    }
+}
+
+/* Landscape mode for mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .landing-container {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-desc {
+        margin-bottom: 1.5rem;
+    }
+
+    .pdf-viewer {
+        height: 75vh;
     }
 }

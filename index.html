@@ -18,6 +18,10 @@
             overflow: hidden;
         }
 
+        body.menu-open {
+            overflow: hidden !important;
+        }
+
         .landing-container {
             display: flex;
             height: 100vh;
@@ -120,31 +124,76 @@
         }
 
         /* Responsive overrides for index page */
-        @media (max-width: 1024px) {
-            .landing-container {
-                flex-direction: column;
-            }
-
-            .hero-title {
-                font-size: 4rem;
-            }
-
-            .hero-subtitle {
-                font-size: 2rem;
-            }
-        }
-
         @media (max-width: 768px) {
+            .landing-container {
+                padding-top: 80px;
+            }
+
+            .content-side {
+                margin-left: 0;
+                padding: 2rem 1.5rem;
+                width: 100%;
+            }
+
             .hero-title {
-                font-size: 3rem;
+                font-size: 3.5rem;
+                margin-bottom: 1.5rem;
             }
 
             .hero-subtitle {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
                 height: 3rem;
             }
 
             .hero-desc {
+                font-size: 1.3rem;
+                margin-bottom: 2rem;
+            }
+
+            .social-icons {
+                gap: 1.5rem;
+            }
+
+            .social-icons a {
+                width: 3.5rem;
+                height: 3.5rem;
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .landing-container {
+                padding-top: 70px;
+            }
+
+            .content-side {
+                padding: 1.5rem 1rem;
+                padding-top: 2rem;
+                width: 100%;
+            }
+
+            .hero-title {
+                font-size: 2.8rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.4rem;
+                height: 2.5rem;
+            }
+
+            .hero-desc {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .social-icons {
+                gap: 1.2rem;
+            }
+
+            .social-icons a {
+                width: 3rem;
+                height: 3rem;
                 font-size: 1.2rem;
             }
         }
@@ -154,17 +203,17 @@
 <body>
     <div class="noise-overlay"></div>
 
-    <div class="landing-container">
-        <aside class="side-rail">
-            <nav>
-                <a href="index.html" class="active">Home</a>
-                <a href="about.html">About</a>
-                <a href="experience.html">Experience</a>
-                <a href="projects.html">Projects</a>
-                <a href="resume.html">Resume</a>
-            </nav>
-        </aside>
+    <aside class="side-rail">
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="about.html">About</a>
+            <a href="experience.html">Experience</a>
+            <a href="projects.html">Projects</a>
+            <a href="resume.html">Resume</a>
+        </nav>
+    </aside>
 
+    <div class="landing-container">
         <div class="content-side">
             <h1 class="hero-title">
                 NEAL KAUSHIK<br>
@@ -228,6 +277,7 @@
 
         type();
     </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
