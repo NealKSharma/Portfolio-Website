@@ -17,7 +17,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Hamburger Menu Styles */
+/* ==================== HAMBURGER MENU ==================== */
 .hamburger {
     display: none;
     flex-direction: column;
@@ -100,7 +100,7 @@ body.menu-open {
     overflow: hidden;
 }
 
-/* Custom Scrollbar */
+/* ==================== CUSTOM SCROLLBAR ==================== */
 ::-webkit-scrollbar {
     width: 12px;
 }
@@ -119,7 +119,7 @@ body.menu-open {
     background: linear-gradient(180deg, #e76f6f, #b74b4b);
 }
 
-/* Noise Overlay */
+/* ==================== NOISE OVERLAY ==================== */
 .noise-overlay {
     position: fixed;
     top: 0;
@@ -132,7 +132,7 @@ body.menu-open {
     z-index: 1;
 }
 
-/* Side Rail Navigation */
+/* ==================== SIDE RAIL NAVIGATION ==================== */
 .side-rail {
     position: fixed;
     left: 0;
@@ -188,7 +188,7 @@ body.menu-open {
     color: #e76f6f;
 }
 
-/* Main Content */
+/* ==================== MAIN CONTENT ==================== */
 .main-content {
     margin-left: 220px;
     padding: 3rem;
@@ -197,7 +197,7 @@ body.menu-open {
     min-height: 100vh;
 }
 
-/* Common Card Styles - Used in Experience and Projects */
+/* ==================== COMMON CARD STYLES ==================== */
 .content-container {
     max-width: 1400px;
     margin: 0 auto;
@@ -240,6 +240,88 @@ body.menu-open {
     padding: 1rem 1rem;
 }
 
+/* Card Title & Header Components */
+.card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card-title h2 {
+    font-size: 1.8rem;
+    color: #e0e0e0;
+}
+
+.date-badge {
+    background: rgba(183, 75, 75, 0.25);
+    border: 2px solid #b74b4b;
+    padding: 0.5rem 1.5rem;
+    border-radius: 3rem;
+    color: #e76f6f;
+    font-weight: 600;
+    font-size: 1.1rem;
+    white-space: nowrap;
+}
+
+.company-name,
+.project-subtitle {
+    font-size: 1.3rem;
+    color: #b74b4b;
+    margin-bottom: 1.5rem;
+}
+
+.project-subtitle {
+    font-style: italic;
+}
+
+.card-description,
+.project-description {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+/* Contributions & Features Lists */
+.contributions ul,
+.project-features ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin: 0;
+}
+
+.contributions li,
+.project-features li {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 0.6rem;
+}
+
+/* ==================== BUTTONS ==================== */
+.github-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 1.8rem;
+    background: linear-gradient(135deg, #b74b4b 0%, #e76f6f 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(183, 75, 75, 0.3);
+}
+
+.github-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(183, 75, 75, 0.5);
+}
+
+/* ==================== TECH STACK BADGES ==================== */
 .tech-stack {
     margin-top: 2rem;
     display: flex;
@@ -265,42 +347,14 @@ body.menu-open {
     transform: scale(1.05);
 }
 
-/* Common Animations */
+/* ==================== ANIMATIONS ==================== */
 @keyframes fadeIn {
     from {
         opacity: 0;
         transform: translateY(20px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
-    }
-}
-
-/* Responsive overrides for cards */
-@media (max-width: 1024px) {
-    .content-card {
-        grid-template-columns: 1fr;
-    }
-
-    .card-image {
-        padding: 2rem;
-    }
-
-    .card-image img {
-        max-height: 250px;
-    }
-}
-
-@media (max-width: 768px) {
-    .card-content {
-        padding: 2rem 1.5rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .card-content {
-        padding: 1.5rem 1rem;
     }
 }

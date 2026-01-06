@@ -1,6 +1,6 @@
 /* Responsive Styles - Media queries for all pages */
 
-/* Tablets and Small Laptops */
+/* ==================== TABLETS AND SMALL LAPTOPS ==================== */
 @media (max-width: 1024px) {
     .side-rail {
         width: 220px;
@@ -20,15 +20,144 @@
     }
 
     .card-image {
-        padding: 2rem;
+        padding: 2rem !important;
+        min-height: 250px !important;
     }
 
     .card-image img {
-        max-height: 250px;
+        max-height: 400px;
+    }
+
+    .card-content {
+        padding: 2rem !important;
+    }
+
+    .card-title,
+    .project-header {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        gap: 0.8rem !important;
+    }
+
+    .card-title h2,
+    .project-header h2 {
+        font-size: 1.6rem !important;
+    }
+
+    .company-name,
+    .project-subtitle {
+        font-size: 1.4rem;
+    }
+
+    .card-description,
+    .project-description {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .contributions li,
+    .project-features li {
+        font-size: 1.4rem;
+    }
+
+    .date-badge {
+        padding: 0.3rem 0.8rem;
+        font-size: 1.1rem;
+    }
+
+    .tech-stack {
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .tech-badge {
+        padding: 0.8rem 1.4rem;
+        font-size: 1.4rem;
+    }
+
+    .github-btn {
+        padding: 0.6rem;
+        font-size: 1.4rem;
+        gap: 0.8rem;
+    }
+
+    /* About page */
+    .education-card {
+        padding: 2rem !important;
+        margin-right: 0rem !important;
+    }
+
+    .card-header {
+        gap: 1.2rem !important;
+    }
+
+    .card-header i {
+        font-size: 3rem !important;
+    }
+
+    .card-header h3 {
+        font-size: 2.2rem !important;
+    }
+
+    .header-with-badge {
+        gap: 1.2rem !important;
+    }
+
+    .badge {
+        font-size: 1.2rem !important;
+        padding: 0.2rem 0.8rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .card-content strong {
+        font-size: 1.4rem !important;
+    }
+
+    .card-content p {
+        font-size: 1.4rem !important;
+    }
+
+    .info-badge {
+        font-size: 1.5rem !important;
+        padding: 1rem 1rem !important;
+        margin-top: 0rem !important;
+    }
+
+    .about-text {
+        gap: 2rem;
+        padding: 1rem !important;
+    }
+
+    .about-text p {
+        font-size: 1.6rem !important;
+        line-height: 1.7 !important;
+    }
+
+    /* Resume page */
+    .pdf-viewer {
+        min-height: 70vh;
+    }
+
+    .download-section {
+        margin: 1.5rem 0 !important;
+    }
+
+    .download-btn {
+        padding: 1.2rem 2.5rem !important;
+        font-size: 1.5rem !important;
+    }
+
+    .fallback-message h3 {
+        font-size: 2.2rem !important;
+    }
+
+    .fallback-message p {
+        font-size: 1.6rem !important;
     }
 }
 
-/* Tablets */
+/* ==================== TABLETS ==================== */
 @media (max-width: 768px) {
     .side-rail {
         width: 100%;
@@ -82,13 +211,6 @@
         display: none;
     }
 
-    /* Adjust main content */
-    .main-content {
-        margin-left: 0;
-        margin-top: 80px;
-        padding: 2rem 1.5rem;
-    }
-
     /* Main content */
     .main-content {
         margin-left: 0;
@@ -100,14 +222,35 @@
         font-size: 3rem;
     }
 
-    /* Content cards */
+    .content-container {
+        gap: 3rem;
+    }
+
+    /* Cards */
+    .card-image {
+        padding: 0.5rem !important;
+        min-height: 220px !important;
+    }
+
+    .card-image img {
+        max-height: 350px;
+    }
+
     .card-content {
-        padding: 2rem 1.5rem;
+        padding: 1.5rem !important;
+    }
+
+    .card-title,
+    .project-header {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        gap: 0.6rem !important;
     }
 
     .card-title h2,
     .project-header h2 {
-        font-size: 1.6rem;
+        font-size: 1.3rem !important;
     }
 
     .company-name,
@@ -117,23 +260,34 @@
 
     .card-description,
     .project-description {
-        font-size: 1.1rem;
-        line-height: 1.6;
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
     }
 
     .contributions li,
     .project-features li {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 
     .date-badge {
-        padding: 0.4rem 1.2rem;
-        font-size: 1rem;
+        padding: 0.2rem 0.6rem;
+        font-size: 0.9rem;
+    }
+
+    .tech-stack {
+        gap: 0.3rem;
+        margin-top: 1.3rem;
     }
 
     .tech-badge {
         padding: 0.6rem 1.2rem;
-        font-size: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .github-btn {
+        padding: 0.4rem;
+        font-size: 1.2rem;
+        gap: 0.7rem;
     }
 
     /* Home page */
@@ -143,7 +297,8 @@
 
     .content-side {
         margin-left: 0;
-        padding: 2rem 1.5rem;
+        padding: 10rem 1.2rem !important;
+        padding-top: 2rem !important;
     }
 
     .hero-title {
@@ -183,47 +338,80 @@
     }
 
     .education-card {
-        margin-right: 0;
+        padding: 1.5rem !important;
+        margin-right: 0rem !important;
+    }
+
+    .card-header {
+        gap: 0.9rem !important;
+    }
+
+    .card-header i {
+        font-size: 2.5rem !important;
     }
 
     .card-header h3 {
-        font-size: 1.8rem;
+        font-size: 1.8rem !important;
+    }
+
+    .header-with-badge {
+        gap: 1rem !important;
+    }
+
+    .badge {
+        font-size: 1rem !important;
+        padding: 0.1rem 0.5rem !important;
+        margin-bottom: 0.8rem !important;
     }
 
     .card-content strong {
-        font-size: 1.3rem;
+        font-size: 1.2rem !important;
     }
 
     .card-content p {
-        font-size: 1.2rem;
+        font-size: 1.2rem !important;
     }
 
     .info-badge {
-        font-size: 1.1rem;
-        padding: 0.7rem 1.3rem;
+        font-size: 1.3rem !important;
+        padding: 0.8rem 0.7rem !important;
+        margin-top: 0rem !important;
+    }
+
+    .about-text {
+        gap: 2rem;
+        padding: 0.8rem !important;
     }
 
     .about-text p {
-        font-size: 1.2rem;
+        font-size: 1.35rem !important;
+        line-height: 1.7 !important;
     }
 
     /* Resume page */
     .pdf-viewer {
-        height: 60vh;
+        min-height: 68vh;
+    }
+
+    .download-section {
+        margin: 1.3rem 0 !important;
     }
 
     .download-btn {
-        padding: 1rem 2rem;
-        font-size: 1.2rem;
+        padding: 1.1rem 2.2rem !important;
+        font-size: 1.3rem !important;
     }
 
-    .github-btn {
-        padding: 0.7rem 1.6rem;
-        font-size: 1rem;
+    .fallback-message h3 {
+        font-size: 2rem !important;
+    }
+
+    .fallback-message p {
+        font-size: 1.4rem !important;
     }
 }
 
-/* Mobile Devices */
+/* ==================== MOBILE DEVICES ==================== */
 @media (max-width: 480px) {
     .side-rail {
         padding: 0.8rem 1rem;
@@ -243,12 +431,6 @@
         padding: 1.5rem 1rem;
     }
 
-    /* Main content */
-    .main-content {
-        margin-top: 70px;
-        padding: 1.5rem 1rem;
-    }
-
     .page-title {
         font-size: 2.5rem;
     }
@@ -259,185 +441,150 @@
 
     /* Cards */
     .card-image {
-        padding: 1.5rem 1rem;
-        min-height: 180px;
+        padding: 0.2rem !important;
+        min-height: 180px !important;
     }
 
     .card-image img {
-        max-height: 200px;
+        max-height: 300px;
     }
 
     .card-content {
-        padding: 1.5rem 1rem;
+        padding: 1rem !important;
     }
 
     .card-title,
     .project-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        gap: 0.3rem !important;
     }
 
     .card-title h2,
     .project-header h2 {
-        font-size: 1.4rem;
-        line-height: 1.3;
+        font-size: 0.9rem !important;
     }
 
     .company-name,
     .project-subtitle {
-        font-size: 1.1rem;
+        font-size: 0.8rem !important;
     }
 
     .card-description,
     .project-description {
         font-size: 1rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 0.5rem;
     }
 
     .contributions li,
     .project-features li {
-        font-size: 0.95rem;
-        padding-left: 1.3rem;
-        line-height: 1.5;
-    }
-
-    .date-badge {
-        padding: 0.4rem 1rem;
         font-size: 0.9rem;
     }
 
+    .date-badge {
+        padding: 0.1rem 0.4rem;
+        font-size: 0.7rem;
+    }
+
     .tech-stack {
-        gap: 0.6rem;
-        margin-top: 1.5rem;
+        gap: 0.2rem;
+        margin-top: 1rem;
     }
 
     .tech-badge {
-        padding: 0.5rem 1rem;
+        padding: 0.4rem 0.9rem;
         font-size: 0.9rem;
     }
 
     .github-btn {
-        padding: 0.7rem 1.5rem;
-        font-size: 1rem;
+        padding: 0.3rem;
+        font-size: 0.9rem;
         gap: 0.6rem;
     }
 
     /* Home page */
-    .landing-container {
-        padding-top: 70px;
-    }
-
     .content-side {
-        padding: 1.5rem 1rem;
-        padding-top: 2rem;
-        margin-left: 0;
-    }
-
-    .hero-title {
-        font-size: 2.8rem;
-        margin-bottom: 1rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1.4rem;
-        height: 2.5rem;
-    }
-
-    .hero-desc {
-        font-size: 1.1rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .social-icons {
-        gap: 1.2rem;
-    }
-
-    .social-icons a {
-        width: 3rem;
-        height: 3rem;
-        font-size: 1.2rem;
+        padding: 15rem 1rem !important;
+        padding-top: 0rem !important;
     }
 
     /* About page */
-    .profile-image-container {
-        max-width: 240px;
-        height: 240px;
-    }
-
     .education-card {
-        padding: 1.5rem;
+        padding: 1rem !important;
+        margin-right: 0rem !important;
     }
 
     .card-header {
-        gap: 1rem;
+        gap: 0.6rem !important;
     }
 
     .card-header i {
-        font-size: 2rem;
+        font-size: 2rem !important;
     }
 
     .card-header h3 {
-        font-size: 1.5rem;
+        font-size: 1.5rem !important;
     }
 
     .header-with-badge {
-        flex-direction: column;
-        gap: 0.8rem;
+        gap: 0.8rem !important;
     }
 
     .badge {
-        font-size: 0.9rem;
-        padding: 0.4rem 0.8rem;
-        margin-bottom: 1.2rem;
+        font-size: 0.8rem !important;
+        padding: 0 0.4rem !important;
+        margin-bottom: 0.5rem !important;
     }
 
     .card-content strong {
-        font-size: 1.2rem;
+        font-size: 0.9rem !important;
     }
 
     .card-content p {
-        font-size: 1.1rem;
+        font-size: 0.9rem !important;
     }
 
     .info-badge {
-        font-size: 1rem;
-        padding: 0.6rem 1.2rem;
+        font-size: 1rem !important;
+        padding: 0.6rem 0.5rem !important;
+        margin-top: 0rem !important;
     }
 
     .about-text {
         gap: 1.5rem;
+        padding: 0.5rem !important;
     }
 
     .about-text p {
-        font-size: 1.05rem;
-        line-height: 1.7;
+        font-size: 1.05rem !important;
+        line-height: 1.7 !important;
     }
 
     /* Resume page */
     .pdf-viewer {
-        min-height: 66vh;
+        min-height: 60vh;
     }
 
     .download-section {
-        margin: 1.5rem 0;
+        margin: 1rem 0 !important;
     }
 
     .download-btn {
-        padding: 0.9rem 1.8rem;
-        font-size: 1.1rem;
+        padding: 0.9rem 1.8rem !important;
+        font-size: 1rem !important;
     }
 
     .fallback-message h3 {
-        font-size: 1.6rem;
+        font-size: 1.6rem !important;
     }
 
     .fallback-message p {
-        font-size: 1.1rem;
+        font-size: 1.1rem !important;
     }
 }
 
-/* Very small devices */
+/* ==================== VERY SMALL DEVICES ==================== */
 @media (max-width: 360px) {
     .hero-title {
         font-size: 2.4rem;
@@ -450,15 +597,19 @@
 
     .card-title h2,
     .project-header h2 {
-        font-size: 1.3rem;
+        font-size: 0.9rem !important;
+    }
+
+    .about-text {
+        padding: 0.3rem !important;
     }
 
     .about-text p {
-        font-size: 1rem;
+        font-size: 0.95rem !important;
     }
 }
 
-/* Landscape mode for mobile */
+/* ==================== LANDSCAPE MODE FOR MOBILE ==================== */
 @media (max-width: 768px) and (orientation: landscape) {
     .landing-container {
         height: auto;
