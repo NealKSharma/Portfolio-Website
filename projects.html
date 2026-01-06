@@ -42,6 +42,114 @@
 
     <main class="main-content">
         <div class="content-container">
+
+            <article class="content-card">
+                <div class="card-image">
+                    <img src="images/SpaceMiner.png" alt="Space-Miner">
+                </div>
+                <div class="card-content">
+                    <div class="project-header">
+                        <h2>Space-Miner</h2>
+                        <a href="https://github.com/NealKSharma/Space-Miner" class="github-btn"
+                            target="_blank">GitHub</a>
+                    </div>
+                    <p class="project-subtitle">2D Top-Down Survival/Adventure Game</p>
+                    <p class="project-description">
+                        <strong>Space-Miner</strong> is a personal project, completely independent of any coursework,
+                        that has been the most fun I’ve had coding.
+                        It’s a full-fledged survival/adventure game for <strong>Windows</strong>, built entirely from
+                        scratch in <strong>raw Java</strong> without any external libraries or game engines.
+                        The game is currently under active development with plans for a full release on major game
+                        stores.
+                        This project blends my passions for coding, gaming, and space exploration into a single
+                        immersive experience.
+                    </p>
+                    <div class="project-features">
+                        <ul>
+                            <li>Developed core gameplay systems including precise player movement, mining mechanics,
+                                particle effects, loot drops, save/load via Java serialization, custom pixel art, and
+                                interactive companion AI powered by a <strong>custom A* pathfinding algorithm</strong>.
+                            </li>
+                            <li>Implemented a <strong>slot-based inventory and crafting system</strong> with chest
+                                storage, hotbar controls, and full save/load support using Java serialization to
+                                preserve world and entity states.</li>
+                            <li>Created a dynamic environment featuring a <strong>lighting system with day/night
+                                    cycles</strong>, gradient-based light sources, and breakable objects with particle
+                                feedback.</li>
+                            <li>Built a robust world and rendering system using <strong>Swing and AWT</strong> for
+                                tile-based worlds with smooth movement, screen culling, minimap generation, and
+                                depth-aware entity rendering.</li>
+                            <li>Integrated additional gameplay features such as interactive UI with item descriptions,
+                                procedural resource placement, teleportation triggers, and debugging tools for testing
+                                and iteration.</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Java</span>
+                        <span class="tech-badge">AWT/Swing</span>
+                        <span class="tech-badge">Physics</span>
+                        <span class="tech-badge">Algorithms (A*)</span>
+                        <span class="tech-badge">World Generation</span>
+                    </div>
+                </div>
+            </article>
+
+
+            <article class="content-card">
+                <div class="card-image">
+                    <img src="images/CySaint.png" alt="Cy Saint's Hospital App">
+                </div>
+                <div class="card-content">
+                    <div class="project-header">
+                        <h2>Cy Saint’s Hospital</h2>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <a href="https://youtu.be/8IttIGWHdNU?si=TdxBpgpCr2yi7Hxx" class="github-btn"
+                                target="_blank">Showcase</a>
+                            <a href="https://github.com/NealKSharma/Full-Stack-Hospital-App" class="github-btn"
+                                target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                    <p class="project-subtitle">Full-Stack Android Hospital Management System</p>
+                    <p class="project-description">
+                        <strong>Cy Saint’s Hospital</strong> is a full-stack Android application developed as part of a
+                        computer science coursework project (COMS 3090)
+                        in a team of four. I contributed primarily as a <strong>backend developer</strong>, building
+                        secure and scalable systems to streamline workflows
+                        for patients, doctors, pharmacists, and administrators. The project was recognized as
+                        <strong>1st place Best Project Overall</strong> in a class
+                        of over <strong>300 students</strong> for technical design, full-stack implementation, and teamwork.
+                    </p>
+                    <div class="project-features">
+                        <ul>
+                            <li>Implemented a secure <strong>role-based ecosystem</strong> (Patient, Doctor, Pharmacist,
+                                Admin) using <strong>JWT authentication</strong> to protect sensitive data and regulate
+                                access to restricted features.</li>
+                            <li>Integrated <strong>WebRTC</strong> for live video consultations and
+                                <strong>WebSockets</strong> for real-time chat, enabling immediate communication between
+                                doctors and patients.
+                            </li>
+                            <li>Developed a privacy-focused <strong>AI Health Assistant</strong> leveraging the
+                                <strong>Gemini API</strong>, capable of answering medical queries while protecting
+                                patient confidentiality.
+                            </li>
+                            <li>Built a prescription-driven pharmacy system with protected medications, appointment
+                                scheduling, and a comprehensive admin portal, using <strong>Firebase</strong> for push
+                                notifications and user management.</li>
+                            <li>Collaborated effectively in an Agile team, coordinating across roles, meeting deadlines,
+                                and integrating backend services seamlessly with the Android front-end.</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Spring Boot</span>
+                        <span class="tech-badge">WebSockets</span>
+                        <span class="tech-badge">WebRTC</span>
+                        <span class="tech-badge">AI Integration</span>
+                        <span class="tech-badge">Firebase</span>
+                    </div>
+                </div>
+            </article>
+
+
             <article class="content-card">
                 <div class="card-image">
                     <img src="images/BrewMaster.png" alt="BrewMaster Project">
@@ -50,9 +158,7 @@
                     <div class="project-header">
                         <h2>Online Retail Management System</h2>
                         <a href="https://github.com/NealKSharma/OnlineRetailManagementSystem" class="github-btn"
-                            target="_blank">
-                            <i class="fab fa-github"></i> GitHub
-                        </a>
+                            target="_blank">GitHub</a>
                     </div>
                     <p class="project-subtitle">BrewMaster – Full-Stack E-Commerce Platform</p>
                     <p class="project-description">
@@ -110,7 +216,8 @@
                             <li>Configured <strong>OpenMediaVault</strong> for centralized storage and cross-platform
                                 file sharing.</li>
                             <li>Wrote <strong>automation scripts</strong> for backup rotation and
-                                <strong>Wake-on-LAN</strong> power management.</li>
+                                <strong>Wake-on-LAN</strong> power management.
+                            </li>
                             <li>Secured access via <strong>OpenVPN</strong> and <strong>SSH</strong> for headless
                                 administration.</li>
                             <li>Deployed <strong>Docker</strong> to isolate services and host monitoring tools.</li>
@@ -125,6 +232,7 @@
                     </div>
                 </div>
             </article>
+
         </div>
     </main>
     <script src="script.js"></script>

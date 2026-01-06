@@ -20,12 +20,17 @@
     }
 
     .card-image {
-        padding: 2rem !important;
-        min-height: 250px !important;
+        min-height: 350px !important;
+        position: relative !important;
     }
 
     .card-image img {
-        max-height: 400px;
+        max-height: none !important;
+        position: static !important;
+        transform: none !important;
+        width: 100% !important;
+        height: auto !important;
+        object-fit: contain !important;
     }
 
     .card-content {
@@ -228,12 +233,17 @@
 
     /* Cards */
     .card-image {
-        padding: 0.5rem !important;
-        min-height: 220px !important;
+        min-height: 300px !important;
+        position: relative !important;
     }
 
     .card-image img {
-        max-height: 350px;
+        max-height: none !important;
+        position: static !important;
+        transform: none !important;
+        width: 100% !important;
+        height: auto !important;
+        object-fit: contain !important;
     }
 
     .card-content {
@@ -441,12 +451,17 @@
 
     /* Cards */
     .card-image {
-        padding: 0.2rem !important;
-        min-height: 180px !important;
+        min-height: 250px !important;
+        position: relative !important;
     }
 
     .card-image img {
-        max-height: 300px;
+        max-height: none !important;
+        position: static !important;
+        transform: none !important;
+        width: 100% !important;
+        height: auto !important;
+        object-fit: contain !important;
     }
 
     .card-content {
