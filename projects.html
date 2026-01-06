@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Neal Kaushik Sharma</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="common.css">
     <link rel="stylesheet" href="responsive.css">
     <style>
@@ -14,7 +16,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
             flex-wrap: wrap;
             gap: 1rem;
         }
@@ -55,38 +56,24 @@
             color: rgba(255, 255, 255, 0.8);
             font-size: 1.2rem;
             line-height: 1.7;
-            margin-bottom: 2rem;
-        }
-
-        .project-features h4 {
-            color: #b74b4b;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .project-features ul {
-            list-style: none;
-            padding: 0;
+            list-style: disc;
+            padding-left: 1.5rem;
+            margin: 0;
         }
 
         .project-features li {
             color: rgba(255, 255, 255, 0.8);
             font-size: 1.1rem;
             line-height: 1.6;
-            margin-bottom: 0.8rem;
-            padding-left: 2rem;
-            position: relative;
-        }
-
-        .project-features li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: #b74b4b;
-            font-size: 1.5rem;
+            margin-bottom: 0.6rem;
         }
     </style>
 </head>
+
 <body>
     <div class="noise-overlay"></div>
 
@@ -109,38 +96,42 @@
                 <div class="card-content">
                     <div class="project-header">
                         <h2>Online Retail Management System</h2>
-                        <a href="https://github.com/NealKSharma/OnlineRetailManagementSystem" class="github-btn" target="_blank">
+                        <a href="https://github.com/NealKSharma/OnlineRetailManagementSystem" class="github-btn"
+                            target="_blank">
                             <i class="fab fa-github"></i> GitHub
                         </a>
                     </div>
                     <p class="project-subtitle">BrewMaster – Full-Stack E-Commerce Platform</p>
                     <p class="project-description">
-                        A <strong>full-stack e-commerce web application</strong> developed as
-                        <strong>BrewMaster</strong>, a simulated coffee retail store.
-                        Designed for scalability and security, it implements a <strong>domain-independent
-                        retail management system</strong> supporting user accounts, product inventory, and order processing. 
-                        Built using <strong>ASP.NET Core MVC, C#, and SQL Server</strong>, it follows the <strong>MVC architecture</strong> 
-                        pattern with a centralized <strong>Database Helper</strong> for clean data handling, AJAX-driven UI updates, 
-                        and robust authentication mechanisms.
+                        This flexible e-commerce system serves as a <strong>universal retail solution</strong>
+                        demonstrated here as a coffee store named <strong>BrewMaster</strong>.
+                        It handles the full scope of online business operations including <strong>secure customer
+                            transactions</strong> and <strong>real-time inventory management</strong>.
+                        The architecture prioritizes a smooth user experience while ensuring the platform remains
+                        <strong>scalable and data secure</strong>.
                     </p>
+
                     <div class="project-features">
-                        <h4>Key Features & Contributions:</h4>
                         <ul>
-                            <li>Implemented secure <strong>user authentication</strong> with <strong>SHA256 + salt</strong> hashing, role-based access control, and dynamic profile updates with validation.</li>
-                            <li>Developed an interactive <strong>admin dashboard</strong> to monitor users, orders, and logs in real time.</li>
-                            <li>Built <strong>AJAX-based product management</strong> with live table updates, binary image uploads, and autofill editing functionality for streamlined admin operations.</li>
-                            <li>Designed a responsive <strong>shopping cart and checkout system</strong> with SQL data sync, notifications, and automatic stock handling.</li>
-                            <li>Engineered detailed <strong>audit trails and error logging</strong> using structured SQL tables for system transparency.</li>
-                            <li>Deployed on <strong>Microsoft Azure</strong> with Function Apps and Key Vault integration for secure, cloud-ready scalability.</li>
+                            <li>Secured user data by implementing <strong>SHA256 hashing with unique salts</strong> and
+                                strictly enforced role-based access control to separate admin privileges from customer
+                                accounts.</li>
+                            <li>Streamlined operations with an <strong>AJAX-powered admin dashboard</strong> that
+                                supports live data table editing, autofill functionality, and binary image uploads
+                                without page reloads.</li>
+                            <li>Developed a synchronized <strong>shopping cart and checkout workflow</strong> that
+                                performs real-time SQL validations to manage stock levels and prevent inventory
+                                discrepancies.</li>
+                            <li>Saved <strong>audit trails and centralized error logs</strong> to
+                                capture detailed system events for improved transparency and quick debugging.</li>
                         </ul>
                     </div>
                     <div class="tech-stack">
+                        <span class="tech-badge">Full-Stack</span>
                         <span class="tech-badge">C#</span>
-                        <span class="tech-badge">.NET</span>
-                        <span class="tech-badge">SQL</span>
-                        <span class="tech-badge">Azure</span>
-                        <span class="tech-badge">jQuery</span>
-                        <span class="tech-badge">HTML/CSS</span>
+                        <span class="tech-badge">ASP.NET Core</span>
+                        <span class="tech-badge">SQL Server</span>
+                        <span class="tech-badge">jQuery/AJAX</span>
                     </div>
                 </div>
             </article>
@@ -153,29 +144,30 @@
                     <div class="project-header">
                         <h2>Network Attached Storage (NAS)</h2>
                     </div>
-                    <p class="project-subtitle">Personal Server Infrastructure & Automation System</p>
+                    <p class="project-subtitle">Personal Server Infrastructure and Automation</p>
                     <p class="project-description">
-                        A <strong>self-hosted Network Attached Storage (NAS)</strong> and personal server
-                        setup running on a <strong>Raspberry Pi 5</strong>, designed for automated backups, remote file access,
-                        and secure networking. Built with <strong>OpenMediaVault</strong> on Debian Linux, it provides
-                        shared network folders accessible from multiple devices, with backup automation and security tools
-                        that emulate lightweight <strong>DevOps and cloud practices</strong> in a home-lab environment.
+                        A self-hosted <strong>personal cloud</strong> built on a <strong>Raspberry Pi 5</strong>.
+                        Designed to master <strong>Linux and SSH</strong>, it uses <strong>OpenMediaVault</strong> for
+                        secure
+                        storage and automated backups, emulating <strong>DevOps practices</strong> in a home-lab
+                        environment.
                     </p>
                     <div class="project-features">
-                        <h4>Key Features & Implementations:</h4>
                         <ul>
-                            <li>Configured <strong>OpenMediaVault</strong> on Debian Linux to manage file sharing, system health, and network drives accessible from Windows and Linux PCs.</li>
-                            <li>Developed <strong>bash automation scripts</strong> for daily and remote server backups, including rotation management and <strong>Wake-on-LAN</strong> triggers for power-efficient operations.</li>
-                            <li>Integrated <strong>OpenVPN</strong> for encrypted remote access and deployed <strong>Docker-based services</strong> for modular application hosting and system isolation.</li>
-                            <li>Set up a local <strong>web hosting environment</strong> for tools and web apps, with real-time system monitoring via a custom dashboard.</li>
-                            <li>Hardened the server with custom firewall rules and network policies to ensure secure and stable 24/7 uptime.</li>
+                            <li>Configured <strong>OpenMediaVault</strong> for centralized storage and cross-platform
+                                file sharing.</li>
+                            <li>Wrote <strong>automation scripts</strong> for backup rotation and
+                                <strong>Wake-on-LAN</strong> power management.</li>
+                            <li>Secured access via <strong>OpenVPN</strong> and <strong>SSH</strong> for headless
+                                administration.</li>
+                            <li>Deployed <strong>Docker</strong> to isolate services and host monitoring tools.</li>
                         </ul>
                     </div>
                     <div class="tech-stack">
-                        <span class="tech-badge">Raspberry Pi</span>
-                        <span class="tech-badge">Linux</span>
-                        <span class="tech-badge">OpenMediaVault</span>
                         <span class="tech-badge">Docker</span>
+                        <span class="tech-badge">Linux (Debian)</span>
+                        <span class="tech-badge">Shell Scripting</span>
+                        <span class="tech-badge">OpenMediaVault</span>
                         <span class="tech-badge">OpenVPN</span>
                     </div>
                 </div>
@@ -184,4 +176,5 @@
     </main>
     <script src="script.js"></script>
 </body>
+
 </html>

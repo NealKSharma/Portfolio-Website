@@ -138,14 +138,14 @@ body.menu-open {
     left: 0;
     top: 0;
     height: 100vh;
-    width: 250px;
+    width: 220px;
     background: rgba(255, 255, 255, 0.02);
     border-right: 1px solid rgba(183, 75, 75, 0.2);
     backdrop-filter: blur(20px);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 3rem;
+    padding: 1.5rem;
     z-index: 1000;
 }
 
@@ -190,7 +190,7 @@ body.menu-open {
 
 /* Main Content */
 .main-content {
-    margin-left: 250px;
+    margin-left: 220px;
     padding: 3rem;
     position: relative;
     z-index: 10;
@@ -203,7 +203,7 @@ body.menu-open {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: 3rem;
 }
 
 .content-card {
@@ -237,7 +237,7 @@ body.menu-open {
 }
 
 .card-content {
-    padding: 2rem 1rem;
+    padding: 1rem 1rem;
 }
 
 .tech-stack {

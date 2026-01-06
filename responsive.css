@@ -121,11 +121,6 @@
         line-height: 1.6;
     }
 
-    .contributions h4,
-    .project-features h4 {
-        font-size: 1.2rem;
-    }
-
     .contributions li,
     .project-features li {
         font-size: 1rem;
@@ -298,11 +293,6 @@
     .project-description {
         font-size: 1rem;
         margin-bottom: 1.5rem;
-    }
-
-    .contributions h4,
-    .project-features h4 {
-        font-size: 1.1rem;
     }
 
     .contributions li,
