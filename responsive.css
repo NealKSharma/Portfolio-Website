@@ -63,7 +63,7 @@
 
     .contributions li,
     .project-features li {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
     }
 
     .date-badge {
@@ -141,7 +141,7 @@
 
     /* Resume page */
     .pdf-viewer {
-        min-height: 70vh;
+        height: 47.8vh !important;
     }
 
     .download-section {
@@ -276,7 +276,7 @@
 
     .contributions li,
     .project-features li {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
     }
 
     .date-badge {
@@ -400,7 +400,7 @@
 
     /* Resume page */
     .pdf-viewer {
-        min-height: 68vh;
+        height: 69.8vh !important;
     }
 
     .download-section {
@@ -494,12 +494,13 @@
 
     .contributions li,
     .project-features li {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     .date-badge {
         padding: 0.1rem 0.4rem;
         font-size: 0.7rem;
+        margin-bottom: 0.5rem;
     }
 
     .tech-stack {
@@ -516,6 +517,7 @@
         padding: 0.3rem;
         font-size: 0.9rem;
         gap: 0.6rem;
+        margin-bottom: 0.5rem;
     }
 
     /* Home page */
@@ -578,7 +580,7 @@
 
     /* Resume page */
     .pdf-viewer {
-        min-height: 60vh;
+        height: 58vh !important
     }
 
     .download-section {
@@ -622,6 +624,10 @@
     .about-text p {
         font-size: 0.95rem !important;
     }
+
+    .pdf-viewer {
+        height: 41.3vh !important
+    }
 }
 
 /* ==================== LANDSCAPE MODE FOR MOBILE ==================== */
@@ -643,9 +649,5 @@
 
     .hero-desc {
         margin-bottom: 1.5rem;
-    }
-
-    .pdf-viewer {
-        height: 75vh;
     }
 }

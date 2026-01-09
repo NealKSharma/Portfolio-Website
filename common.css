@@ -199,7 +199,6 @@ body.menu-open {
 
 /* ==================== COMMON CARD STYLES ==================== */
 .content-container {
-    max-width: 1400px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -300,7 +299,7 @@ body.menu-open {
 .contributions li,
 .project-features li {
     color: rgba(255, 255, 255, 0.8);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     line-height: 1.6;
     margin-bottom: 0.6rem;
 }

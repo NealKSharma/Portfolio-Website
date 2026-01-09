@@ -47,17 +47,19 @@
         }
 
         .pdf-viewer-container {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1.5rem;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            overflow: visible;
+            box-shadow: none;
         }
 
         .pdf-viewer {
             width: 100%;
-            height: 114vh;
+            height: 143.5vh;
             border: none;
+            display: block;
+            background-color: transparent;
         }
 
         .fallback-message {
@@ -76,19 +78,6 @@
         .fallback-message p {
             font-size: 1.3rem;
             margin-bottom: 2rem;
-        }
-
-        /* Responsive overrides */
-        @media (max-width: 1024px) {
-            .pdf-viewer {
-                height: 70vh;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .pdf-viewer {
-                height: 60vh;
-            }
         }
     </style>
 </head>
@@ -111,7 +100,7 @@
         <div class="resume-container">
 
             <div class="pdf-viewer-container">
-                <iframe src="Resume.pdf#toolbar=0&navpanes=0&scrollbar=1" class="pdf-viewer" title="Resume PDF Viewer">
+                <iframe src="Resume.pdf#view=FitH&toolbar=0" class="pdf-viewer" title="Resume PDF Viewer">
                 </iframe>
                 <div class="fallback-message">
                     <h3>Unable to display PDF</h3>
