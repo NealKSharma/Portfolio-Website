@@ -126,8 +126,10 @@ body.menu-open {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
-    opacity: 0.5;
+    /* Replaced heavy SVG filter with a static noise PNG for better performance */
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAAAAABVVVVaWlpkZGRubm56enqFhYWW/rP1AAAAAXRSTlMAQObYZgAAAKZJREFUOE/F09ENg1AMQ1EB4YIcgRE6QTP0P7OMjhEgC3SD9D9Xj5Kqf6Q/FMTnJyfHxoP/HKcx9owncIzdY1mW5WNZti3L9mVZtm1ety/787os19f18rw9L8/b8/K8PS/P2/PyvD0vz9vz8rw9L8/b8/K8PS/P2/PyvD0vz9vz8rw9L8/b8/K8PS/P2/PyvD0vz9vz8rw9L8/b8/K8PS/P2/P+8/L2D5V9tVrf8L9XAAAAAElFTkSuQmCC");
+    background-repeat: repeat;
+    opacity: 0.05;
     pointer-events: none;
     z-index: 1;
 }

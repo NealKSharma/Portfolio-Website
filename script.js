@@ -54,11 +54,14 @@
     });
 
     // Close menu on window resize to desktop
-    window.addEventListener('resize', function() {
-        if (!isMobile() && nav.classList.contains('active')) {
-            closeMenu();
-        }
-    });
+    // Debounce helper to optimize performance on window resize
+    function debounce(func, wait) {
+        let timeout;
+        return function() {
+            clearTimeout(timeout);
+            timeout = setTimeout(func, wait);
+        };
+    }
 
     // Show/hide hamburger based on screen size
     function updateNavigation() {
@@ -72,7 +75,15 @@
         }
     }
 
+    // Debounced window resize handler
+    const handleResize = debounce(function() {
+        if (!isMobile() && nav.classList.contains('active')) {
+            closeMenu();
+        }
+        updateNavigation();
+    }, 150);
+
     // Initial check
     updateNavigation();
-    window.addEventListener('resize', updateNavigation);
+    window.addEventListener('resize', handleResize);
 })();
