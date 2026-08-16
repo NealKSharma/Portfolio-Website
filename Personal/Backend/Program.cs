@@ -11,9 +11,14 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactDevClient", policy => policy.WithOrigins("http://localhost:5173").AllowAnyMethod().AllowAnyHeader());
 });
 
+builder.Services.AddHttpClient();
+builder.Services.AddControllers();
+
 var app = builder.Build();
 
 app.UseCors("AllowReactDevClient");
+
+app.MapControllers();
 
 app.MapPost("/api/login", (LoginRequest req) => {    
     var expectedKey = Environment.GetEnvironmentVariable("ADMIN_KEY");

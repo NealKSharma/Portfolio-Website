@@ -1,13 +1,7 @@
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function Menu() {
     const navigate = useNavigate();
-    
-    const isAuthenticated = localStorage.getItem('isAuthenticated');
-
-    if (!isAuthenticated) {
-        return <Navigate to="/" replace />;
-    }
 
     const handleLogout = () => {
         localStorage.removeItem('isAuthenticated');
@@ -16,8 +10,23 @@ export default function Menu() {
 
     return (
         <div className="p-8 max-w-2xl mx-auto">
-            <h1 className="text-4xl font-bold mb-4">Welcome to the Secret Menu</h1>
-            <p className="mb-8">You are officially authenticated.</p>
+            <h1 className="text-4xl font-bold mb-4">Menu</h1>
+
+            <div className="flex gap-4 mb-8">
+                <Link 
+                    to="/ai" 
+                    className="bg-blue-600 text-white p-2 rounded font-bold hover:bg-blue-700 text-center"
+                >
+                    AI
+                </Link>
+
+                <Link 
+                    to="/dashboard" 
+                    className="bg-green-600 text-white p-2 rounded font-bold hover:bg-green-700 text-center"
+                >
+                    Dashboard
+                </Link>
+            </div>
             
             <button 
                 onClick={handleLogout}
