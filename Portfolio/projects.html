@@ -33,10 +33,10 @@
     <aside class="side-rail">
         <nav>
             <a href="../index.html">Home</a>
-            <a href="about.html">About</a>
             <a href="experience.html">Experience</a>
             <a href="projects.html" class="active">Projects</a>
             <a href="resume.html">Resume</a>
+            <a href="about.html">About</a>
         </nav>
     </aside>
 
@@ -57,30 +57,36 @@
                     <p class="project-description">
                         <strong>Space-Miner</strong> is a personal project, completely independent of any coursework,
                         that has been the most fun I’ve had coding. This project stems from my passions for coding,
-                        gaming, and space exploration
-                        It’s a full-fledged survival/adventure game for Windows, built entirely from
+                        gaming, and space exploration. It’s a full-fledged survival/adventure game for Windows, built entirely from
                         scratch in <strong>raw Java</strong> without any external libraries or game engines.
-                        The game is currently under active development with plans for a full release on major game
-                        stores.
+                        The game is currently under active development with plans for a full release on major game stores.
                     </p>
                     <div class="project-features">
                         <ul>
-                            <li>Developed core gameplay systems including precise player movement, mining mechanics,
+                            <li>
+                                Developed core gameplay systems including precise player movement, mining mechanics,
                                 particle effects, loot drops, custom pixel art, and
                                 a companion AI powered by a <strong>custom A* pathfinding algorithm</strong>.
                             </li>
-                            <li>Implemented a <strong>slot-based inventory and crafting system</strong> with chest
+                            <li>
+                                Implemented a <strong>slot-based inventory and crafting system</strong> with chest
                                 storage, hotbar controls, and full save/load using <strong>Java serialization</strong>
-                                to
-                                preserve world and entity states.</li>
-                            <li>Created a dynamic environment featuring a <strong>lighting system with day/night
-                                    cycles</strong>, gradient-based light sources, and breakable objects with particle
-                                feedback.</li>
-                            <li>Built a robust world and rendering system using <strong>Swing and AWT</strong> for
+                                to preserve world and entity states.
+                            </li>
+                            <li>
+                                Created a dynamic environment featuring a <strong>lighting system with day/night
+                                cycles</strong>, gradient-based light sources, and breakable objects with particle
+                                feedback.
+                            </li>
+                            <li>
+                                Built a robust world and rendering system using <strong>Swing and AWT</strong> for
                                 tile-based worlds with smooth movement, screen culling, minimap generation, and
-                                depth-aware entity rendering.</li>
-                            <li>Integrated additional gameplay features such as interactive UI with item descriptions,
-                                procedural resource placement, teleportation triggers, and debugging tools.</li>
+                                depth-aware entity rendering.
+                            </li>
+                            <li>
+                                Integrated additional gameplay features such as interactive UI with item descriptions,
+                                procedural resource placement, teleportation triggers, and debugging tools.
+                            </li>
                         </ul>
                     </div>
                     <div class="tech-stack">
@@ -93,6 +99,48 @@
                 </div>
             </article>
 
+            <article class="content-card">
+                <div class="card-image">
+                    <img src="images/Server.png" alt="Home Server Infrastructure">
+                </div>
+                <div class="card-content">
+                    <div class="project-header">
+                        <h2>Home Server Infrastructure</h2>
+                    </div>
+                    <p class="project-subtitle">Personal Server and Local LLM Infrastructure</p>
+                    <p class="project-description"> A self-hosted <strong>home server and local LLM infrastructure</strong>, 
+                        housed in a custom <strong>3D-printed enclosure</strong>. Designed to gain hands-on experience with 
+                        <strong>Linux, networking, AI infrastructure, and server administration</strong> with local LLM inference, 
+                        centralized management, AI agent harnesses, and automated backups. </p>
+                    <div class="project-features">
+                        <ul> 
+                            <li>
+                                Built a local LLM setup with <strong>llama.cpp</strong>, running models like 
+                                <strong>Qwen3.6-35B-A3B</strong> with server read/write and internet access.
+                            </li>
+                            <li>
+                                Experimenting with different AI agent harnesses, including <strong>Hermes</strong> 
+                                and <strong>Pi Harness</strong>, to run and manage local AI agents.
+                            </li>
+                            <li>
+                                Developed a centralized webapp with <strong>React</strong> and <strong>.NET</strong> 
+                                to manage AI servers and storage, using <strong>Docker</strong> and <strong>GitHub deployments</strong>.
+                            </li> 
+                            <li>
+                                Built cloud-like storage with <strong>multi-drive backups</strong>, <strong>SMB shares</strong>, 
+                                <strong>file versioning</strong>, and <strong>remote access</strong>.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Docker</span>
+                        <span class="tech-badge">Linux</span>
+                        <span class="tech-badge">llama.cpp</span>
+                        <span class="tech-badge">AI Harnesses</span>
+                        <span class="tech-badge">Tailscale</span>
+                    </div>
+                </div>
+            </article>
 
             <article class="content-card">
                 <div class="card-image">
@@ -111,32 +159,38 @@
                     <p class="project-subtitle">Full-Stack Android Hospital Management System</p>
                     <p class="project-description">
                         <strong>Cy Saint’s Hospital</strong> is a full-stack Android application developed as part of a
-                        computer science coursework project (COMS 3090)
-                        in a team of four. I contributed primarily as a <strong>backend developer</strong>, building
-                        secure and scalable systems to streamline workflows
-                        for patients, doctors, pharmacists, and administrators. The project was recognized as
-                        <strong>1st place Best Project Overall</strong> in a class
-                        of over <strong>300 students</strong> for technical design, full-stack implementation, and
-                        teamwork.
+                        computer science coursework project (COMS 3090) in a team of four. I contributed primarily as a 
+                        <strong>backend developer</strong>, building secure and scalable systems to streamline workflows
+                        for patients, doctors, pharmacists, and administrators. The project was recognized as <strong>1st 
+                        place Best Project Overall</strong> in a class of over <strong>300 students</strong> for technical 
+                        design, full-stack implementation, and teamwork.
                     </p>
                     <div class="project-features">
                         <ul>
-                            <li>Implemented a secure <strong>role-based ecosystem</strong> (Patient, Doctor, Pharmacist,
+                            <li>
+                                Implemented a secure <strong>role-based ecosystem</strong> (Patient, Doctor, Pharmacist,
                                 Admin) using <strong>JWT authentication</strong> to protect sensitive data and regulate
-                                access to restricted features.</li>
-                            <li>Integrated <strong>WebRTC</strong> for live video consultations and
+                                access to restricted features.
+                            </li>
+                            <li>
+                                Integrated <strong>WebRTC</strong> for live video consultations and
                                 <strong>WebSockets</strong> for real-time chat, enabling immediate communication between
                                 doctors and patients.
                             </li>
-                            <li>Developed a privacy-focused <strong>AI Health Assistant</strong> leveraging the
+                            <li>
+                                Developed a privacy-focused <strong>AI Health Assistant</strong> leveraging the
                                 <strong>Gemini API</strong>, capable of answering medical queries while protecting
                                 patient confidentiality.
                             </li>
-                            <li>Built a prescription-driven pharmacy system with protected medications, appointment
+                            <li>
+                                Built a prescription-driven pharmacy system with protected medications, appointment
                                 scheduling, and a comprehensive admin portal, using <strong>Firebase</strong> for push
-                                notifications and user management.</li>
-                            <li>Collaborated effectively in an Agile team, coordinating across roles, meeting deadlines,
-                                and integrating backend services seamlessly with the Android front-end.</li>
+                                notifications and user management.
+                            </li>
+                            <li>
+                                Collaborated effectively in an Agile team, coordinating across roles, meeting deadlines,
+                                and integrating backend services seamlessly with the Android front-end.
+                            </li>
                         </ul>
                     </div>
                     <div class="tech-stack">
@@ -152,11 +206,11 @@
 
             <article class="content-card">
                 <div class="card-image">
-                    <img src="images/CySaintWebApp.png" alt="Saint Cy's Hospital Management WebApp">
+                    <img src="images/CySaintWebApp.png" alt="Saint Cy's Hospital WebApp">
                 </div>
                 <div class="card-content">
                     <div class="project-header">
-                        <h2>Saint Cy’s Hospital Management WebApp</h2>
+                        <h2>Saint Cy’s Hospital WebApp</h2>
                         <a href="https://github.com/NealKSharma/Saint-Cys-WebApp" class="github-btn"
                             target="_blank">GitHub</a>
                     </div>
@@ -168,16 +222,24 @@
                     </p>
                     <div class="project-features">
                         <ul>
-                            <li>Built interactive patient dashboards, doctor portals, pharmacy workflows, 
+                            <li>
+                                Built interactive patient dashboards, doctor portals, pharmacy workflows, 
                                 and admin lifecycle management tools using <strong>React (Vite)</strong> 
-                                and <strong>Tailwind CSS</strong>.</li>
-                            <li>Integrated a dynamic <strong>AI Health Assistant powered by Gemini 2.5 
+                                and <strong>Tailwind CSS</strong>.
+                            </li>
+                            <li>
+                                Integrated a dynamic <strong>AI Health Assistant powered by Gemini 2.5 
                                 Flash</strong>, using role-based prompt engineering to provide context-aware 
-                                access to records while maintaining privacy.</li>
-                            <li>Implemented secure authentication and authorization architecture using 
-                                <strong>JSON Web Tokens (JWT)</strong> and <strong>bcryptjs</strong> password hashing.</li>
-                            <li>Architected RESTful MongoDB Atlas APIs with dynamic role permissions, 
-                                prescription stock tracking, and real-time administrative error-logging.</li>
+                                access to records while maintaining privacy.
+                            </li>
+                            <li>
+                                Implemented secure authentication and authorization architecture using 
+                                <strong>JSON Web Tokens (JWT)</strong> and <strong>bcryptjs</strong> password hashing.
+                            </li>
+                            <li>
+                                Architected RESTful MongoDB Atlas APIs with dynamic role permissions, 
+                                prescription stock tracking, and real-time administrative error-logging.
+                            </li>
                         </ul>
                     </div>
                     <div class="tech-stack">
@@ -189,7 +251,6 @@
                     </div>
                 </div>
             </article>
-
 
             <article class="content-card">
                 <div class="card-image">
@@ -206,24 +267,32 @@
                         This flexible e-commerce system serves as a <strong>universal retail solution</strong>
                         demonstrated here as a coffee store named <strong>BrewMaster</strong>.
                         It handles the full scope of online business operations including <strong>secure customer
-                            transactions</strong> and <strong>real-time inventory management</strong>.
+                        transactions</strong> and <strong>real-time inventory management</strong>.
                         The architecture prioritizes a smooth user experience while ensuring the platform remains
                         <strong>scalable and secure</strong>.
                     </p>
 
                     <div class="project-features">
                         <ul>
-                            <li>Secured user data by implementing <strong>SHA256 hashing with unique salts</strong> and
+                            <li>
+                                Secured user data by implementing <strong>SHA256 hashing with unique salts</strong> and
                                 strictly enforced role-based access control to separate admin privileges from customer
-                                accounts.</li>
-                            <li>Streamlined operations with an <strong>AJAX-powered admin dashboard</strong> that
+                                accounts.
+                            </li>
+                            <li>
+                                Streamlined operations with an <strong>AJAX-powered admin dashboard</strong> that
                                 supports live data table editing, autofill functionality, and binary image uploads
-                                without page reloads.</li>
-                            <li>Developed a synchronized <strong>shopping cart and checkout workflow</strong> that
+                                without page reloads.
+                            </li>
+                            <li>
+                                Developed a synchronized <strong>shopping cart and checkout workflow</strong> that
                                 performs real-time SQL validations to manage stock levels and prevent inventory
-                                discrepancies.</li>
-                            <li>Saved <strong>audit trails and centralized error logs</strong> to
-                                capture detailed system events for improved transparency and quick debugging.</li>
+                                discrepancies.
+                            </li>
+                            <li>
+                                Saved <strong>audit trails and centralized error logs</strong> to
+                                capture detailed system events for improved transparency and quick debugging.
+                            </li>
                         </ul>
                     </div>
                     <div class="tech-stack">
@@ -232,46 +301,6 @@
                         <span class="tech-badge">ASP.NET Core</span>
                         <span class="tech-badge">SQL Server</span>
                         <span class="tech-badge">jQuery/AJAX</span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="content-card">
-                <div class="card-image">
-                    <img src="images/NAS.png" alt="NAS Project">
-                </div>
-                <div class="card-content">
-                    <div class="project-header">
-                        <h2>Network Attached Storage (NAS)</h2>
-                    </div>
-                    <p class="project-subtitle">Personal Server Infrastructure</p>
-                    <p class="project-description">
-                        A self-hosted <strong>personal NAS and server</strong> built on a <strong>Raspberry Pi
-                            5</strong>,
-                        housed in a custom <strong>3D-printed enclosure</strong>. Designed to gain hands-on experience
-                        with <strong>Linux, networking, and server administration</strong> — featuring automated
-                        backups,
-                        SSH-based remote access, and secure networking.
-                    </p>
-                    <div class="project-features">
-                        <ul>
-                            <li>Configured <strong>OpenMediaVault</strong> with <strong>Syncthing</strong> to sync files
-                                across the server and PCs, with version history for file recovery.</li>
-                            <li>Integrated <strong>Tailscale</strong> for secure remote access from anywhere, and
-                                enabled
-                                local <strong>SMB network shares</strong> for seamless cross-device file sharing.</li>
-                            <li>Implemented <strong>automated backups</strong> across multiple drives to prevent data
-                                loss, with rotation scripts for long-term storage management.</li>
-                            <li>Deployed a <strong>Docker</strong>-based container environment to isolate and host
-                                web services on the local network.</li>
-                        </ul>
-                    </div>
-                    <div class="tech-stack">
-                        <span class="tech-badge">Docker</span>
-                        <span class="tech-badge">Linux (Debian)</span>
-                        <span class="tech-badge">OpenMediaVault</span>
-                        <span class="tech-badge">Syncthing</span>
-                        <span class="tech-badge">Tailscale</span>
                     </div>
                 </div>
             </article>
@@ -293,14 +322,22 @@
                     </p>
                     <div class="project-features">
                         <ul>
-                            <li>Executed comprehensive data preprocessing using one-hot encoding and logarithmic 
-                                transformations to normalize continuous distributions.</li>
-                            <li>Trained and benchmarked Linear Regression, Decision Trees, and <b>KNN Regression</b> 
-                                models evaluated via 5-fold cross-validation, MAE, and RMSE.</li>
-                            <li>Deployed the top-performing KNN model, achieving an <b>R² score of ~0.66</b> to explain 
-                                66% of planetary temperature variance.</li>
-                            <li>Calculated mathematical boundaries for the <b>Goldilocks Habitable Zone</b> using stellar 
-                                mass formulas to identify prospective exoplanet candidates.</li>
+                            <li>
+                                Executed comprehensive data preprocessing using one-hot encoding and logarithmic 
+                                transformations to normalize continuous distributions.
+                            </li>
+                            <li>
+                                Trained and benchmarked Linear Regression, Decision Trees, and <b>KNN Regression</b> 
+                                models evaluated via 5-fold cross-validation, MAE, and RMSE.
+                            </li>
+                            <li>
+                                Deployed the top-performing KNN model, achieving an <b>R² score of ~0.66</b> to explain 
+                                66% of planetary temperature variance.
+                            </li>
+                            <li>
+                                Calculated mathematical boundaries for the <b>Goldilocks Habitable Zone</b> using stellar 
+                                mass formulas to identify prospective exoplanet candidates.
+                            </li>
                         </ul>
                     </div>
                     <div class="tech-stack">

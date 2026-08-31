@@ -302,38 +302,38 @@
 
     /* Home page */
     .landing-container {
-        padding-top: 80px;
+        padding-top: 320px !important;
     }
 
     .content-side {
-        margin-left: 0;
+        margin-left: 0 !important;
         padding: 10rem 1.2rem !important;
         padding-top: 2rem !important;
     }
 
     .hero-title {
-        font-size: 3.5rem;
-        margin-bottom: 1.5rem;
+        font-size: 3.5rem !important;
+        margin-bottom: 1.5rem !important;
     }
 
     .hero-subtitle {
-        font-size: 1.8rem;
-        height: 3rem;
+        font-size: 1.8rem !important;
+        height: 3rem !important;
     }
 
     .hero-desc {
-        font-size: 1.3rem;
-        margin-bottom: 2rem;
+        font-size: 1.3rem !important;
+        margin-bottom: 2rem !important;
     }
 
     .social-icons {
-        gap: 1.5rem;
+        gap: 1.5rem !important;
     }
 
     .social-icons a {
-        width: 3.5rem;
-        height: 3.5rem;
-        font-size: 1.3rem;
+        width: 3.5rem !important;
+        height: 3.5rem !important;
+        font-size: 1.3rem !important;
     }
 
     /* About page */
@@ -447,6 +447,41 @@
 
     .content-container {
         gap: 2.5rem;
+    }
+
+    .landing-container {
+        padding-top: 70px;
+    }
+
+    .content-side {
+        padding: 1.5rem 1rem;
+        padding-top: 2rem;
+        width: 100%;
+    }
+
+    .hero-title {
+        font-size: 2.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.4rem;
+        height: 2.5rem;
+    }
+
+    .hero-desc {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .social-icons {
+        gap: 1.2rem;
+    }
+
+    .social-icons a {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.2rem;
     }
 
     /* Cards */
